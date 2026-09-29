@@ -29,8 +29,7 @@ tasks:
   - type: create_job
     name: validate_pilot
     entity_label: validate-pilot
-    script: amp/bootstrap.py
-    arguments: validate
+    script: amp/validate_pilot.py
     kernel: python3
     cpu: 1
     memory: 2
@@ -41,8 +40,7 @@ tasks:
   - type: create_job
     name: configure_project_resources
     entity_label: configure-project-resources
-    script: amp/bootstrap.py
-    arguments: resources
+    script: amp/configure_project_resources.py
     kernel: python3
     cpu: 1
     memory: 2
@@ -53,8 +51,7 @@ tasks:
   - type: create_job
     name: setup_cluster_environment
     entity_label: setup-cluster-environment
-    script: amp/bootstrap.py
-    arguments: cluster-env
+    script: amp/setup_cluster_environment.py
     kernel: python3
     cpu: 4
     memory: 16
@@ -65,8 +62,7 @@ tasks:
   - type: create_job
     name: setup_training_environment
     entity_label: setup-training-environment
-    script: amp/bootstrap.py
-    arguments: training-env
+    script: amp/setup_training_environment.py
     kernel: python3
     cpu: 4
     memory: 16
@@ -77,8 +73,7 @@ tasks:
   - type: create_job
     name: launch_training_cluster
     entity_label: launch-training-cluster
-    script: amp/bootstrap.py
-    arguments: launch
+    script: amp/launch_training_cluster.py
     kernel: python3
     cpu: 2
     memory: 8
@@ -89,8 +84,7 @@ tasks:
   - type: create_job
     name: cluster-smoke
     entity_label: cluster-smoke
-    script: amp/jobs.py
-    arguments: submit --config configs/training/cluster-smoke.json --submission-id cluster-smoke --wait
+    script: amp/run_cluster_smoke.py
     kernel: python3
     cpu: 1
     memory: 2

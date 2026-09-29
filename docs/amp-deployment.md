@@ -128,6 +128,33 @@ Use a new ID such as `cluster-smoke-002` for a second run. Existing IDs and outp
 directories are not overwritten. Credentials are read from `CDSW_APIV2_KEY` or
 `CML_API_KEY` at runtime and are not placed in the submission payload.
 
+### CAI notebook-backed job entry points
+
+CAI/PBJ can execute a job as notebook cells without `__file__`, while `sys.argv`
+contains `ipykernel_launcher.py -f /tmp/jupyter/runtime/kernel-....json`. Each AMP
+step therefore uses a dedicated wrapper with no Job Arguments. It launches a
+normal Python subprocess with the exact CLI operation; it never forwards kernel
+arguments or replaces the notebook kernel. The terminal CLI commands above are
+unchanged.
+
+If an earlier import failed with `invalid choice: ...kernel-....json`, update the
+project checkout and refresh the job definitions. AMP **Redeploy** imports the
+updated manifest; **Resume** alone retains the already-created script paths.
+Alternatively, after `git pull --ff-only`, edit the existing CAI Jobs to use the
+following scripts, clear their Arguments fields, and resume the failed AMP step:
+
+| Existing job | Script |
+|---|---|
+| validate_pilot | `amp/validate_pilot.py` |
+| configure_project_resources | `amp/configure_project_resources.py` |
+| setup_cluster_environment | `amp/setup_cluster_environment.py` |
+| setup_training_environment | `amp/setup_training_environment.py` |
+| launch_training_cluster | `amp/launch_training_cluster.py` |
+| cluster-smoke | `amp/run_cluster_smoke.py` |
+
+Both recovery paths preserve the head-only startup design. The smoke job remains
+a manual operation after worker creation and network setup.
+
 ## Data and storage
 
 AMP import brings `data/pilot/pilot-smoke-v1/` into this project's filesystem.

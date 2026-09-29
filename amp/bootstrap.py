@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""AMP job entry point, including PBJ execution contexts without __file__."""
+"""Setup CLI invoked with explicit arguments by the dedicated CAI job wrappers."""
 import argparse
 import fcntl
 import hashlib
