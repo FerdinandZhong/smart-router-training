@@ -1,0 +1,21 @@
+{
+  "eligible_for_training": false,
+  "source_is_synthetic": true,
+  "trials_per_candidate": 1,
+  "review_items": [
+    {
+      "example_id": "fixture-2",
+      "class_id": "GPT56_TERRA",
+      "type": "contract_runtime_alignment",
+      "raw_judge_verdict": "fail",
+      "issue": "The contract requires explicit timeout acknowledgement; the runtime task asks only for the next safe action. A read-only retry can be operationally correct without that acknowledgement.",
+      "action": "Review this criterion before training; do not silently relabel the recorded trial."
+    }
+  ],
+  "limitations": [
+    "Only two available GPT-5.6 candidates; GPT-5.6 Luna was not exposed by session tools.",
+    "One trial per state/model; results are binary observations, not calibrated probabilities.",
+    "System/developer harness context remains; fresh agents receive no prior conversation.",
+    "No agent tools executed, downstream replay, serving revision, token usage or cost measured."
+  ]
+}

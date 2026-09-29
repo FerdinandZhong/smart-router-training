@@ -1,0 +1,16 @@
+{
+  "task_id": "model_local_step_smoke",
+  "schema_version": "1.0",
+  "kind": "independent_binary",
+  "unit": "agent_step",
+  "classes": [
+    {
+      "id": "GPT56_SOL",
+      "description": "The configured GPT56_SOL candidate satisfies the current local step contract."
+    },
+    {
+      "id": "GPT56_TERRA",
+      "description": "The configured GPT56_TERRA candidate satisfies the current local step contract."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "scripts/setup_cross_node_gpu.fish": {
+    "source": "../scripts/setup_cross_node_gpu.fish",
+    "original_sha256": "413d52ea76ab887629d20a09bd2298de876c3ae4cbb2b0fb1e02caa96ac14023",
+    "sha256": "c7a4d471a8ec27f1d07ab3267e87f10587ab1a3c512bbdaef7a5c2c671bc6bbb",
+    "adaptation": "Use training environment and project-local vendored manifest; run manually before training."
+  },
+  "scripts/run_collective_probe.fish": {
+    "source": "../scripts/run_collective_probe.fish",
+    "original_sha256": "9ad86a8a3a7477cef07ac9dffa1a8d526648a8f8c41938d57e671a84ec0db580",
+    "sha256": "e92b2f80960492aa2cad2b5b3ac779f3de7a57049fb94e8aac1e8e806a53513a",
+    "adaptation": "Use training environment and project-local vendored manifest; run manually before training."
+  },
+  "scripts/collective_probe.py": {
+    "source": "../scripts/collective_probe.py",
+    "original_sha256": "521e87d4300bf943c4f50544a387e29b697053c44edd426c0e389b8570c76fba",
+    "sha256": "521e87d4300bf943c4f50544a387e29b697053c44edd426c0e389b8570c76fba",
+    "adaptation": "Use training environment and project-local vendored manifest; run manually before training."
+  }
+}

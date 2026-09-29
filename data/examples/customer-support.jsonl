@@ -1,0 +1,3 @@
+{"ticket_id":"ticket-001","conversation_id":"conversation-001","message":"Please refund the duplicate subscription charge.","intent":"billing"}
+{"ticket_id":"ticket-002","conversation_id":"conversation-002","message":"I cannot log in after resetting my password.","intent":"technical"}
+{"ticket_id":"ticket-003","conversation_id":"conversation-003","message":"Please send pricing for a team of twenty users.","intent":"sales"}

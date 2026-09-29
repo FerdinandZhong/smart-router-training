@@ -1,0 +1,56 @@
+{
+  "config_version": "1.0",
+  "status": "synthetic_construction_fixture",
+  "customer_id": "demo_only",
+  "task": {
+    "task_id": "agent_step_sufficiency",
+    "schema_version": "1.0",
+    "kind": "independent_binary",
+    "unit": "agent_step",
+    "instructions": "Estimate each configured tier independently at the current pre-call state. Concrete model pool and continuation policy must be specified before annotation.",
+    "classes": [
+      {
+        "id": "FAST",
+        "description": "The configured fast model satisfies the current contract and preserves downstream success."
+      },
+      {
+        "id": "GENERAL",
+        "description": "The configured general model satisfies the current contract and preserves downstream success."
+      },
+      {
+        "id": "REASONING",
+        "description": "The configured reasoning model satisfies the current contract and preserves downstream success."
+      }
+    ]
+  },
+  "dataset": {
+    "dataset_id": "synthetic_agent_steps_v1",
+    "format": "jsonl",
+    "path": "data/examples/agent-steps.jsonl",
+    "path_base": "project_root",
+    "columns": {
+      "example_id": "example_id",
+      "group_id": "episode_id",
+      "state": "router_input",
+      "probabilities": "tier_targets",
+      "episode_id": "episode_id",
+      "step_id": "step_id",
+      "step_index": "step_index",
+      "metadata": "metadata",
+      "label_evidence": "label_evidence"
+    },
+    "label_source": "synthetic_unlabeled_fixture",
+    "label_completeness": "positive_only",
+    "split": {
+      "strategy": "grouped",
+      "seed": 42,
+      "train": 0.7,
+      "validation": 0.1,
+      "calibration": 0.1,
+      "test": 0.1
+    }
+  },
+  "annotation": {
+    "mode": "queue_missing"
+  }
+}

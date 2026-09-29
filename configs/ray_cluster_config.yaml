@@ -1,0 +1,27 @@
+# Head-only startup. Add GPU workers manually through the Management Swagger UI.
+# Runtime images must exist in the target Workbench.
+ray_cluster:
+  head_cpu: 8
+  head_memory: 32
+  management_api_cpu: 2
+  management_api_memory: 8
+  ray_port: 6379
+  dashboard_port: 8265
+  autoscaling:
+    enabled: true
+    limits: null
+    max_launch_batch: 2
+  worker_pools: []
+  launch_initial_workers: false
+  worker_groups: []
+cai:
+  project_name: smart-router-training
+  head_app_name: smart-router-ray-head
+  head_runtime_identifier: docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-pbj-jupyterlab-python3.11-standard:2026.04.1-b7
+  worker_runtime_identifier: docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-pbj-jupyterlab-python3.11-cuda:2026.04.1-b7
+monitoring:
+  prometheus_host: null
+  grafana_host: null
+  grafana_iframe_host: null
+  grafana_org_id: '1'
+environment: {}

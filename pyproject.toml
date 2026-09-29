@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smart-router-training"
+version = "0.1.0"
+description = "Self-contained Cloudera AMP for decision-model data and Ray training"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+parquet = ["pyarrow>=14"]
+annotation = ["jsonschema>=4"]
+cluster = [
+    "ray[serve,default]==2.58.0", "protobuf>=5.29.6,<7",
+    "pyyaml>=6.0.3", "aiohttp>=3.13.3", "fastapi>=0.133,<0.137",
+    "uvicorn[standard]>=0.27", "pydantic>=2", "httpx>=0.27",
+    "jinja2>=3.1", "requests>=2.32", "python-multipart>=0.0.20",
+]
+training = ["ray[train]==2.58.0", "torch==2.8.0", "numpy>=1.26,<3"]
+
+[project.scripts]
+smart-router-data = "smart_router.cli:main"
+smart-router-annotate = "smart_router.annotation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src", "."]
+include = ["smart_router*", "ray_serve_cai*", "cai_integration*"]
+
+[tool.setuptools.package-data]
+ray_serve_cai = ["configs/*.yaml", "configs/nginx/*.j2", "configs/nginx/conf.d/*.j2", "configs/nginx/snippets/*.j2", "static/*"]
+cai_integration = ["templates/*.j2", "*.sh"]

@@ -1,0 +1,20 @@
+{
+  "task_id": "agent_step_sufficiency",
+  "schema_version": "1.0",
+  "kind": "independent_binary",
+  "unit": "agent_step",
+  "classes": [
+    {
+      "id": "FAST",
+      "description": "The configured fast model satisfies the step contract and preserves downstream success."
+    },
+    {
+      "id": "GENERAL",
+      "description": "The configured general model satisfies the step contract and preserves downstream success."
+    },
+    {
+      "id": "REASONING",
+      "description": "The configured reasoning model satisfies the step contract and preserves downstream success."
+    }
+  ]
+}

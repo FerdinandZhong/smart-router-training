@@ -1,0 +1,56 @@
+{
+  "config_version": "1.0",
+  "label_scope": "local_step",
+  "records": "../../data/examples/annotation/records.jsonl",
+  "task": "../../data/examples/annotation/task.json",
+  "contracts": "../../data/examples/annotation/contracts.jsonl",
+  "trials_per_candidate": 3,
+  "min_valid_trials": 3,
+  "max_attempts_per_call": 2,
+  "judge_confidence_threshold": 0.8,
+  "max_calls": 120,
+  "max_reserved_output_tokens": 700000,
+  "candidates": [
+    {
+      "id": "fast",
+      "api": "responses",
+      "model": "gpt-5.6-luna",
+      "base_url": "https://api.openai.com/v1",
+      "api_key_env": "OPENAI_API_KEY",
+      "max_output_tokens": 2048,
+      "timeout_seconds": 180,
+      "class_id": "FAST"
+    },
+    {
+      "id": "general",
+      "api": "responses",
+      "model": "gpt-6-sol",
+      "base_url": "https://api.openai.com/v1",
+      "api_key_env": "OPENAI_API_KEY",
+      "max_output_tokens": 4096,
+      "timeout_seconds": 180,
+      "class_id": "GENERAL"
+    },
+    {
+      "id": "reasoning",
+      "api": "responses",
+      "model": "gpt-6-astra",
+      "base_url": "https://api.openai.com/v1",
+      "api_key_env": "OPENAI_API_KEY",
+      "max_output_tokens": 8192,
+      "timeout_seconds": 180,
+      "class_id": "REASONING"
+    }
+  ],
+  "judges": [
+    {
+      "id": "judge",
+      "api": "responses",
+      "base_url": "https://api.openai.com/v1",
+      "api_key_env": "OPENAI_API_KEY",
+      "max_output_tokens": 4096,
+      "timeout_seconds": 180,
+      "model_env": "ANNOTATION_JUDGE_MODEL"
+    }
+  ]
+}

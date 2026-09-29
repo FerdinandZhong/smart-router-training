@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+"""
+CAI Job Entry Point for Launching Ray Cluster
+
+This Python script serves as the entry point for CAI jobs.
+It activates the virtual environment via bash wrapper and launches the Ray cluster.
+
+This pattern is required by CAI:
+- CAI jobs require Python entry points
+- We use subprocess to call bash wrapper scripts
+- Bash wrapper handles venv activation cleanly
+
+Usage as CAI Job:
+  script: "cai_integration/launch_ray_cluster_job.py"
+
+Or manually:
+  python cai_integration/launch_ray_cluster_job.py
+"""
+
+import subprocess
+import os
+import sys
+from pathlib import Path
+
+
+def main():
+    """Execute the Ray cluster launch via bash wrapper."""
+    # Get cai_integration directory
+    # Handle case where __file__ might not be available in some CAI execution contexts
+    try:
+        script_dir = Path(__file__).resolve().parent
+        project_root = script_dir.parent
+    except (NameError, AttributeError):
+        # Fallback: assume we're in project root and cai_integration is a subdirectory
+        candidates = (Path(os.environ.get("CDSW_PROJECT_DIR") or Path.cwd()), Path.cwd(), Path.cwd().parent)
+        project_root = next((p for p in candidates if (p / "cai_integration" / "launch_ray_cluster.py").is_file()), Path.cwd())
+        script_dir = project_root / "cai_integration"
+
+    # Path to bash wrapper script (in cai_integration)
+    bash_wrapper = script_dir / "launch_ray_cluster.sh"
+
+    if not bash_wrapper.exists():
+        print(f"❌ Error: Bash wrapper not found at {bash_wrapper}")
+        print("Expected location: cai_integration/launch_ray_cluster.sh")
+        return 1
+
+    print("=" * 70)
+    print("🚀 Ray Cluster Launch (CAI Job Entry Point)")
+    print("=" * 70)
+    print(f"\n📝 Executing: launch_ray_cluster.py")
+    print(f"   Project root: {project_root}")
+    print()
+
+    venv_python = project_root / ".venv" / "bin" / "python"
+    if not venv_python.exists():
+        print(f"❌ Error: venv not found at {venv_python}")
+        print("Please run setup_environment.py first")
+        return 1
+
+    try:
+        result = subprocess.run(
+            [str(venv_python), "-u",
+             str(project_root / "cai_integration" / "launch_ray_cluster.py")],
+            cwd=str(project_root),
+        )
+
+        return result.returncode
+    except Exception as e:
+        print(f"\n❌ Error executing bash wrapper: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
+if __name__ == "__main__":
+    _rc = main()
+    if _rc:
+        sys.exit(_rc)

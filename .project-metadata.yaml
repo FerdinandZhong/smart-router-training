@@ -1,0 +1,98 @@
+name: Smart Router Training
+description: >-
+  Self-contained decision-model training pilot with repository-included data,
+  an isolated PyTorch environment and a dedicated Ray head.
+  Import creates only the head; add GPU workers through Swagger, configure
+  cross-pod collective networking, then run cluster-smoke manually.
+author: Smart Router Training
+date: '2026-09-29'
+specification_version: '1.0'
+prototype_version: '0.1'
+runtimes:
+  - editor: JupyterLab
+    kernel: Python 3.11
+    edition: Standard
+environment_variables:
+  RAY_HEAD_SUBDOMAIN:
+    default: smart-router-ray-head
+    description: Unique head Application subdomain for this training AMP.
+    required: false
+  RAY_HEAD_CPU:
+    default: '8'
+    description: CPU cores for the head Application.
+    required: false
+  RAY_HEAD_MEMORY:
+    default: '32'
+    description: Head Application memory in GiB.
+    required: false
+tasks:
+  - type: create_job
+    name: validate_pilot
+    entity_label: validate-pilot
+    script: amp/bootstrap.py
+    arguments: validate
+    kernel: python3
+    cpu: 1
+    memory: 2
+    timeout: 5
+  - type: run_job
+    entity_label: validate-pilot
+    wait_for: true
+  - type: create_job
+    name: configure_project_resources
+    entity_label: configure-project-resources
+    script: amp/bootstrap.py
+    arguments: resources
+    kernel: python3
+    cpu: 1
+    memory: 2
+    timeout: 5
+  - type: run_job
+    entity_label: configure-project-resources
+    wait_for: true
+  - type: create_job
+    name: setup_cluster_environment
+    entity_label: setup-cluster-environment
+    script: amp/bootstrap.py
+    arguments: cluster-env
+    kernel: python3
+    cpu: 4
+    memory: 16
+    timeout: 45
+  - type: run_job
+    entity_label: setup-cluster-environment
+    wait_for: true
+  - type: create_job
+    name: setup_training_environment
+    entity_label: setup-training-environment
+    script: amp/bootstrap.py
+    arguments: training-env
+    kernel: python3
+    cpu: 4
+    memory: 16
+    timeout: 45
+  - type: run_job
+    entity_label: setup-training-environment
+    wait_for: true
+  - type: create_job
+    name: launch_training_cluster
+    entity_label: launch-training-cluster
+    script: amp/bootstrap.py
+    arguments: launch
+    kernel: python3
+    cpu: 2
+    memory: 8
+    timeout: 25
+  - type: run_job
+    entity_label: launch-training-cluster
+    wait_for: true
+  - type: create_job
+    name: cluster-smoke
+    entity_label: cluster-smoke
+    script: amp/jobs.py
+    arguments: submit --config configs/training/cluster-smoke.json --submission-id cluster-smoke --wait
+    kernel: python3
+    cpu: 1
+    memory: 2
+    gpu: 0
+    timeout: 20

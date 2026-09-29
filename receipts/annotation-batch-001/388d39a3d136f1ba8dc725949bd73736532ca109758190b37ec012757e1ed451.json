@@ -1,0 +1,17 @@
+{
+  "request_hash": "388d39a3d136f1ba8dc725949bd73736532ca109758190b37ec012757e1ed451",
+  "requested_model": "gpt-5.6-terra",
+  "actual_model": null,
+  "text": "{\"action\":\"lookup_invoice\",\"invoice_id\":\"INV-42\"}",
+  "usage": {},
+  "execution": {
+    "tool": "collaboration.spawn_agent",
+    "task_name": "/root/batch01_sample01_terra",
+    "model_override": "gpt-5.6-terra",
+    "fork_turns": "none",
+    "reasoning_effort": "inherited_session_setting",
+    "model_identity_source": "requested tool override; serving revision not exposed",
+    "usage_available": false,
+    "message": "Perform the next agent step using only the runtime input below. Follow its task, constraints and output requirements. Do not invent tool results. If an action is requested, return its proposed action as text or JSON; no tools are executed in this evaluation. Do not use tools or inspect files. Respond only with your task output, with no evaluation commentary.\n\nRuntime input:\n{\"state\":{\"goal\":\"Investigate duplicate invoice INV-42.\",\"current_task\":\"Return JSON with action and invoice_id for the next read-only lookup.\",\"constraints\":{\"read_only\":true},\"available_actions\":[\"lookup_invoice\",\"ask_user\"],\"recent_events\":[]}}"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "pilot-smoke-v1",
+  "purpose": "engineering_smoke",
+  "label_semantics": "Single-trial, local-step silver observations; unknowns masked; no executable replay.",
+  "source": {
+    "dataset": "SWE-Gym/OpenHands-Sampled-Trajectories",
+    "revision": "baf3a4e4bff514d48ddc08a93a2ade5c126212c7",
+    "official_split": "train.raw",
+    "shard": "train.raw-00000-of-00003.parquet",
+    "sha256": "29d038b0c34eb0e50a19730f3cf3daa5a156c2d7e9c871c01b568acbab6aae07",
+    "rows_scanned": 2019,
+    "selection": "Seeded identity order; round-robin repositories; one run per issue; three spread-out eligible steps per episode; full prefixes <=36000 JSON characters; at least one prior tool observation >=500 characters (heuristic, not execution verification)",
+    "license": "Dataset card does not declare a license; upstream code is Apache-2.0, which is not asserted to license all dataset contents.",
+    "release_gate": "Local annotation research only; clarify dataset/source-code terms before training release or redistribution."
+  },
+  "source_manifest_sha256": "dfc5a07f3bba1f4eec25d044249093590f7d08387c67dd76d0133b9e56446ae4",
+  "annotation_sources": [
+    {
+      "path": "runs/real-pilot-001-combined/silver_labels.jsonl",
+      "sha256": "33ca531e0f13142a32256a54ee24582e72e417907ba6a9106beea7f8bb11b896"
+    },
+    {
+      "path": "runs/real-pilot-002/silver_labels.jsonl",
+      "sha256": "3fce3c3f888d135bc794c3d631d86774e29429f63fa7fee104c4aafbdc4ab99c"
+    }
+  ],
+  "splits": {
+    "train": 210,
+    "validation": 30,
+    "calibration": 30,
+    "test": 30
+  },
+  "group_count": 100,
+  "class_support": {
+    "FAST": {
+      "pass": 27,
+      "fail": 219,
+      "unknown": 54
+    },
+    "GENERAL": {
+      "pass": 291,
+      "fail": 9,
+      "unknown": 0
+    },
+    "REASONING": {
+      "pass": 296,
+      "fail": 4,
+      "unknown": 0
+    }
+  },
+  "files_sha256": {
+    "calibration.jsonl": "871df86eb01e0c9bb6dc69b825a9dc40623a2cdcb44b0d61e1c58010c937c9c5",
+    "task.json": "d2b583d6bca8391b9d68ea692a0fe12ec4b3d65d869e60912e1f4cca802c4725",
+    "test.jsonl": "634a4de439dfa0ac14a3281c4545f31ca2a5a93783415458edd8a0525e11cb84",
+    "train.jsonl": "eb92d0616d6d712591aa3094e454835f349f6cce9c1b8052b4fb986155dc796d",
+    "validation.jsonl": "ddbd5d35d5c9b204a307e08a7d4590d30eba15a441a93d3632c18996ec984370"
+  }
+}

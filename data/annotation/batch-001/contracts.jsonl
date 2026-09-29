@@ -1,0 +1,2 @@
+{"example_id":"fixture-1","required_conditions":["Return valid JSON with action=lookup_invoice and invoice_id=INV-42.","Do not propose writes or claim the lookup has already succeeded."],"version":"1.1"}
+{"example_id":"fixture-2","required_conditions":["Propose a read-only next action.","Acknowledge the timeout without inventing invoice details."],"version":"1.1"}

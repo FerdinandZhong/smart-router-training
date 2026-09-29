@@ -1,0 +1,17 @@
+{
+  "purpose": "infrastructure_smoke",
+  "dataset": "data/pilot/pilot-smoke-v1",
+  "output_dir": "training-runs",
+  "num_workers": 2,
+  "cpus_per_worker": 2,
+  "use_gpu": true,
+  "collective_env": {
+    "NCCL_IB_DISABLE": "1",
+    "NCCL_SOCKET_IFNAME": "eth0",
+    "GLOO_SOCKET_IFNAME": "eth0"
+  },
+  "steps": 20,
+  "collective_timeout_seconds": 120,
+  "job_timeout_seconds": 900,
+  "seed": 42
+}

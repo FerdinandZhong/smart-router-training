@@ -1,0 +1,51 @@
+{
+  "config_version": "1.0",
+  "label_scope": "local_step",
+  "records": "../../data/examples/annotation/records.jsonl",
+  "task": "../../data/examples/annotation/task.json",
+  "contracts": "../../data/examples/annotation/contracts.jsonl",
+  "mock_responses": "../../data/examples/annotation/responses.json",
+  "trials_per_candidate": 2,
+  "min_valid_trials": 2,
+  "max_attempts_per_call": 2,
+  "judge_confidence_threshold": 0.8,
+  "max_calls": 80,
+  "max_reserved_output_tokens": 20480,
+  "candidates": [
+    {
+      "id": "fast",
+      "api": "mock",
+      "model": "fixture-fast",
+      "max_output_tokens": 256,
+      "class_id": "FAST"
+    },
+    {
+      "id": "general",
+      "api": "mock",
+      "model": "fixture-general",
+      "max_output_tokens": 256,
+      "class_id": "GENERAL"
+    },
+    {
+      "id": "reasoning",
+      "api": "mock",
+      "model": "fixture-reasoning",
+      "max_output_tokens": 256,
+      "class_id": "REASONING"
+    }
+  ],
+  "judges": [
+    {
+      "id": "judge-a",
+      "api": "mock",
+      "model": "fixture-judge-a",
+      "max_output_tokens": 256
+    },
+    {
+      "id": "judge-b",
+      "api": "mock",
+      "model": "fixture-judge-b",
+      "max_output_tokens": 256
+    }
+  ]
+}

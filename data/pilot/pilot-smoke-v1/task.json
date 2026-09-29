@@ -1,0 +1,20 @@
+{
+  "task_id": "agent_local_tool_sufficiency",
+  "schema_version": "1.0",
+  "kind": "independent_binary",
+  "unit": "agent_step",
+  "classes": [
+    {
+      "id": "FAST",
+      "description": "The configured FAST candidate proposes a schema-valid, evidence-supported next tool action."
+    },
+    {
+      "id": "GENERAL",
+      "description": "The configured GENERAL candidate proposes a schema-valid, evidence-supported next tool action."
+    },
+    {
+      "id": "REASONING",
+      "description": "The configured REASONING candidate proposes a schema-valid, evidence-supported next tool action."
+    }
+  ]
+}

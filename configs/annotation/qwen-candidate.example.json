@@ -1,0 +1,13 @@
+{
+  "id": "fast",
+  "class_id": "FAST",
+  "api": "chat_completions",
+  "model_env": "QWEN_SERVED_MODEL",
+  "base_url_env": "QWEN_BASE_URL",
+  "api_key_env": "QWEN_API_KEY",
+  "max_output_tokens": 4096,
+  "timeout_seconds": 180,
+  "generation": {
+    "temperature": 0.6
+  }
+}

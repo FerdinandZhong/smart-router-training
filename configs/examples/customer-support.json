@@ -1,0 +1,77 @@
+{
+  "config_version": "1.0",
+  "status": "data_import_example_training_not_implemented",
+  "customer_id": "customer_a",
+  "task": {
+    "task_id": "support_intent",
+    "schema_version": "1.0",
+    "kind": "single_label",
+    "instructions": "Select the team best suited to handle the customer's primary request.",
+    "classes": [
+      {
+        "id": "billing",
+        "description": "Charges, invoices, subscription payments, and refunds"
+      },
+      {
+        "id": "technical",
+        "description": "Login failures, broken features, and troubleshooting"
+      },
+      {
+        "id": "sales",
+        "description": "Product evaluation, pricing enquiries, and purchase requests"
+      }
+    ],
+    "unknown_label_policy": "error",
+    "abstention": {
+      "enabled": true,
+      "threshold_source": "calibration"
+    }
+  },
+  "dataset": {
+    "dataset_id": "customer_a_support_v1",
+    "format": "jsonl",
+    "path": "data/examples/customer-support.jsonl",
+    "path_base": "project_root",
+    "columns": {
+      "example_id": "ticket_id",
+      "group_id": "conversation_id",
+      "text": "message",
+      "label": "intent"
+    },
+    "label_source": "customer_provided",
+    "label_completeness": "complete",
+    "split": {
+      "strategy": "grouped",
+      "seed": 42,
+      "train": 0.7,
+      "validation": 0.1,
+      "calibration": 0.1,
+      "test": 0.1
+    }
+  },
+  "annotation": {
+    "mode": "disabled"
+  },
+  "model": {
+    "adapter": "gliner_decide",
+    "checkpoint": "fastino/GLiNER2.5-Decide",
+    "revision": "PIN_BEFORE_RUN"
+  },
+  "training": {
+    "recipe": "encoder_classification",
+    "objective": "softmax_cross_entropy",
+    "preflight": "require_differentiable_adapter_loss",
+    "execution": {
+      "backend": "ray_train",
+      "num_workers": 2,
+      "gpus_per_worker": 1
+    }
+  },
+  "evaluation": {
+    "primary_metric": "macro_f1",
+    "calibration": "temperature_scaling"
+  },
+  "artifacts": {
+    "namespace": "customer_a/support_intent/1.0"
+  }
+}
