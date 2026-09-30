@@ -13,6 +13,7 @@ from urllib.parse import urlsplit
 _file = globals().get("__file__")
 ROOT = Path(_file).resolve().parents[1] if _file else Path(os.environ.get("CDSW_PROJECT_DIR") or Path.cwd()).resolve()
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
+from amp.environment import isolated_environment
 
 
 def load_config(path):
@@ -97,8 +98,11 @@ def main():
     python = ROOT / ".venv-router-train/bin/python"
     if not python.exists():
         raise RuntimeError("Run the AMP setup_training_environment job first")
-    if Path(sys.prefix).resolve() != python.parent.parent.resolve():
-        os.execv(str(python), [str(python), str(ROOT / "amp/jobs.py"), *sys.argv[1:]])
+    env = isolated_environment(ROOT, python)
+    if Path(sys.prefix).resolve() != python.parent.parent.resolve() or any(
+        os.environ.get(key) != env.get(key) for key in ("PYTHONPATH", "PYTHONHOME", "PYTHONNOUSERSITE")
+    ):
+        os.execve(str(python), [str(python), str(ROOT / "amp/jobs.py"), *sys.argv[1:]], env)
     import ray
     from ray.job_submission import JobSubmissionClient
     if ray.__version__ != "2.58.0":

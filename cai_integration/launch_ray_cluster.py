@@ -26,7 +26,6 @@ import os
 import re
 import sys
 import time
-import yaml
 from pathlib import Path
 
 # Configure logging before anything else so that logger calls from cai_cluster
@@ -55,11 +54,17 @@ def _project_root():
 
 
 PROJECT_ROOT = _project_root()
+sys.path.insert(0, str(PROJECT_ROOT))
+from amp.environment import isolated_environment
+_launch_env = isolated_environment(PROJECT_ROOT, _VENV_PYTHON)
 if (__name__ == "__main__" and _VENV_PYTHON.exists()
-        and Path(sys.prefix).resolve() != _VENV_PYTHON.parent.parent.resolve()):
-    os.execv(str(_VENV_PYTHON), [str(_VENV_PYTHON), "-u",
-             str(PROJECT_ROOT / "cai_integration" / "launch_ray_cluster.py")])
+        and (Path(sys.prefix).resolve() != _VENV_PYTHON.parent.parent.resolve()
+             or any(os.environ.get(key) != _launch_env.get(key)
+                    for key in ("PYTHONPATH", "PYTHONHOME", "PYTHONNOUSERSITE")))):
+    os.execve(str(_VENV_PYTHON), [str(_VENV_PYTHON), "-u",
+             str(PROJECT_ROOT / "cai_integration" / "launch_ray_cluster.py")], _launch_env)
 
+import yaml
 from jinja2 import Environment, FileSystemLoader
 
 # Add parent directory to path for imports

@@ -216,3 +216,23 @@ runtime-image compatibility and CAI import still require the remote smoke.
 archive for review or staging. It is not a substitute for the Git URL in the
 standard AMP importer. A wheel alone does not include the AMP metadata and
 pilot dataset; import the project source tree.
+
+### Recovering from CAI add-on dependency conflicts
+
+If environment setup installs packages successfully but `pip check` reports
+conflicts with `cml`, `mlflow-cml-plugin`, or `mlflow-skinny` from
+`/runtime-addons`, update the checkout (`git pull --ff-only`) and rerun the failed
+`amp/setup_cluster_environment.py` or `amp/setup_training_environment.py` job.
+The setup can reuse the existing virtualenv; deleting it is unnecessary.
+
+CAI can inject add-on packages through `PYTHONPATH`, which is still honored when
+`PYTHONNOUSERSITE=1`. Setup now replaces that path with the project paths, removes
+`PYTHONHOME`, and creates/repairs the virtualenv with system-site packages disabled.
+Installation, `pip check`, and import verification use the same clean environment.
+Head and worker launchers and the training submitter also isolate their child
+Python environments while preserving CAI credentials and GPU/network settings.
+`pip check` remains mandatory; dependency conflicts inside the virtualenv still
+fail setup. The platform's own add-on installation is left intact.
+
+If cluster applications were already running before this fix, regenerate their
+launchers and restart those applications before submitting training jobs.

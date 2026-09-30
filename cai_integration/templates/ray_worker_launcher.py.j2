@@ -22,6 +22,13 @@ VENV_PYTHON = Path("{{ venv_python }}")
 PROJECT_DIR = Path("{{ project_dir }}")
 RAY_BIN     = VENV_PYTHON.parent / "ray"   # /home/cdsw/.venv/bin/ray
 
+# CAI injects runtime add-ons through PYTHONPATH; do not pass them to Ray.
+sys.path.insert(0, str(PROJECT_DIR))
+from amp.environment import isolated_environment
+_clean_env = isolated_environment(PROJECT_DIR, VENV_PYTHON)
+os.environ.pop("PYTHONHOME", None)
+os.environ.update(_clean_env)
+
 if not VENV_PYTHON.exists():
     print(f"ERROR: venv not found at {VENV_PYTHON}")
     sys.exit(1)

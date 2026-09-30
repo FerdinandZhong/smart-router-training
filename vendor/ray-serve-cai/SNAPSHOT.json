@@ -97,8 +97,16 @@
   },
   "local_modifications": {
     "cai_integration/templates/ray_head_launcher.py.j2": {
-      "sha256": "749fdafdafb45919f170df67b9c4c9cb03f5492ddbfeeebe4e7648ad0bfc9235",
-      "reason": "Head nginx fallback invokes this AMP cluster environment setup, preserving its dependency contract."
+      "sha256": "c4028844074cd8ff537a551ac1dbb4c98a0da49953b0123a8dc8c6e529770e5d",
+      "reason": "Head nginx fallback invokes this AMP cluster environment setup, preserving its dependency contract. Isolate virtualenv child processes from CAI Python add-ons."
+    },
+    "cai_integration/launch_ray_cluster.py": {
+      "sha256": "62493352a657b4ed404fdc5c1773f7516a6bea6c59c2eca1242855c60d614466",
+      "reason": "Isolate virtualenv child processes from CAI Python add-ons."
+    },
+    "cai_integration/templates/ray_worker_launcher.py.j2": {
+      "sha256": "ad0512cccfddceae74940c7db137e8cd0516496e6a207f37aa8e0f121a5d4742",
+      "reason": "Isolate virtualenv child processes from CAI Python add-ons."
     }
   },
   "license_note": "Source pyproject declares Apache-2.0; upstream checkout contains no standalone LICENSE file. Preserve source headers and provenance."

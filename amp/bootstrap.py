@@ -8,7 +8,6 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-import venv
 
 
 def project_root():
@@ -24,6 +23,7 @@ def project_root():
 
 ROOT = project_root()
 sys.path[:0] = [str(ROOT), str(ROOT / "src")]
+from amp.environment import isolated_environment
 
 
 def validate():
@@ -54,9 +54,10 @@ def setup_environment(kind):
             raise RuntimeError("Another environment setup is running; retry this AMP step after it finishes") from None
         target = ROOT / (".venv" if kind == "cluster" else ".venv-router-train")
         python = target / "bin/python"
-        if not python.exists():
-            venv.EnvBuilder(with_pip=True).create(target)
-        env = {**os.environ, "PIP_USER": "0", "PYTHONNOUSERSITE": "1"}
+        env = isolated_environment(ROOT, python)
+        # Re-running venv also repairs include-system-site-packages without
+        # deleting installed packages. Run ensurepip with the clean environment.
+        subprocess.run([getattr(sys, "_base_executable", sys.executable), "-m", "venv", str(target)], env=env, check=True)
         subprocess.run([str(python), "-m", "pip", "install", "-e", f"{ROOT}[{kind}]"], env=env, check=True)
         subprocess.run([str(python), "-m", "pip", "check"], env=env, check=True)
         check = "import ray; assert ray.__version__ == '2.58.0', ray.__version__; print(ray.__version__)"
@@ -85,7 +86,7 @@ def main():
         setup_environment("cluster" if args.operation == "cluster-env" else "training")
     elif args.operation == "launch":
         validate()
-        subprocess.run([str(ROOT / ".venv/bin/python"), "-u", str(ROOT / "cai_integration/launch_ray_cluster.py")], cwd=ROOT, check=True)
+        subprocess.run([str(ROOT / ".venv/bin/python"), "-u", str(ROOT / "cai_integration/launch_ray_cluster.py")], cwd=ROOT, env=isolated_environment(ROOT, ROOT / ".venv/bin/python"), check=True)
 
 
 if __name__ == "__main__":
