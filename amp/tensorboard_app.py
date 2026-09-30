@@ -21,7 +21,7 @@ def application_spec(root, environment=None):
     import yaml
     config = yaml.safe_load((root / 'configs/ray_cluster_config.yaml').read_text())
     return dict(name='Smart Router TensorBoard', script='amp/serve_tensorboard.py',
-                cpu=1, memory=2, num_gpus=0,
+                cpu=2, memory=4, num_gpus=0,
                 runtime_identifier=config['cai']['head_runtime_identifier'],
                 subdomain=subdomain, bypass_authentication=False)
 

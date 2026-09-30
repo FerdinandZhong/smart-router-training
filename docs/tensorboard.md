@@ -1,6 +1,6 @@
 # TensorBoard on CAI
 
-TensorBoard runs as a separate authenticated CAI Application (1 CPU, 2 GiB, no
+TensorBoard runs as a separate authenticated CAI Application (2 CPUs, 4 GiB, no
 GPU), using the configured head CPU runtime and `.venv-router-train`. It reads
 `/home/cdsw/training-runs` from the same shared project filesystem as the Ray
 workers. No event upload, GPU allocation, or head restart is needed.
@@ -38,7 +38,7 @@ use CAI Applications to confirm readiness and inspect startup logs. If an existi
 matching application is stopped or failed, restart it through CAI Applications.
 There is no need to redeploy the Ray cluster. A manually created CAI Application
 can instead use `amp/serve_tensorboard.py` as its script, Python 3.11 Standard,
-1 CPU / 2 GiB / 0 GPU, with unauthenticated access disabled.
+2 CPUs / 4 GiB / 0 GPU, with unauthenticated access disabled.
 
 The launcher binds to `CDSW_APP_PORT` and uses the isolated training Python.
 It ignores notebook kernel arguments, preserves the CAI kernel, propagates

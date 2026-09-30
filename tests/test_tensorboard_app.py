@@ -14,6 +14,7 @@ class TensorBoardAppTests(unittest.TestCase):
     def test_application_is_cpu_only_and_authenticated(self):
         spec = application_spec(ROOT, {'CDSW_APIV2_KEY': 'not-forwarded'})
         self.assertEqual(spec['num_gpus'], 0)
+        self.assertEqual((spec['cpu'], spec['memory']), (2, 4))
         self.assertFalse(spec['bypass_authentication'])
         self.assertNotIn('environment', spec)
         self.assertTrue((ROOT / spec['script']).is_file())
