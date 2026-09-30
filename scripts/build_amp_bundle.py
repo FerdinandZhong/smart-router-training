@@ -13,6 +13,8 @@ from amp.bootstrap import validate
 
 def members(root):
     selected = {".project-metadata.yaml", ".gitignore", "pyproject.toml", "README.md",
+                "AGENTS.md", "DESIGN.md", "TODO.md", "project-overview.md",
+                "architecture.md", "user-guide.md", "development.md", "component-api.md",
                 "configs/ray_cluster_config.yaml", "scripts/build_amp_bundle.py",
                 "scripts/export_smoke_training_data.py", "docs/amp-deployment.md",
                 "scripts/setup_cross_node_gpu.fish", "scripts/run_collective_probe.fish",

@@ -13,6 +13,22 @@ collective networking, then launch the smoke job. Follow the
 job commands, data flow and cluster shutdown. The AMP metadata is
 [.project-metadata.yaml](.project-metadata.yaml).
 
+
+## Project documentation
+
+| File | Purpose |
+|---|---|
+| [AGENTS.md](AGENTS.md) | AI contributor context and working rules |
+| [DESIGN.md](DESIGN.md) | Visual and information-presentation conventions |
+| [TODO.md](TODO.md) | Current tasks, priorities and verified progress |
+| [project-overview.md](project-overview.md) | Project purpose, users and implemented scope |
+| [architecture.md](architecture.md) | Architecture, deployment and data flow |
+| [user-guide.md](user-guide.md) | Dataset, annotation and training workflows |
+| [development.md](development.md) | Setup, commands and regression checks |
+| [component-api.md](component-api.md) | Implemented component and API contracts |
+
+## Detailed guides and research
+
 - [Implementation plan v2.1](docs/agent-step-router-implementation-plan.md) — current design, annotation protocol, training gates, and build order.
 - [Model comparison and customer framework contract](docs/decision-models-and-customer-training.md) — adapter boundaries, class semantics, ingestion, calibration, and acceptance gates.
 - [Dataset construction guide](docs/data-pilot.md) — sample definition, pilot sizes, working audit/preparation commands, and remaining real-data requirements.
@@ -27,7 +43,13 @@ job commands, data flow and cluster shutdown. The AMP metadata is
 - [Original implementation plan v1](docs/agent-step-router-implementation-plan-v1.md) — archived ModernBERT-first proposal.
 - [Original research report](docs/deep-research-report.md) — background research; implementation decisions are superseded by v2.1 where they differ.
 
-Status as of 2026-09-29: all 300 pilot states have completed annotation, with 846 observed state/model labels and 54 unknowns. The frozen bundle is included under `data/pilot/pilot-smoke-v1/`. AMP and cluster-smoke code are implemented locally; live CAI import and GPU/NCCL validation remain. The smoke trains a controlled diagnostic model and validates pilot data access. Laya fine-tuning, executable replay and routing-quality evaluation remain separate milestones.
+Status as of 2026-09-30: the frozen 300-state pilot contains 846 observed
+state/model labels and 54 unknowns. The training head and TensorBoard are running
+in CAI; two one-GPU worker applications have been created, with Ray readiness and
+NCCL validation still pending at the last check. Local infrastructure and
+TensorBoard tests pass. The smoke trains a controlled diagnostic model, not a
+router. Laya fine-tuning, executable replay and routing-quality evaluation remain
+separate milestones. See [TODO.md](TODO.md) for current evidence and acceptance gates.
 
 Run `PYTHONPATH=src python -m smart_router.cli audit --config configs/examples/customer-support.json` from this directory. See the construction guide for preparation and test commands.
 

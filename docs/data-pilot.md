@@ -1,5 +1,9 @@
 # Dataset construction pilot
 
+> Initial construction guidance and dated pilot snapshots. The completed frozen
+> 300-state bundle is `data/pilot/pilot-smoke-v1/`; see [current progress](../TODO.md)
+> for annotation completion and deployment status.
+
 Updated 2026-09-28. Offline construction and a [local-step annotation runner](annotation-pipeline.md) are implemented. The [real-data pilot](real-data-pilot-001.md) contains 300 recorded SWE-Gym pre-call states from 100 independent issues, with the first ten selected for annotation debugging.
 
 ## What counts as one sample?

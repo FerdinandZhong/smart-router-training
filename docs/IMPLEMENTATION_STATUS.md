@@ -1,4 +1,8 @@
-# Implementation status
+# Implementation history
+
+> Historical checkpoints through 2026-09-28. For current progress, read
+> [TODO.md](../TODO.md) and [the project overview](../project-overview.md).
+> Statements below describe their original checkpoint, not the current deployment.
 
 Updated: 2026-09-28.
 
