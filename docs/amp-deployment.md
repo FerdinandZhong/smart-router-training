@@ -19,6 +19,9 @@ Sequential AMP jobs
     -> setup_training_environment (.venv-router-train; Ray 2.58.0 + Torch 2.8.0 + TensorBoard)
     -> launch_training_cluster
          +-- CPU head only: 8 CPUs / 32 GiB (zero GPU workers)
+    -> launch_tensorboard
+         +-- authenticated CPU dashboard: 2 CPUs / 4 GiB
+         +-- reads shared training-runs/ event files
   |
   v
 Manual setup through head Swagger UI
@@ -44,6 +47,7 @@ Manually run cluster-smoke (CPU-only CAI submission job)
   v
 training-runs/cluster-smoke/
   run-manifest.json, worker identities, metrics, checkpoints, SUCCESS.json
+  tensorboard/<stage>/events.* -> TensorBoard Scalars UI
 ```
 
 The smoke model is a controlled one-weight regression, not a Laya adapter. It
@@ -63,8 +67,8 @@ successful decision-model training.
    `configs/ray_cluster_config.yaml` are available in the target Workbench.
    Set a unique `RAY_HEAD_SUBDOMAIN` for additional installations. The default is
    `smart-router-ray-head`, distinct from the old serving cluster's head.
-3. Import runs validation, provisions environments, and starts **only the CPU
-   head**. Worker pools and worker groups are empty. GPU resource choices are
+3. Import runs validation, provisions environments, and starts the **CPU
+   head and TensorBoard dashboard**. Worker pools and worker groups are empty. GPU resource choices are
    made later through the API. When redeploying an older installation, remove any
    previously set `RAY_INITIAL_WORKER_POOLS` or set it to `[]` first; existing
    Applications/pool state are not deleted by changing the YAML.

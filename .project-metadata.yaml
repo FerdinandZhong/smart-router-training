@@ -2,7 +2,7 @@ name: Smart Router Training
 description: >-
   Self-contained decision-model training pilot with repository-included data,
   an isolated PyTorch environment and a dedicated Ray head.
-  Import creates only the head; add GPU workers through Swagger, configure
+  Import creates the CPU head and TensorBoard dashboard; add GPU workers through Swagger, configure
   cross-pod collective networking, then run cluster-smoke manually.
 author: Smart Router Training
 date: '2026-09-29'

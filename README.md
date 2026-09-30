@@ -7,7 +7,7 @@ Current direction: compare Laya, CLM-8B, and GLiNER2.5-Decide through interchang
 This project is now a self-contained **Cloudera AMP**: it includes a pinned Ray
 cluster implementation, setup/launch jobs, an isolated PyTorch environment, the
 300-state pilot dataset, and a two-worker infrastructure smoke job. AMP import
-starts only the head. Add GPU workers through Swagger, configure their
+starts the CPU head and TensorBoard dashboard. Add GPU workers through Swagger, configure their
 collective networking, then launch the smoke job. Follow the
 [AMP deployment guide](docs/amp-deployment.md) for import, resource requirements,
 job commands, data flow and cluster shutdown. The AMP metadata is
