@@ -18,7 +18,8 @@ def members(root):
                 "scripts/setup_cross_node_gpu.fish", "scripts/run_collective_probe.fish",
                 "scripts/collective_probe.py",
                 "docs/ray-first-trial-implementation-plan.md", "tests/test_amp.py",
-                "tests/test_amp_execution_contexts.py", "tests/test_amp_environment.py",
+                "tests/test_amp_execution_contexts.py", "tests/test_amp_environment.py", "tests/test_tensorboard_app.py",
+                "tests/run_tensorboard_smoke.py",
                 "tests/run_distributed_amp_smoke.py"}
     for folder in ("src", "amp", "ray_serve_cai", "cai_integration", "vendor/ray-serve-cai", "configs/training", "data/pilot/pilot-smoke-v1"):
         for path in (root / folder).rglob("*"):

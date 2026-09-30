@@ -30,3 +30,6 @@ job commands, data flow and cluster shutdown. The AMP metadata is
 Status as of 2026-09-29: all 300 pilot states have completed annotation, with 846 observed state/model labels and 54 unknowns. The frozen bundle is included under `data/pilot/pilot-smoke-v1/`. AMP and cluster-smoke code are implemented locally; live CAI import and GPU/NCCL validation remain. The smoke trains a controlled diagnostic model and validates pilot data access. Laya fine-tuning, executable replay and routing-quality evaluation remain separate milestones.
 
 Run `PYTHONPATH=src python -m smart_router.cli audit --config configs/examples/customer-support.json` from this directory. See the construction guide for preparation and test commands.
+
+Training metrics: see [TensorBoard on CAI](docs/tensorboard.md) for the separate
+CPU dashboard, existing-project setup, and per-step smoke loss curves.

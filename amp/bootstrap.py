@@ -62,7 +62,7 @@ def setup_environment(kind):
         subprocess.run([str(python), "-m", "pip", "check"], env=env, check=True)
         check = "import ray; assert ray.__version__ == '2.58.0', ray.__version__; print(ray.__version__)"
         if kind == "training":
-            check += "; import torch; assert torch.__version__.split('+')[0] == '2.8.0'; print(torch.__version__)"
+            check += "; import torch; assert torch.__version__.split('+')[0] == '2.8.0'; print(torch.__version__); import tensorboard; print(tensorboard.__version__)"
         subprocess.run([str(python), "-c", check], env=env, check=True)
         freeze = subprocess.check_output([str(python), "-m", "pip", "freeze"], env=env, text=True)
         (state / f"{kind}-environment.txt").write_text(freeze)

@@ -3,6 +3,7 @@
 This deliberately does not claim to fine-tune Laya or learn a useful router.
 """
 import argparse
+from contextlib import nullcontext
 from datetime import timedelta
 import hashlib
 import json
@@ -20,6 +21,7 @@ def train_worker(config):
     import torch
     import torch.distributed as dist
     from ray.train.torch import get_device, prepare_model
+    from torch.utils.tensorboard import SummaryWriter
     from smart_router.data.pilot_bundle import validate_bundle
 
     rank = train.get_context().get_world_rank()
@@ -65,13 +67,25 @@ def train_worker(config):
             dist.all_reduce(loss)
             return loss.item() / world_size
     before = global_loss()
-    for _ in range(config["steps"]):
-        optimizer.zero_grad()
-        loss = torch.nn.functional.mse_loss(model(x), y)
-        loss.backward()
-        if not all(torch.isfinite(p.grad).all() for p in model.parameters()):
-            raise RuntimeError("Nonfinite gradients")
-        optimizer.step()
+    event_dir = root / "tensorboard" / config["stage"]
+    with (SummaryWriter(str(event_dir), flush_secs=5) if rank == 0 else nullcontext()) as writer:
+        if rank == 0:
+            writer.add_scalar("diagnostic/loss", before, start)
+            writer.add_text("run/model", "controlled_linear_diagnostic", start)
+        for offset in range(config["steps"]):
+            step_started = time.perf_counter()
+            optimizer.zero_grad()
+            loss = torch.nn.functional.mse_loss(model(x), y)
+            loss.backward()
+            if not all(torch.isfinite(p.grad).all() for p in model.parameters()):
+                raise RuntimeError("Nonfinite gradients")
+            optimizer.step()
+            step_loss = global_loss()  # Same reduction on every rank; rank zero writes.
+            if rank == 0:
+                step = start + offset + 1
+                writer.add_scalar("diagnostic/loss", step_loss, step)
+                writer.add_scalar("train/learning_rate", optimizer.param_groups[0]["lr"], step)
+                writer.add_scalar("perf/step_seconds", time.perf_counter() - step_started, step)
     after = global_loss()
     weight = model.module.weight.detach().clone()
     weights = [torch.zeros_like(weight) for _ in range(world_size)]

@@ -13,6 +13,10 @@ runtimes:
     kernel: Python 3.11
     edition: Standard
 environment_variables:
+  TENSORBOARD_SUBDOMAIN:
+    default: smart-router-tensorboard
+    description: Unique authenticated TensorBoard Application subdomain.
+    required: false
   RAY_HEAD_SUBDOMAIN:
     default: smart-router-ray-head
     description: Unique head Application subdomain for this training AMP.
@@ -80,6 +84,17 @@ tasks:
     timeout: 25
   - type: run_job
     entity_label: launch-training-cluster
+    wait_for: true
+  - type: create_job
+    name: launch_tensorboard
+    entity_label: launch-tensorboard
+    script: amp/launch_tensorboard.py
+    kernel: python3
+    cpu: 1
+    memory: 2
+    timeout: 5
+  - type: run_job
+    entity_label: launch-tensorboard
     wait_for: true
   - type: create_job
     name: cluster-smoke

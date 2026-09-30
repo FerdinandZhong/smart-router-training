@@ -52,4 +52,14 @@ if __name__ == "__main__":
         assert initial["optimizer"]["state"]
         metrics = json.loads((root / "resume-metrics.json").read_text())
         assert metrics["start_step"] == 20 and metrics["weights_synchronized"]
+        from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
+        for stage, first, last in [('initial', 0, 20), ('resume', 20, 22)]:
+            event_dir = root / 'tensorboard' / stage
+            assert len(list(event_dir.glob('events.out.tfevents.*'))) == 1, 'Only rank zero should write'
+            accumulator = EventAccumulator(str(event_dir)).Reload()
+            losses = accumulator.Scalars('diagnostic/loss')
+            assert [event.step for event in losses] == list(range(first, last + 1))
+            stage_metrics = json.loads((root / f'{stage}-metrics.json').read_text())
+            assert abs(losses[-1].value - stage_metrics['final_loss']) < 1e-5
+        print("PASS: TensorBoard event steps, global loss and rank-zero-only writes")
         print("PASS: two-process CPU backward, synchronization, shared data, optimizer checkpoint and resume")

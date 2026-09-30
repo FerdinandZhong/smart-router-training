@@ -16,7 +16,7 @@ Import this project into CAI as an AMP
 Sequential AMP jobs
   validate_pilot -> configure_project_resources
     -> setup_cluster_environment (.venv; Ray 2.58.0 + management dependencies)
-    -> setup_training_environment (.venv-router-train; Ray 2.58.0 + Torch 2.8.0)
+    -> setup_training_environment (.venv-router-train; Ray 2.58.0 + Torch 2.8.0 + TensorBoard)
     -> launch_training_cluster
          +-- CPU head only: 8 CPUs / 32 GiB (zero GPU workers)
   |
@@ -236,3 +236,7 @@ fail setup. The platform's own add-on installation is left intact.
 
 If cluster applications were already running before this fix, regenerate their
 launchers and restart those applications before submitting training jobs.
+
+The AMP also creates an authenticated CPU-only [TensorBoard application](tensorboard.md)
+for per-step smoke metrics on shared storage. Existing projects can deploy it
+independently without restarting the Ray head or GPU workers.
