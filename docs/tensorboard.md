@@ -40,7 +40,8 @@ There is no need to redeploy the Ray cluster. A manually created CAI Application
 can instead use `amp/serve_tensorboard.py` as its script, Python 3.11 Standard,
 2 CPUs / 4 GiB / 0 GPU, with unauthenticated access disabled.
 
-The launcher binds to `CDSW_APP_PORT` and uses the isolated training Python.
+The launcher binds to `127.0.0.1:CDSW_APP_PORT` (PBJ owns the external-interface
+listener, so `0.0.0.0` would cause an address-in-use error) and uses the isolated training Python.
 It ignores notebook kernel arguments, preserves the CAI kernel, propagates
 server failures, and reloads event files every five seconds. CAI ingress provides
 TLS and authentication. The normal Python event loader is used (`--load_fast
@@ -67,7 +68,9 @@ python amp/jobs.py submit --submission-id cluster-smoke-tb-001 --wait
 TensorBoard may initially show no dashboards until this run writes events.
 Select `<submission-id>/tensorboard/initial` and `.../resume` in the Scalars UI.
 Ray's own result logging may also produce separate event runs under `ray/`.
-Event files persist when TensorBoard stops or restarts. Model/operator profiling
+Event files persist when TensorBoard stops or restarts. Server output is also retained in `.amp-state/tensorboard-server.log`; launcher
+exceptions go to `.amp-state/tensorboard-launcher.log` for diagnostics when the
+CAI log UI is unavailable. Model/operator profiling
 and CPU/CUDA traces are not enabled by this change.
 
 Implementation follows the official [TensorBoard server usage](https://www.tensorflow.org/tensorboard/get_started)

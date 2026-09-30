@@ -13,8 +13,18 @@ def main():
     if root is None:
         raise RuntimeError("Cannot locate amp/entrypoints.py; run from the AMP project or set CDSW_PROJECT_DIR")
     sys.path.insert(0, str(root.resolve()))
-    from amp.entrypoints import project_root, run
-    run(project_root(script_file), 'amp/tensorboard_app.py', ['serve'])
+    from amp.entrypoints import project_root
+    from amp.tensorboard_app import serve
+    root = project_root(script_file)
+    try:
+        serve(root)
+    except BaseException:
+        import traceback
+        state = root / '.amp-state'
+        state.mkdir(exist_ok=True)
+        with (state / 'tensorboard-launcher.log').open('a') as log:
+            traceback.print_exc(file=log)
+        raise
 
 
 if __name__ == "__main__":

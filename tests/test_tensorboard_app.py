@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, patch, mock_open
 
 from amp.tensorboard_app import application_spec, ensure_application, serve
 
@@ -45,10 +45,15 @@ class TensorBoardAppTests(unittest.TestCase):
         with patch.dict(os.environ, {'CDSW_APP_PORT': '8123', 'PYTHONPATH': '/runtime-addons',
                                     'PYTHONHOME': '/bad'}), \
              patch.object(Path, 'exists', return_value=True), \
-             patch.object(Path, 'mkdir'), patch('subprocess.run') as run:
+             patch.object(Path, 'mkdir'), patch.object(Path, 'open', mock_open()), patch('subprocess.Popen') as run:
+            process = run.return_value.__enter__.return_value
+            process.stdout = iter(['TensorBoard ready\n'])
+            process.wait.return_value = 0
             serve(ROOT)
         command = run.call_args.args[0]
         self.assertIn('8123', command)
+        self.assertEqual(command[command.index('--host') + 1], '127.0.0.1')
+        self.assertEqual(command[0], str(ROOT / '.venv-router-train/bin/python'))
         self.assertIn(str(ROOT / 'training-runs'), command)
         self.assertIn('tensorboard.main', command)
         self.assertNotIn('PYTHONHOME', run.call_args.kwargs['env'])
@@ -59,6 +64,6 @@ class TensorBoardAppTests(unittest.TestCase):
         source = ROOT / 'amp/serve_tensorboard.py'
         with patch.dict(os.environ, {'CDSW_PROJECT_DIR': str(ROOT)}), \
              patch.object(sys, 'argv', ['ipykernel_launcher.py', '-f', '/tmp/kernel.json']), \
-             patch.object(sys, 'path', list(sys.path)), patch('subprocess.run') as run:
+             patch.object(sys, 'path', list(sys.path)), patch('amp.tensorboard_app.serve') as run:
             exec(compile(source.read_text(), '<CAI-cell>', 'exec'), {'__name__': '__main__'})
-        self.assertEqual(run.call_args.args[0][-2:], [str(ROOT / 'amp/tensorboard_app.py'), 'serve'])
+        run.assert_called_once_with(ROOT)

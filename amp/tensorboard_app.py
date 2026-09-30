@@ -48,11 +48,22 @@ def serve(root=ROOT):
     logdir.mkdir(exist_ok=True)
     # Keep the PBJ kernel alive. The child owns the HTTP server and fails the app
     # on startup errors. CAI ingress supplies authentication and TLS.
+    # PBJ owns the app port on its external interface; bind only loopback.
     command = [str(python), '-m', 'tensorboard.main', '--logdir', str(logdir),
-               '--host', '0.0.0.0', '--port', str(port), '--reload_interval', '5',
+               '--host', '127.0.0.1', '--port', str(port), '--reload_interval', '5',
                '--load_fast', 'false']
     print(f'Serving TensorBoard on port {port}; event root: {logdir}', flush=True)
-    subprocess.run(command, cwd=root, env=isolated_environment(root, python), check=True)
+    state = root / '.amp-state'
+    state.mkdir(exist_ok=True)
+    with (state / 'tensorboard-server.log').open('a', buffering=1) as log:
+        with subprocess.Popen(command, cwd=root, env=isolated_environment(root, python),
+                              stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True) as process:
+            for line in process.stdout:
+                log.write(line)
+                print(line, end='', flush=True)
+            returncode = process.wait()
+        if returncode:
+            raise subprocess.CalledProcessError(returncode, command)
 
 
 def main():
