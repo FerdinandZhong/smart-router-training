@@ -1,0 +1,119 @@
+{
+  "config_version": "1.0",
+  "label_scope": "local_step",
+  "records": "../../data/prepared/gateway-pilot-v1/records.jsonl",
+  "task": "../../data/prepared/gateway-pilot-v1/task.json",
+  "contracts": "../../data/prepared/gateway-pilot-v1/contracts.jsonl",
+  "candidates": [
+    {
+      "id": "fast",
+      "class_id": "FAST",
+      "model": "gemini-3.1-flash-lite",
+      "api": "chat_completions",
+      "base_url": "https://ai-gateway.cloudops.cloudera.com",
+      "api_key_file": "/Users/zhongqishuai/tokens/litellm_key_applied_ai",
+      "max_output_tokens": 2048,
+      "timeout_seconds": 90,
+      "generation": {
+        "response_format": {
+          "type": "json_object"
+        }
+      }
+    },
+    {
+      "id": "general",
+      "class_id": "GENERAL",
+      "model": "gpt-5.6-luna",
+      "api": "responses",
+      "base_url": "https://ai-gateway.cloudops.cloudera.com",
+      "api_key_file": "/Users/zhongqishuai/tokens/litellm_key_applied_ai",
+      "max_output_tokens": 2048,
+      "timeout_seconds": 90,
+      "generation": {
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        },
+        "reasoning": {
+          "effort": "low"
+        }
+      }
+    },
+    {
+      "id": "reasoning",
+      "class_id": "REASONING",
+      "model": "gpt-5.6-sol",
+      "api": "responses",
+      "base_url": "https://ai-gateway.cloudops.cloudera.com",
+      "api_key_file": "/Users/zhongqishuai/tokens/litellm_key_applied_ai",
+      "max_output_tokens": 2048,
+      "timeout_seconds": 90,
+      "generation": {
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        },
+        "reasoning": {
+          "effort": "low"
+        }
+      }
+    }
+  ],
+  "judges": [
+    {
+      "id": "judge",
+      "model": "gpt-5.6-terra",
+      "api": "responses",
+      "base_url": "https://ai-gateway.cloudops.cloudera.com",
+      "api_key_file": "/Users/zhongqishuai/tokens/litellm_key_applied_ai",
+      "max_output_tokens": 1024,
+      "timeout_seconds": 90,
+      "generation": {
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        },
+        "reasoning": {
+          "effort": "low"
+        }
+      }
+    }
+  ],
+  "candidate_system": "Perform the next agent step using only the supplied runtime input. Follow its task, constraints and output requirements. Do not invent tool results. If an action is requested, return its proposed action as text or JSON; no tools are executed in this evaluation.",
+  "trials_per_candidate": 1,
+  "min_valid_trials": 1,
+  "max_attempts_per_call": 3,
+  "judge_confidence_threshold": 0.8,
+  "max_calls": 18000,
+  "max_reserved_output_tokens": 36864000,
+  "cost_policy": {
+    "estimated_ceiling_usd": 150,
+    "input_output_rates_per_million": {
+      "gemini-3.1-flash-lite": [
+        0.25,
+        1.5
+      ],
+      "gpt-5.6-luna": [
+        0.2,
+        1.2
+      ],
+      "gpt-5.6-sol": [
+        4,
+        20
+      ],
+      "gpt-5.6-terra": [
+        2,
+        12
+      ],
+      "gpt-5.4": [
+        2.5,
+        15
+      ]
+    },
+    "source": "user_gateway_screenshot",
+    "cache_discount_assumed": false
+  }
+}

@@ -10,8 +10,10 @@ training. Read [project-overview.md](project-overview.md), [TODO.md](TODO.md), a
 
 - Customer data import, agent-step annotation, the frozen pilot, AMP provisioning,
   TensorBoard, and a Ray infrastructure smoke trainer are implemented.
-- Laya, CLM-8B and GLiNER2.5-Decide are proposed interchangeable adapters. Their
-  fine-tuning, calibration and production routing are not implemented.
+- A pinned Laya head trial supports masked independent-binary pilot training,
+  validation and reload/resume. CLM-8B and GLiNER2.5-Decide adapters, calibration
+  and production routing remain proposed. Do not generalize the Laya trial to
+  unsupported task kinds or claim routing quality from its short bounded view.
 - The smoke validates distributed execution using a controlled linear model. It
   reads and validates pilot data but does not learn routing labels.
 - Deployment observations belong in dated status notes. A created CAI application

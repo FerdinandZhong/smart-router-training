@@ -107,6 +107,10 @@
     "cai_integration/templates/ray_worker_launcher.py.j2": {
       "sha256": "ad0512cccfddceae74940c7db137e8cd0516496e6a207f37aa8e0f121a5d4742",
       "reason": "Isolate virtualenv child processes from CAI Python add-ons."
+    },
+    "ray_serve_cai/management/app.py": {
+      "sha256": "04e3b026791d29c267ac90c212d3e1e277e511a7074dbb89f5b234a3836c3c2c",
+      "reason": "Expose authenticated Ray Jobs submission, status, logs and stop routes in management Swagger; retain upstream source hash."
     }
   },
   "license_note": "Source pyproject declares Apache-2.0; upstream checkout contains no standalone LICENSE file. Preserve source headers and provenance."

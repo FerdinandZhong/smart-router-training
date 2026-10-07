@@ -43,15 +43,25 @@ job commands, data flow and cluster shutdown. The AMP metadata is
 - [Original implementation plan v1](docs/agent-step-router-implementation-plan-v1.md) — archived ModernBERT-first proposal.
 - [Original research report](docs/deep-research-report.md) — background research; implementation decisions are superseded by v2.1 where they differ.
 
-Status as of 2026-09-30: the frozen 300-state pilot contains 846 observed
-state/model labels and 54 unknowns. The training head and TensorBoard are running
-in CAI; two one-GPU worker applications have been created, with Ray readiness and
-NCCL validation still pending at the last check. Local infrastructure and
-TensorBoard tests pass. The smoke trains a controlled diagnostic model, not a
-router. Laya fine-tuning, executable replay and routing-quality evaluation remain
-separate milestones. See [TODO.md](TODO.md) for current evidence and acceptance gates.
+Status as of 2026-10-01: the frozen 300-state pilot contains 846 observed
+state/model labels and 54 unknowns. Live two-node GPU/NCCL infrastructure validation
+passed. A pinned Laya head completed a 20-step pilot trial, fresh reload and resume
+to step 22 on the two L40S workers. This is an engineering milestone: validation
+underperformed constant training-prior predictions, and the bounded view retained
+only about 5–6% of original state tokens at the median. Calibration, executable
+replay and useful routing-quality evidence remain pending. See the
+[Laya recipe](docs/laya-first-trial.md), [dated results](docs/status/2026-10-01-laya-first-trial.md)
+and [TODO.md](TODO.md) for current evidence and acceptance gates.
 
 Run `PYTHONPATH=src python -m smart_router.cli audit --config configs/examples/customer-support.json` from this directory. See the construction guide for preparation and test commands.
 
 Training metrics: see [TensorBoard on CAI](docs/tensorboard.md) for the separate
 CPU dashboard, existing-project setup, and per-step smoke loss curves.
+
+## Full Laya pilot
+
+The [full pilot recipe](docs/laya-pilot-training.md) supports shuffled complete
+training epochs, validation checkpoint selection, audited 2,048-token views and
+selected-head export. It remains a frozen-encoder, independent-binary adapter.
+See the [dated GPU results](docs/status/2026-10-01-laya-pilot.md); calibration and
+production routing remain unimplemented.

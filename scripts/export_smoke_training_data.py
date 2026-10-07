@@ -19,7 +19,9 @@ def read_rows(path):
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
 
 
-def export(prepared, labels, output):
+def export(prepared, labels, output, dataset_id="pilot-smoke-v1", purpose="engineering_smoke"):
+    if purpose not in {"engineering_smoke", "pilot_training"}:
+        raise ValueError("Unsupported training bundle purpose")
     task = json.loads((prepared / "task.json").read_text())
     spec = TaskSpec.from_dict(task)
     by_id = {}
@@ -68,7 +70,7 @@ def export(prepared, labels, output):
     (output / "task.json").write_text(json.dumps(task, indent=2) + "\n")
     source_manifest = json.loads((prepared / "manifest.json").read_text())
     manifest = {
-        "schema_version": "1.0", "dataset_id": "pilot-smoke-v1", "purpose": "engineering_smoke",
+        "schema_version": "1.0", "dataset_id": dataset_id, "purpose": purpose,
         "label_semantics": "Single-trial, local-step silver observations; unknowns masked; no executable replay.",
         "source": source_manifest["source"],
         "source_manifest_sha256": digest(prepared / "manifest.json"),

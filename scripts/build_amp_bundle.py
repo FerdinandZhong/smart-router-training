@@ -21,6 +21,7 @@ def members(root):
                 "scripts/collective_probe.py",
                 "docs/ray-first-trial-implementation-plan.md", "tests/test_amp.py",
                 "tests/test_amp_execution_contexts.py", "tests/test_amp_environment.py", "tests/test_tensorboard_app.py",
+                "tests/test_management_jobs.py", "tests/test_laya_trial.py", "tests/test_laya_pilot.py",
                 "tests/run_tensorboard_smoke.py",
                 "tests/run_distributed_amp_smoke.py"}
     for folder in ("src", "amp", "ray_serve_cai", "cai_integration", "vendor/ray-serve-cai", "configs/training", "data/pilot/pilot-smoke-v1"):

@@ -67,6 +67,11 @@ artifacts and the distinction between local-step evidence and downstream success
 
 ## Launch and operate the training AMP
 
+After the infrastructure smoke, use the separate
+[Laya head trial guide](docs/laya-first-trial.md) for pinned model setup,
+short pilot adaptation, validation and checkpoint reload/resume. It is an
+engineering trial with a bounded context view, not a routing-quality benchmark.
+
 1. Import the repository as a CAI AMP with Python 3.11 and available CPU/CUDA
    runtimes. Setup launches the CPU Ray head and TensorBoard.
 2. Add two one-GPU workers through the head Swagger API, following the exact
@@ -106,3 +111,17 @@ stopped independently; events persist on shared storage.
 For an existing project without TensorBoard, see [TensorBoard setup](docs/tensorboard.md).
 Startup logs, loopback binding, environment isolation and notebook argument errors
 are covered there and in [AMP troubleshooting](docs/amp-deployment.md).
+
+## Full Laya pilot
+
+The [full pilot recipe](docs/laya-pilot-training.md) supports shuffled complete
+training epochs, validation checkpoint selection, audited 2,048-token views and
+selected-head export. It remains a frozen-encoder, independent-binary adapter.
+See the [dated GPU results](docs/status/2026-10-01-laya-pilot.md); calibration and
+production routing remain unimplemented.
+
+## Gateway data expansion
+
+See [gateway annotation campaign](docs/gateway-annotation-campaign.md) for the
+new 1,000-state pool, candidate mapping, paced collection and pending judge gate.
+The original pilot remains unchanged.

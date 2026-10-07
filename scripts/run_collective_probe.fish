@@ -1,15 +1,23 @@
 #!/usr/bin/env fish
 # Run from a machine with kubectl access; no file copy into the pods needed.
-if test (count $argv) -lt 2; or test (count $argv) -gt 3
-    echo 'Usage: fish scripts/run_collective_probe.fish POD0 POD1 [NAMESPACE]' >&2
+if test (count $argv) -lt 2; or test (count $argv) -gt 4
+    echo 'Usage: fish scripts/run_collective_probe.fish POD0 POD1 [NAMESPACE] [PYTHON_EXECUTABLE]' >&2
     exit 2
 end
 
 set pod0 $argv[1]
 set pod1 $argv[2]
 set ns mlx-user-2
-if test (count $argv) -eq 3
+if test (count $argv) -ge 3
     set ns $argv[3]
+end
+set python /home/cdsw/.venv-router-train/bin/python
+if test (count $argv) -eq 4
+    set python $argv[4]
+end
+if not string match -q '/*' -- "$python"
+    echo 'PYTHON_EXECUTABLE must be an absolute path inside both pods.' >&2
+    exit 2
 end
 if test "$pod0" = "$pod1"
     echo 'Specify two different GPU worker pods.' >&2
@@ -32,14 +40,15 @@ kubectl -n "$ns" get pod "$pod1" -o name; or exit 1
 
 set log_dir (mktemp -d ./collective-probe.XXXXXX); or exit 1
 echo "Logs: $log_dir"
+echo "Remote Python: $python (isolated mode)"
 echo "Rendezvous: $master_ip:29601; process deadline: 180 seconds"
 
-function run_probe --argument-names ns pod rank master probe
+function run_probe --argument-names ns pod rank master probe python
     kubectl -n "$ns" exec -i "$pod" -c engine -- \
         env NCCL_DEBUG=INFO NCCL_DEBUG_SUBSYS=INIT,NET,ENV \
         NCCL_IB_DISABLE=1 NCCL_SOCKET_IFNAME=eth0 \
         GLOO_SOCKET_IFNAME=eth0 TORCH_DISTRIBUTED_DEBUG=DETAIL \
-        /home/cdsw/.venv-router-train/bin/python -u - \
+        "$python" -I -u - \
         --rank "$rank" --master "$master" < "$probe"
 end
 
@@ -48,11 +57,11 @@ kubectl -n "$ns" exec -i "$pod0" -c engine -- \
     env NCCL_DEBUG=INFO NCCL_DEBUG_SUBSYS=INIT,NET,ENV \
     NCCL_IB_DISABLE=1 NCCL_SOCKET_IFNAME=eth0 \
     GLOO_SOCKET_IFNAME=eth0 TORCH_DISTRIBUTED_DEBUG=DETAIL \
-    /home/cdsw/.venv-router-train/bin/python -u - \
+    "$python" -I -u - \
     --rank 0 --master "$master_ip" < "$probe" > "$log_dir/rank0.log" 2>&1 &
 set rank0_pid $last_pid
 
-run_probe "$ns" "$pod1" 1 "$master_ip" "$probe" > "$log_dir/rank1.log" 2>&1
+run_probe "$ns" "$pod1" 1 "$master_ip" "$probe" "$python" > "$log_dir/rank1.log" 2>&1
 set rank1_status $status
 wait $rank0_pid
 

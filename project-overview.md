@@ -31,11 +31,14 @@ calibration and test. Of 900 state/class targets, 846 are observed and 54 are
 unknown. These are single-trial local-step silver observations, not calibrated
 success probabilities or verified downstream task outcomes.
 
-The current trainer fits a controlled one-weight regression to test the
-infrastructure. It validates pilot access but does not fit a decision model.
-Laya, CLM-8B and GLiNER2.5-Decide adapters, larger datasets, executable replay,
-calibration, and production routing remain planned. ModernBERT-first material is
-historical background, not the current implementation direction.
+The infrastructure trainer fits a controlled one-weight regression. A separate
+[Laya pilot trial](docs/laya-first-trial.md) adapts a pinned checkpoint's decision
+head with masked independent-binary targets, two-worker DDP, validation against
+training priors, and checkpoint reload/resume. It uses a bounded 512-token view
+and a short step cap; it does not establish routing quality. CLM-8B and
+GLiNER2.5-Decide adapters, larger datasets, executable replay, calibration, and
+production routing remain planned. ModernBERT-first material is historical
+background, not the current implementation direction.
 
 ## Documentation map
 
@@ -52,3 +55,11 @@ historical background, not the current implementation direction.
 [README.md](README.md) is the entry point. Detailed runbooks and research evidence
 remain under `docs/`; they are linked rather than copied into each overview.
 See [TODO.md](TODO.md) for dated deployment evidence and remaining work.
+
+## Full Laya pilot
+
+The [full pilot recipe](docs/laya-pilot-training.md) supports shuffled complete
+training epochs, validation checkpoint selection, audited 2,048-token views and
+selected-head export. It remains a frozen-encoder, independent-binary adapter.
+See the [dated GPU results](docs/status/2026-10-01-laya-pilot.md); calibration and
+production routing remain unimplemented.

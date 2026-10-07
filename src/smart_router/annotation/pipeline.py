@@ -21,6 +21,21 @@ from smart_router.schemas import DataError, TaskSpec, canonical_json, identifier
 
 
 VERSION = "local-step-v1"
+JUDGE_RESPONSE_FORMAT = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "local_step_judgment", "strict": True,
+        "schema": {
+            "type": "object", "additionalProperties": False,
+            "properties": {
+                "verdict": {"type": "string", "enum": ["pass", "fail", "abstain"]},
+                "confidence": {"type": "number"},
+                "reason": {"type": "string"},
+            },
+            "required": ["verdict", "confidence", "reason"],
+        },
+    },
+}
 CANDIDATE_SYSTEM = (
     "Perform the next agent step using only the supplied runtime input. "
     "Follow its task, constraints and output requirements. Do not invent tool results. "
@@ -87,8 +102,16 @@ def resolve_model(raw):
     require("api_key" not in model, "Use api_key_env; do not put credentials in configuration")
     generation = model.get("generation", {})
     require(isinstance(generation, dict), "generation must be an object")
-    allowed = {"temperature", "top_p", "reasoning"} if model["api"] == "responses" else {"temperature", "top_p", "seed", "reasoning_effort", "chat_template_kwargs", "top_k", "presence_penalty"}
+    allowed = {"temperature", "top_p", "reasoning", "text"} if model["api"] == "responses" else {"temperature", "top_p", "seed", "reasoning_effort", "chat_template_kwargs", "top_k", "presence_penalty", "response_format", "thinking"}
     require(not set(generation) - allowed, f"Unsupported generation options: {set(generation) - allowed}")
+    if "thinking" in generation:
+        require(model["api"] == "chat_completions" and generation["thinking"] == {"type": "disabled"},
+                "Only explicitly disabled Chat Completions thinking is supported")
+    if "text" in generation:
+        require(generation["text"] == {"format": {"type": "json_object"}}, "Only JSON object Responses text format is supported")
+    if "response_format" in generation:
+        require(generation["response_format"] in ({"type": "json_object"}, JUDGE_RESPONSE_FORMAT),
+                "Only JSON object or the strict local-step judgment schema is supported")
     if "chat_template_kwargs" in generation:
         options = generation["chat_template_kwargs"]
         require(isinstance(options, dict) and not set(options) - {"enable_thinking", "preserve_thinking"}, "Only explicit thinking-mode template options are supported")

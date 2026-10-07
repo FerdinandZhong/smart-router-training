@@ -23,8 +23,8 @@ Customer records / recorded agent trajectories
                     |
            versioned data bundle
                     |
-     future model adapters and router training
-       (not implemented by the smoke trainer)
+     Laya typed-binary head pilot training
+     + future adapter/calibration/routing work
 ```
 
 `src/smart_router/schemas.py` owns task semantics and model-input projection.
@@ -94,3 +94,28 @@ binds to loopback behind CAI's authenticated ingress.
 
 See [deployment details](docs/amp-deployment.md), [annotation design](docs/annotation-pipeline.md),
 and [proposed adapter contract](docs/decision-models-and-customer-training.md).
+
+## Laya pilot extension
+
+`amp/setup_laya_environment.py` extends the idle training environment with pinned
+Laya/Transformers packages and downloads one revision of checkpoint, encoder
+configuration and tokenizer into shared `model-cache/`. The setup lock, installed
+source commit and artifact hashes are recorded under `.amp-state/`.
+
+`amp/laya_jobs.py` submits `smart_router.training.laya_trial` through Ray Jobs.
+Two GPU workers run one full model replica each: encoder and action head frozen,
+26.2 million decision-head parameters trainable. Independent per-class questions
+use raw binary logits and global observed-target normalization. The bounded
+512-token view records omitted context; full-state labels remain unchanged.
+Validation is sharded without padding and compared to training-prior constants.
+A CPU driver freshly loads the head checkpoint before a two-step GPU resume.
+Calibration/test labels do not contribute to optimization or model selection.
+See [Laya recipe and limitations](docs/laya-first-trial.md).
+
+## Full Laya pilot
+
+The [full pilot recipe](docs/laya-pilot-training.md) supports shuffled complete
+training epochs, validation checkpoint selection, audited 2,048-token views and
+selected-head export. It remains a frozen-encoder, independent-binary adapter.
+See the [dated GPU results](docs/status/2026-10-01-laya-pilot.md); calibration and
+production routing remain unimplemented.

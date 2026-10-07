@@ -314,6 +314,27 @@ class AnnotationTests(unittest.TestCase):
         self.assertEqual(report["attempts_reserved"], 0)
         self.assertEqual(report["statuses"], {"pending_external_execution": 12})
 
+    def test_anthropic_disabled_thinking_is_validated_and_forwarded(self):
+        base = {"id": "sonnet", "api": "chat_completions", "model": "sonnet",
+                "base_url": "https://example.com/v1", "api_key_env": "SONNET_KEY",
+                "generation": {"thinking": {"type": "disabled"}}}
+        model = resolve_model(base)
+        self.assertEqual(backends.request_body(model, "s", "u")["thinking"], {"type": "disabled"})
+        with self.assertRaisesRegex(DataError, "explicitly disabled"):
+            resolve_model({**base, "generation": {"thinking": {"type": "enabled"}}})
+        with self.assertRaises(DataError):
+            resolve_model({**base, "api": "responses"})
+
+    def test_strict_judgment_schema_is_forwarded_without_arbitrary_schema_support(self):
+        from smart_router.annotation.pipeline import JUDGE_RESPONSE_FORMAT
+        base = {"id": "sonnet", "api": "chat_completions", "model": "sonnet",
+                "base_url": "https://example.com/v1", "api_key_env": "SONNET_KEY",
+                "generation": {"response_format": JUDGE_RESPONSE_FORMAT}}
+        model = resolve_model(base)
+        self.assertEqual(backends.request_body(model, "s", "u")["response_format"], JUDGE_RESPONSE_FORMAT)
+        with self.assertRaises(DataError):
+            resolve_model({**base, "generation": {"response_format": {"type": "json_schema"}}})
+
     def test_qwen_thinking_switch_is_explicit_and_forwarded(self):
         base = {"id": "qwen", "api": "chat_completions", "model": "qwen",
                 "base_url": "https://example.com/v1", "api_key_env": "QWEN_KEY",

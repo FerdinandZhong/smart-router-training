@@ -68,7 +68,8 @@ class AMPTests(unittest.TestCase):
         from scripts.build_amp_bundle import members
         self.assertIn("scripts/setup_cross_node_gpu.fish", members(ROOT))
         setup = (ROOT / "scripts/setup_cross_node_gpu.fish").read_text()
-        self.assertIn("vendor/ray-serve-cai/deploy/istio/", setup)
+        self.assertIn('set cluster_dir "$repo_dir/vendor/ray-serve-cai"', setup)
+        self.assertIn('"$cluster_dir/deploy/istio/ray-collective-protocol-inspection-trial.yaml"', setup)
         for name in ("setup_cross_node_gpu.fish", "run_collective_probe.fish"):
             script = (ROOT / "scripts" / name).read_text()
             self.assertIn(".venv-router-train/bin/python", script)

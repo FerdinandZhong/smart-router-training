@@ -117,8 +117,36 @@ policy; review the included runbook for environment-specific prerequisites.
 Rerun it for replacement pods. The training job uses the same TCP interface
 settings as the probe (`eth0`, InfiniBand disabled), configured in
 `configs/training/cluster-smoke.json`; adjust both if the network differs.
+Both networking scripts accept an optional final Python executable path, which
+must exist inside both pods. The default is
+`/home/cdsw/.venv-router-train/bin/python`. For another virtualenv:
 
-From a terminal **inside the imported CAI project**, equivalent operations are:
+```bash
+fish scripts/setup_cross_node_gpu.fish <GPU_POD_A> <GPU_POD_B> <NAMESPACE> /home/cdsw/.venv-other/bin/python
+# Probe only, after networking is prepared:
+fish scripts/run_collective_probe.fish <GPU_POD_A> <GPU_POD_B> <NAMESPACE> /home/cdsw/.venv-other/bin/python
+```
+
+Setup checks PyTorch, CUDA access and Gloo/NCCL availability on both pods before
+changing networking. It reports the selected Python, Torch and CUDA versions;
+Ray and TensorBoard are not required by these networking probes. All remote
+Python commands use `-I` to exclude CAI Python add-ons. AMP environment setup
+continues to enforce the training project's pinned package versions.
+
+The management Swagger UI also exposes `POST /api/v1/jobs` with a Ray Jobs
+submission example. Use it for training jobs; `/api/v1/applications` deploys
+Ray Serve services. Poll `GET /api/v1/jobs/{submission_id}` and its `/logs`
+route, or request termination with `POST /api/v1/jobs/{submission_id}/stop`.
+Submission and stop require an administrator token. The training extra includes
+`ray[default,train]==2.58.0` because the submission SDK requires dashboard/client
+dependencies in addition to Ray Train. For an existing environment created with
+the older extra, install it without inherited CAI Python paths:
+
+```bash
+env -u PYTHONHOME -u PYTHONPATH PYTHONNOUSERSITE=1 PIP_USER=0 /home/cdsw/.venv-router-train/bin/python -m pip install 'ray[default,train]==2.58.0'
+```
+
+From a terminal **inside the imported CAI project**, submit and monitor with:
 
 ```bash
 python amp/jobs.py plan
@@ -244,3 +272,15 @@ launchers and restart those applications before submitting training jobs.
 The AMP also creates an authenticated CPU-only [TensorBoard application](tensorboard.md)
 for per-step smoke metrics on shared storage. Existing projects can deploy it
 independently without restarting the Ray head or GPU workers.
+
+## Bash package for infrastructure review
+
+A portable Bash review draft is available in
+[docs/customer-share/cross-node-nccl](customer-share/cross-node-nccl/README.md),
+also copied beside the shared fish script under `../scripts/setup_cross_node_gpu.sh`.
+Its default `plan` mode does not execute GPU processes or change Kubernetes
+resources. Explicit apply requires change metadata, idle-worker confirmation and
+plaintext-exception approval. Read the review/rollback instructions before use.
+Four local fake-client contract tests passed; the new Bash automation has not
+been applied to the live CAI cluster. The existing development-network evidence
+does not constitute customer compliance approval.

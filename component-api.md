@@ -1,7 +1,8 @@
 # Component and API reference
 
-This documents implemented interfaces. Model-adapter and production-router APIs
-remain proposals in [the framework contract](docs/decision-models-and-customer-training.md).
+This documents implemented interfaces. The broader interchangeable-adapter and
+production-router APIs remain proposals in
+[the framework contract](docs/decision-models-and-customer-training.md).
 Internal Python helpers are not a versioned public compatibility guarantee.
 
 ## Task and dataset components
@@ -60,6 +61,14 @@ and review artifacts. Original targets are not silently replaced by local-step
 labels. Pass/fail frequencies use valid trials only; transport errors and
 unresolved verdicts remain unknown. See [the detailed contract](docs/annotation-pipeline.md).
 
+Chat Completions generation settings accept `thinking: {"type": "disabled"}`
+for explicit Anthropic gateway control. Other `thinking` settings are rejected.
+They also accept the fixed strict `JUDGE_RESPONSE_FORMAT` schema for native
+JSON judgments. Arbitrary JSON schemas remain unsupported. The pipeline still
+validates confidence, exact fields and the pass/fail/abstain verdict.
+See [original pilot gateway reannotation](docs/pilot-300-gateway-sonnet.md) for
+the Sonnet-judged rebuild commands and evidence paths.
+
 ## Ray and CAI operations
 
 | Entry point | Supported operations |
@@ -67,6 +76,8 @@ unresolved verdicts remain unknown. See [the detailed contract](docs/annotation-
 | `amp/bootstrap.py` | `validate`, `resources`, `cluster-env`, `training-env`, `launch` |
 | Dedicated AMP wrappers | Argument-free scripts referenced by [.project-metadata.yaml](.project-metadata.yaml) |
 | `amp/jobs.py` | `plan`, `submit`, `status`, `logs`, `stop`; `--config`, `--submission-id`, `--wait` |
+| `amp/laya_jobs.py` | Separate Laya pilot `plan`, `submit`, `status`, `logs`, `stop`; fresh `--submission-id` required |
+| `amp/setup_laya_environment.py` | Install pinned Laya dependencies and cache/checksum the model snapshot; run while training jobs are idle |
 | `amp/tensorboard_app.py` | `plan`, `deploy`, `serve` |
 | `amp/launch_tensorboard.py` | CAI job wrapper for authenticated dashboard creation/reuse |
 | `amp/serve_tensorboard.py` | Notebook-safe application entrypoint using the training virtualenv |
@@ -83,6 +94,14 @@ The worker function is `smart_router.training.cluster_smoke.train_worker(config)
 Persistent results include run manifest, per-worker identities, stage metrics,
 Ray checkpoints, a reload checkpoint, TensorBoard events and `SUCCESS.json`.
 
+`smart_router.models.laya` supplies the typed-binary trainable head and versioned
+token view; it currently accepts only `independent_binary`. Customer classes come
+from `task.json`. `smart_router.training.laya_trial` runs the real model through
+two-GPU DDP, global mask normalization, per-class validation/prior metrics, fresh
+head reload and optimizer/step/data-position/RNG resume. Its separate config has
+purpose `laya_pilot_smoke`; calibration/test labels are not used for training or
+selection. See [the recipe and limitations](docs/laya-first-trial.md).
+
 ## Management HTTP API
 
 Use the training head's authenticated `/docs` Swagger UI. Source contracts live
@@ -96,6 +115,11 @@ in [resource routes](ray_serve_cai/management/api/resources.py) and
 | `GET /api/v1/resources/capacity` | Live Ray resource totals and availability |
 | `GET /api/v1/resources/allocation` | Management API's tracked allocations; distinct from live capacity |
 | `DELETE /api/v1/resources/nodes/{app_id}` | Remove the selected worker; admin authorization required |
+| `POST /api/v1/jobs` | Submit a Ray job using the Ray Jobs payload; admin authorization required |
+| `GET /api/v1/jobs` | List Ray jobs |
+| `GET /api/v1/jobs/{submission_id}` | Job status and details |
+| `GET /api/v1/jobs/{submission_id}/logs` | Captured job output |
+| `POST /api/v1/jobs/{submission_id}/stop` | Request termination; admin authorization required |
 
 Worker creation accepts `name`, `node_type`, `cpu`, `memory` (GiB), `gpus`,
 `accelerator_type`, `runtime_identifier`, and optional `node_label`, `ray_labels`
@@ -104,6 +128,36 @@ a registered node-type template. `accelerator_type` is a Ray label; `node_label`
 controls Kubernetes placement. The creation response supplies application and
 worker IDs; pending readiness is not a successful Ray join.
 
-Ray Jobs and Dashboard are exposed under `/dashboard/`. TensorBoard is a separate
+The management Jobs routes forward to the head's local Ray Dashboard, without
+forwarding caller credentials. Submission accepts `submission_id`, `entrypoint`,
+`entrypoint_num_cpus`, `entrypoint_num_gpus`, and `runtime_env`; it returns
+immediately. The Swagger example runs the infrastructure smoke. These routes
+are separate from `/api/v1/applications`, which deploys Ray Serve applications.
+Use a fresh submission ID and matching smoke `--run-id` for each run.
+
+Ray Jobs and Dashboard are also exposed under `/dashboard/`. TensorBoard is a separate
 CAI application: it reads shared event files, binds to `127.0.0.1:$CDSW_APP_PORT`,
 and relies on CAI ingress for authentication/TLS. See [TensorBoard operations](docs/tensorboard.md).
+
+## Full Laya pilot
+
+The [full pilot recipe](docs/laya-pilot-training.md) supports shuffled complete
+training epochs, validation checkpoint selection, audited 2,048-token views and
+selected-head export. It remains a frozen-encoder, independent-binary adapter.
+See the [dated GPU results](docs/status/2026-10-01-laya-pilot.md); calibration and
+production routing remain unimplemented.
+
+## Gateway annotation campaign
+
+- `scripts/list_gateway_models.py`: credential-file/environment model discovery.
+- `scripts/gateway_candidate_stage.py`: paced, cached candidate phases with
+  bounded transient retries and estimated monetary reservations.
+- `scripts/gateway_annotation_campaign.py`: approved Flash Lite/Luna/Sol mapping,
+  separate Terra judging, cached label assembly and separate dataset export.
+- Annotation generation accepts JSON-object or the fixed strict judgment-schema
+  `response_format` for Chat Completions, and JSON-object `text.format` for Responses.
+- `validate_bundle()` accepts `engineering_smoke` and `pilot_training` manifests.
+  Both require task/split checksums, valid targets and explicit unknown masks.
+
+A launched campaign is not evidence that annotation has finished or that labels
+are sufficient for training. Current progress is recorded in its run directory.

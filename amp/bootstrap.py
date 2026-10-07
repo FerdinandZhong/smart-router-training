@@ -63,6 +63,7 @@ def setup_environment(kind):
         check = "import ray; assert ray.__version__ == '2.58.0', ray.__version__; print(ray.__version__)"
         if kind == "training":
             check += "; import torch; assert torch.__version__.split('+')[0] == '2.8.0'; print(torch.__version__); import tensorboard; print(tensorboard.__version__)"
+            check += "; from ray.dashboard.modules.job import sdk; assert sdk.requests is not None, 'Ray Jobs SDK dependencies missing; install ray[default,train]'; from ray.job_submission import JobSubmissionClient"
         subprocess.run([str(python), "-c", check], env=env, check=True)
         freeze = subprocess.check_output([str(python), "-m", "pip", "freeze"], env=env, text=True)
         (state / f"{kind}-environment.txt").write_text(freeze)

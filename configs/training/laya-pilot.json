@@ -1,0 +1,28 @@
+{
+  "purpose": "laya_pilot_training",
+  "model_id": "convaiinnovations/laya",
+  "model_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "source_revision": "4066d5d5fbf08b66c6757ddeedbd797bd7655bc0",
+  "dataset": "data/pilot/pilot-smoke-v1",
+  "output_dir": "training-runs",
+  "num_workers": 2,
+  "cpus_per_worker": 4,
+  "batch_size_per_worker": 2,
+  "max_epochs": 5,
+  "min_epochs": 3,
+  "early_stopping_patience": 2,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "warmup_fraction": 0.1,
+  "max_grad_norm": 1.0,
+  "max_len": 2048,
+  "head_max_len": 192,
+  "seed": 42,
+  "collective_timeout_seconds": 600,
+  "job_timeout_seconds": 7200,
+  "collective_env": {
+    "NCCL_IB_DISABLE": "1",
+    "NCCL_SOCKET_IFNAME": "eth0",
+    "GLOO_SOCKET_IFNAME": "eth0"
+  }
+}

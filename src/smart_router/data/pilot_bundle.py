@@ -9,8 +9,8 @@ from smart_router.schemas import TaskSpec, validate_input
 def validate_bundle(directory):
     root = Path(directory)
     manifest = json.loads((root / "manifest.json").read_text())
-    if manifest.get("purpose") != "engineering_smoke":
-        raise ValueError("Expected an engineering_smoke bundle")
+    if manifest.get("purpose") not in {"engineering_smoke", "pilot_training"}:
+        raise ValueError("Expected an engineering_smoke or pilot_training bundle")
     required = {"task.json", "train.jsonl", "validation.jsonl", "calibration.jsonl", "test.jsonl"}
     if set(manifest["files_sha256"]) != required:
         raise ValueError("Bundle manifest must cover task and all four splits")

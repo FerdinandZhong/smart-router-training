@@ -31,6 +31,8 @@ PYTHONPATH=src python -m smart_router.cli audit --config configs/examples/custom
 python scripts/annotate.py plan --config configs/annotation/mock.json
 python amp/validate_pilot.py
 python amp/jobs.py plan
+python amp/laya_jobs.py plan --submission-id laya-first-trial-example
+python amp/laya_jobs.py plan --config configs/training/laya-pilot.json --submission-id laya-pilot-example
 python amp/tensorboard_app.py plan
 python scripts/build_amp_bundle.py
 git diff --check
@@ -51,13 +53,14 @@ annotation tools are broader than the curated AMP archive.
 | Annotation behavior | Annotation/campaign tests and offline fixtures; distinguish these from live calls |
 | AMP setup or launchers | AMP environment and PBJ execution-context tests; relevant subprocess smoke |
 | Training loop or checkpoints | Unit suite and two-process CPU smoke; live GPU run after network probes |
+| Laya typed-binary adapter | Mask/global-normalization and view-leakage tests; pinned checkpoint two-GPU head fit, validation, fresh reload/resume |
 | TensorBoard launcher/events | Application tests, HTTP smoke, and distributed event validation if the writer changes |
 | Included Ray source | Review snapshot changes, update effective hashes, AMP validation and relevant cluster checks |
 
 Full unit suite:
 
 ```bash
-PYTHONPATH=src:. python -m unittest discover -s tests -q
+PYTHONPATH=src:. python -m pytest tests -q
 ```
 
 Separate integration checks:
@@ -94,3 +97,6 @@ commit local secrets, generated run output or private customer data.
 For deployment commands, recovery and shutdown, follow [user-guide.md](user-guide.md)
 and [the AMP runbook](docs/amp-deployment.md). For presentation changes, follow
 [DESIGN.md](DESIGN.md).
+
+Gateway campaign checks: `PYTHONPATH=src:. python -m pytest tests/test_gateway_dataset.py tests/test_gateway_campaign.py -q`.
+Source extraction uses pinned Parquet shards and requires the Parquet extra.
