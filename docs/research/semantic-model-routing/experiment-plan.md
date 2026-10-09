@@ -6,6 +6,9 @@ Updated after the [focused literature review](focused-literature-review.md) on 9
 The primary catalog-change protocol now covers table additions, following the user's deployment description.
 Standard training objectives remain sufficient for the initial study; a new cost-aware loss is outside scope.
 
+The [Chinese execution plan](training-and-experiments-zh.md) specifies the training stages and the roles of GLiNER2.5-Decide and Laya.
+Its [model evidence](model-evidence.json) distinguishes pinned upstream behavior from our current routing adapters.
+
 ## Research questions
 
 1. Does candidate-conditioned learning improve complete semantic coverage beyond strong lexical, dense, and hybrid retrieval?
@@ -70,10 +73,19 @@ Retrieve both granularities so an inaccurate model summary cannot always hide a 
 Candidate recall sets the ceiling for reranking quality.
 Report this ceiling separately rather than blaming the scorer for missing candidates.
 
-Reuse Laya and GLiNER2.5-Decide as candidate scoring backbones.
+Evaluate Laya and GLiNER2.5-Decide as candidate scoring backbones alongside a conventional cross-encoder.
+Use an indexable dual encoder for first-stage retrieval; no independent vector-index interface was verified for the current decision-model adapters.
 Prototype `score(question, confirmed_history, candidate_descriptor)` with shared weights across candidate IDs.
 Avoid one fixed output class per catalog model.
 New approved models should become searchable through indexing without mandatory classifier-head expansion.
+This interface property does not establish accuracy on new business definitions.
+
+The main reranker comparison uses independent question-candidate pairs from the same frozen candidate pool.
+Place material business definitions in the candidate body, not long option labels.
+Pinned Laya source caps individual option descriptions at 48 tokens and separately truncates the instruction block.
+Audit the actual token view and test essential clauses at different positions.
+Use the same evidence across models; report a separate condition when longer supported views change evidence access.
+A GLiNER candidate-group mode is an optional ablation with group-size and candidate-order tests.
 
 Start with masked binary relevance labels and standard ranking comparisons.
 Treat conflict and completeness annotations as evaluation labels first.
@@ -84,6 +96,14 @@ Candidate-conditioned records and collation require a new adapter.
 Reuse provenance, grouped splits, masks, training telemetry, and distributed execution where their contracts match.
 The existing pre-call projection principle still applies; add an explicit projection for this task.
 Gold SQL, answers, reviewer reasons, and post-execution evidence remain outside model inputs.
+
+Existing routing targets do not provide semantic-retrieval supervision.
+Start primary comparisons from the original checkpoints; old routing-tuned weights are an optional transfer ablation.
+The inspected Laya adapter freezes its encoder; the GLiNER adapter trains only its classifier.
+Compare original models, frozen-encoder adaptation, and encoder-updating adaptation before making backbone claims.
+The existing adapters block encoder gradients and therefore require implementation changes for the last condition.
+Report trainable parameter counts because the two output modules have different capacities.
+If a decision model wins, add a matched base-encoder/task-head control to investigate the source of the gain.
 
 The branch base contains the committed Laya implementation.
 The current GLiNER comparison code remains unfinished work in the original checkout.

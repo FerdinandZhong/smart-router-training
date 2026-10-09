@@ -89,6 +89,8 @@ Laya and GLiNER2.5-Decide are candidate backbones, not proven winners for this t
 Their existing routing labels do not transfer to semantic retrieval.
 A dynamic catalog requires candidate-conditioned scoring rather than a fixed output class for every model ID.
 The [experiment plan](experiment-plan.md) describes the required adapter and controls.
+The [Chinese training and experiment brief](training-and-experiments-zh.md) explains their role as rerankers after hybrid retrieval.
+It also separates frozen-encoder trials from encoder adaptation and records the required input-budget checks.
 
 ## First decision gate
 

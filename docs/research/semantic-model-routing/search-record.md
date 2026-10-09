@@ -173,3 +173,42 @@ No verified Ossie-specific retrieval benchmark was identified in this targeted p
 That result does not establish that such work is absent.
 The reviewed methods already cover coherent table sets, cross-domain transfer, and incremental index design.
 Our proposed contribution therefore requires measured business-semantic completeness and temporal evaluation, not merely a new format or graph component.
+
+## Model-role and training follow-up
+
+Date: 9 October 2026. Requested skills: `nature-academic-search` and `nature-polishing`.
+Search workflow: `multi-source-search`, reusing the established primary-source routing and earlier retrieval-paper review.
+Polishing choices: algorithmic study, Methods, English source plan, generic journal framing; the requested execution brief is written in Chinese.
+The edits preserve the existing research question and mark proposed settings separately from verified implementation facts.
+
+The [Chinese brief](training-and-experiments-zh.md) organizes experiments and model-selection gates.
+The [model evidence inventory](model-evidence.json) records source hashes and three additional papers.
+These additions do not change the earlier 23-work inventory count.
+
+Academic MCP search tools remained unavailable.
+This bounded follow-up used direct arXiv and ACL records, author model cards, and version-pinned source files.
+It did not repeat the broader OpenAlex discovery sweep.
+Search strings included:
+
+```text
+Laya typed structured prediction encoder convai innovations paper 2025 2026
+GLiNER2.5 Decide classification training architecture Fastino 2026 paper
+GLiClass efficient zero shot text classification generalized late interaction 2025 paper
+GLiNER2.5 Decide site:fastino.ai/blog structured decision making
+```
+
+The official GLiNER2 proceedings title differs from its arXiv title.
+Both versions have the same author list and are treated as one work.
+The paper supports family-level architecture claims, while the Decide checkpoint is documented separately.
+GLiClass was read for architecture; LAVOIR was read for adjacent clarification-policy framing and model overview.
+Both remain labeled preprints in this follow-up.
+No paper result was reproduced, and vendor decision benchmarks were not used to rank semantic retrieval candidates.
+
+Local routing adapters and training configurations were inspected read-only in the original checkout.
+Pinned upstream model cards, configs, and scoring implementations were inspected without downloading model weights.
+The first attempted Laya source path returned 404; the repository's actual `laya/common.py` path succeeded.
+The GLiNER compatibility shim identified `gliner2/models/span/model.py` as the concrete implementation.
+
+The source checks establish that the current local adapters freeze their encoders.
+They do not establish full-fine-tuning quality, new-task memory requirements, or live cluster status.
+The plan therefore adds matched encoder-adaptation conditions rather than extrapolating from the old routing trials.

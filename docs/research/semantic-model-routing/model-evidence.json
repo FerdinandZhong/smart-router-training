@@ -1,0 +1,112 @@
+{
+  "review_date": "2026-10-09",
+  "evidence_kind": "Read-only source and literature review; no new training or live-cluster evidence",
+  "local_repository": "/Users/zhongqishuai/Projects/cldr_projects/smart_router_training",
+  "local_files": [
+    {
+      "path": "src/smart_router/models/laya.py",
+      "sha256": "400d7b2d6a97eeed686667c288edef79abe260535ef7eea34861649527457b2f"
+    },
+    {
+      "path": "src/smart_router/models/gliner_decide.py",
+      "sha256": "d63a7e64e29879e7d3ad5835761caad83c8a40b0c0993c565a58a0315a4070dc"
+    },
+    {
+      "path": "configs/training/laya-gateway-1300-10epochs.json",
+      "sha256": "bf22fbcc71b5b4f9b75189a94910079a3bc1b3b121d8a48ce8016789dc7dc3b6"
+    },
+    {
+      "path": "configs/training/gliner-decide-gateway-1300-10epochs.json",
+      "sha256": "cf86160b55fdba6205887cf563a8309170ad51c6dc767c09e74a4c0b05f0ecb5"
+    }
+  ],
+  "upstream_files": [
+    {
+      "file_label": "laya-common.py",
+      "url": "https://raw.githubusercontent.com/NandhaKishorM/laya/4066d5d5fbf08b66c6757ddeedbd797bd7655bc0/laya/common.py",
+      "sha256": "4ab41be6a4d9fdbad74eccf4f64c43e2c7404d227988d97ed8233ded8b182cb1"
+    },
+    {
+      "file_label": "gliner-span-model.py",
+      "url": "https://raw.githubusercontent.com/fastino-ai/GLiNER2/55656fbfa01d3d4a77485e1a1eeeaf682990ccdf/gliner2/models/span/model.py",
+      "sha256": "92a1761e4059b37fed36438a05151b77136c729af9e26a1226ca7cafbaa3afe4"
+    },
+    {
+      "file_label": "laya-card.md",
+      "url": "https://huggingface.co/convaiinnovations/laya/raw/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/README.md",
+      "sha256": "00355613796b3f5860b0d5b20392381d26580ec242e04a1fd150c7f116858602"
+    },
+    {
+      "file_label": "gliner-card.md",
+      "url": "https://huggingface.co/fastino/GLiNER2.5-Decide/raw/5a7adf72a23b4d311abae6ce050d7f0012bb3416/README.md",
+      "sha256": "c92f9ada7e7a5af1620d59fa29b69920c7d1d3851f61e547ddc9d8c2ce5a1b95"
+    },
+    {
+      "file_label": "laya-config.json",
+      "url": "https://huggingface.co/convaiinnovations/laya/raw/55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851/rl_agent_config.json",
+      "sha256": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd"
+    },
+    {
+      "file_label": "gliner-config.json",
+      "url": "https://huggingface.co/fastino/GLiNER2.5-Decide/raw/5a7adf72a23b4d311abae6ce050d7f0012bb3416/config.json",
+      "sha256": "e748e5b80575471c91b3f0dd00f513ba58242544fcb7e1236e0021e61abd7673"
+    }
+  ],
+  "verified_observations": [
+    "Laya local adapter freezes encoder and act_head; remaining trainable modules include transformer decision-head layers.",
+    "GLiNER local adapter trains classifier parameters only and encodes under torch.no_grad.",
+    "Both inspected 10-epoch local configurations specify max_len=2048; this is configuration evidence, not a newly inspected live run.",
+    "Pinned Laya source caps individual option descriptions at 48 tokens and separately budgets question instructions.",
+    "Pinned Laya model config defaults to max_len=512 and head_max_len=192; the local training view overrides sequence construction length.",
+    "Pinned GLiNER Decide config specifies architecture=span and model_name=microsoft/deberta-v3-large.",
+    "The inspected root checkpoints are English-oriented; multilingual variants require explicit separate experiment arms.",
+    "Current adapters use routing labels and prefix/tail state truncation; semantic candidate adapters are proposed, not implemented."
+  ],
+  "additional_literature": [
+    {
+      "id": "gliner2",
+      "title": "GLiNER2: Schema-Driven Multi-Task Learning for Structured Information Extraction",
+      "authors": [
+        "Urchade Zaratiana",
+        "Gil Pasternak",
+        "Oliver Boyd",
+        "George Hurn-Maloney",
+        "Ash Lewis"
+      ],
+      "status": "EMNLP 2025 System Demonstrations",
+      "doi": "10.18653/v1/2025.emnlp-demos.10",
+      "url": "https://aclanthology.org/2025.emnlp-demos.10/",
+      "preprint": "https://arxiv.org/abs/2507.18546",
+      "preprint_title": "GLiNER2: An Efficient Multi-Task Information Extraction System with Schema-Driven Interface",
+      "reading_depth": "Official abstract and publication metadata; current and pinned implementation evidence inspected separately",
+      "boundary": "Family architecture evidence, not a Decide semantic-retrieval benchmark"
+    },
+    {
+      "id": "gliclass",
+      "title": "GLiClass: Generalist Lightweight Model for Sequence Classification Tasks",
+      "status": "2025 arXiv preprint",
+      "url": "https://arxiv.org/abs/2508.07662",
+      "reading_depth": "Abstract and architecture sections",
+      "boundary": "Related text-label joint encoding and alternative architectures; no Ossie retrieval evidence"
+    },
+    {
+      "id": "lavoir",
+      "title": "LAVOIR: Teaching a Single-Pass Decision Encoder When and What to Ask with Amortized Value of Information",
+      "authors": [
+        "Furkan Yılmaz",
+        "Habibe Aleyna Taşdemir",
+        "Muhammed Faruk Gözay"
+      ],
+      "status": "arXiv preprint v1, 2026-09-25",
+      "url": "https://arxiv.org/abs/2609.30706",
+      "reading_depth": "Metadata, abstract, formulation, and model overview",
+      "boundary": "Adjacent clarification-policy research; does not establish Ossie context retrieval quality; numerical claims not reproduced"
+    }
+  ],
+  "limits": [
+    "Upstream model-card comparisons are author-reported operational classification results, not semantic retrieval evidence.",
+    "No evidence justifies choosing GLiNER or Laya as the best candidate before matched retrieval experiments.",
+    "Encoder-adaptation training, LoRA support for the new adapters, and memory requirements remain to be tested.",
+    "Neither the original main worktree nor its uncommitted GLiNER code was changed by this review."
+  ]
+}
