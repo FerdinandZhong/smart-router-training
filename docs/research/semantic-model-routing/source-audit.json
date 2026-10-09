@@ -1,0 +1,144 @@
+{
+  "review_date": "2026-10-09",
+  "research_branch": "research/semantic-model-routing",
+  "base_commit": "2b7eecf37d0053951576bca654f6efd204e07950",
+  "evidence_kind": "read-only local source review; no live authorization, GPU, or database evidence",
+  "repositories": [
+    {
+      "name": "helios",
+      "local_root": "/Users/zhongqishuai/Projects/cldr_projects/helios",
+      "git_head": "316f5d89926f96d366afaee641bd923af4ca6bf3",
+      "scope": "working-tree file contents; source inspection only",
+      "files": [
+        {
+          "path": "apps/helios/mcp/server.py",
+          "sha256": "4e8776f049f894cf6be23faf1a2c652da71a889210b213d8bd4695a7bc52155c",
+          "line_anchors": {
+            "model_store": 107,
+            "lexical_search": 197,
+            "authorize": 415,
+            "search_semantics": 674,
+            "run_query": 792
+          }
+        },
+        {
+          "path": "shared/helios_core/engines/impala.py",
+          "sha256": "20862291f33992af5c983a7b5d9013056dec566b8620058f3edbc8f6a0cd78c2",
+          "line_anchors": {
+            "connect": 37,
+            "effective_identity_check": 67
+          }
+        },
+        {
+          "path": "docs/talk-to-your-data-architecture.md",
+          "sha256": "04b150d0f5a26f482610786b99faa96857b876749792f3fe0b82a0d292c3ebe4",
+          "line_anchors": {}
+        },
+        {
+          "path": "shared/helios_core/ossie/model.py",
+          "sha256": "f27b57c5a93a2a314adf5193ecf5cdc3ad110a37c20a342abb0d11b4ae6c7ca6",
+          "line_anchors": {}
+        }
+      ]
+    },
+    {
+      "name": "uob-ai-data-operations-workspace",
+      "local_root": "/Users/zhongqishuai/Projects/cldr_projects/uob-ai-data-operations-workspace",
+      "git_head": null,
+      "scope": "working-tree file contents; source inspection only",
+      "files": [
+        {
+          "path": "demo/app/planner.py",
+          "sha256": "68496d1a87d321218c4d85eb618f3c818becd63bd50d71898b61943fc4b2dade",
+          "line_anchors": {
+            "full_model_context": 44,
+            "context_limit": 46
+          }
+        },
+        {
+          "path": "demo/app/semantics.py",
+          "sha256": "fbda39febe6dd53ca7d226140541e2553c1fa9df8af2ef2b2065b02ca33d0f27",
+          "line_anchors": {
+            "load_model": 16,
+            "compile_query": 127,
+            "execute_trino": 146
+          }
+        },
+        {
+          "path": "demo/app/orchestration.py",
+          "sha256": "ca54b8b17d3471d7960dc310166182c52c156483c817c93d02688e465a27d5db",
+          "line_anchors": {}
+        },
+        {
+          "path": "demo/scripts/semantic_registry.sql",
+          "sha256": "3fcfc14800b498efbea088cf4643bebf066c2612dda17e3fc3775f6e9bd9350a",
+          "line_anchors": {}
+        },
+        {
+          "path": "demo/HELIOS_HARDENING_PLAN.md",
+          "sha256": "0cc29cc81113abed5ea3e5d4b7097ad2380b6889c6818f1e97166596f57f35b2",
+          "line_anchors": {}
+        },
+        {
+          "path": "demo/FINANCIAL_FOUNDATION.md",
+          "sha256": "54e78c6d62502e08f570978b678ede4128d2aab3665af728691d70a115de9f0d",
+          "line_anchors": {}
+        },
+        {
+          "path": "SESSION_HANDOFF.md",
+          "sha256": "31c10930dabb6b019816dfb7fb072171892ca9eb01644fc203ba6e0604f3ceb9",
+          "line_anchors": {}
+        }
+      ]
+    }
+  ],
+  "original_checkout": {
+    "root": "/Users/zhongqishuai/Projects/cldr_projects/smart_router_training",
+    "branch": "main",
+    "head": "2b7eecf37d0053951576bca654f6efd204e07950",
+    "tracked_patch_scope": "git diff --binary -- . :!data",
+    "tracked_patch_sha256": "349a80377f0ae247efc4535dbc535a627d476d16eab9c2869e39c86c991ffae7",
+    "status_at_review": [
+      " M TODO.md",
+      " M architecture.md",
+      " M component-api.md",
+      " M development.md",
+      " M docs/pilot-300-gateway-sonnet.md",
+      " M project-overview.md",
+      " M src/smart_router/training/laya_pilot.py",
+      " M src/smart_router/training/laya_trial.py",
+      " M tests/test_laya_pilot.py",
+      " M tests/test_laya_trial.py",
+      "?? amp/backfill_validation_accuracy.py",
+      "?? amp/run_model_comparison.py",
+      "?? amp/setup_gliner_environment.py",
+      "?? configs/training/gliner-decide-gateway-1300-10epochs.json",
+      "?? configs/training/gliner-decide-gateway-1300-continuation.json",
+      "?? configs/training/gliner-decide-gateway-1300-low-lr.json",
+      "?? configs/training/laya-gateway-1300-10epochs.json",
+      "?? data/pilot/gateway-combined-1300-v1/",
+      "?? data/pilot/gateway-pilot-v1-final/",
+      "?? data/pilot/gateway-pilot-v1/",
+      "?? data/pilot/pilot-300-gateway-sonnet-v1/",
+      "?? docs/customer-share/cross-node-nccl-it-review.tar.gz",
+      "?? docs/customer-share/follow-up-email.md",
+      "?? docs/customer-share/semantic-layer-note.md",
+      "?? docs/dataset-enhancement-plan.md",
+      "?? docs/gateway-model-comparison.md",
+      "?? docs/status/2026-10-06-pilot-300-gateway-sonnet.md",
+      "?? docs/status/2026-10-08-gateway-model-comparison.md",
+      "?? scripts/audit_gateway_enhancement.py",
+      "?? scripts/combine_gateway_pilots.py",
+      "?? src/smart_router/models/gliner_decide.py",
+      "?? src/smart_router/training/compare_models.py",
+      "?? tests/test_model_comparison.py"
+    ]
+  },
+  "limitations": [
+    "Sibling working trees contain local changes; hashes identify the inspected files.",
+    "The UOB workspace did not expose a standalone Git HEAD.",
+    "Line anchors are navigation hints; the file hashes identify the evidence.",
+    "No credentials or runtime settings were read for this source manifest.",
+    "Upstream Apache documentation was reviewed through mutable web pages on the review date."
+  ]
+}
