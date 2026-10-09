@@ -4,6 +4,10 @@ Review date: 9 October 2026.
 Scope: 2025–2026 literature on schema retrieval, semantic layers, clarification, and context selection.
 This is a targeted review, not a systematic review or an exhaustive novelty determination.
 
+The later [focused review](focused-literature-review.md) extends this search to trained graph traversal and whole-catalog table selection.
+It identifies JoinGR, REaR, CORE-T, and corpus-adaptive schema embeddings as additional close baselines.
+Use that review for the current novelty assessment and this document for the source implementation assessment.
+
 ## Finding
 
 Training a small model to retrieve metadata is already an established research direction.

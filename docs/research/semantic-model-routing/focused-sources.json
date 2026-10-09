@@ -1,0 +1,235 @@
+{
+  "review_date": "2026-10-09",
+  "scope": "Targeted review of Ossie-aligned semantic-context retrieval; primarily 2025-2026 publications",
+  "systematic_review": false,
+  "results_reproduced": false,
+  "deduplication": "Conference and preprint versions are one work; use DOI or arXiv ID, then normalized title and author identity.",
+  "works": [
+    {
+      "id": "joingr",
+      "title": "JoinGR: Learning to Traverse Join Graphs for Table Retrieval",
+      "authors": ["Sandipan De", "Abhijit Chakraborty", "Sambaran Bandyopadhyay", "Vivek Gupta"],
+      "status": "arXiv preprint, v1, 2026-10-01",
+      "url": "https://arxiv.org/abs/2610.01064",
+      "full_text": "https://arxiv.org/html/2610.01064",
+      "review_depth": "Metadata, methods, training, evaluation, and limitations inspected",
+      "evidence_sections": ["3.2.5 Training", "4 Experimental Setup", "5.1 BEAVER", "5.4 Cross-Domain Transfer", "9 Limitations"],
+      "comparison_boundary": "Learned traversal and cross-domain transfer are prior work; no chronological Ossie-context evaluation established."
+    },
+    {
+      "id": "corpus_adaptive_embeddings",
+      "title": "Finding the Right Tables and Columns: A Benchmark and Corpus-Adaptive Embeddings for SQL Schema Retrieval",
+      "authors": ["Qingcheng Zeng", "Puxuan Yu", "Aman Mehta", "Fuheng Zhao", "Rajhans Samdani"],
+      "status": "arXiv preprint, v1, 2026-07-14",
+      "url": "https://arxiv.org/abs/2607.13311",
+      "full_text": "https://arxiv.org/html/2607.13311",
+      "review_depth": "Metadata, methods, results, training appendix, and leakage/held-out-corpus analyses inspected",
+      "evidence_sections": ["3 The Schema-Retrieval Benchmark", "4 Corpus-Adaptive Fine-Tuning", "Appendix A", "Appendices B and C"],
+      "comparison_boundary": "Retrieval per database group; metadata representation includes sampled rows; corpus adaptation and corpus holdout are distinct."
+    },
+    {
+      "id": "bisr",
+      "citation_label": "Bi-SR, Wu, Wang, and Nguyen",
+      "status": "Findings ACL 2026",
+      "doi": "10.18653/v1/2026.findings-acl.369",
+      "url": "https://aclanthology.org/2026.findings-acl.369/",
+      "review_depth": "Official metadata and abstract; earlier PDF retrieval failed",
+      "comparison_boundary": "Detailed reproduction choices are not verified."
+    },
+    {
+      "id": "dbcopilot",
+      "title": "DBCopilot: Natural Language Querying over Massive Databases via Schema Routing",
+      "status": "EDBT 2025; publication-year inclusion, not a 2025-first-release claim",
+      "doi": "10.48786/edbt.2025.57",
+      "url": "https://www.openproceedings.org/2025/conf/edbt/paper-209.pdf",
+      "review_depth": "Official PDF methods and unseen-schema ablation inspected through web extraction",
+      "evidence_sections": ["Generative retrieval background", "3.5 and training synthesis", "4.4 Ablation Study"],
+      "comparison_boundary": "Synthetic catalog injection into parameters differs from index-only new-table support."
+    },
+    {
+      "id": "exsl",
+      "title": "Extractive Schema Linking for Text-to-SQL",
+      "status": "2025 arXiv preprint",
+      "url": "https://arxiv.org/html/2501.17174",
+      "review_depth": "Methods inspected in the earlier review",
+      "comparison_boundary": "Independent schema scores do not certify joint business sufficiency."
+    },
+    {
+      "id": "rear",
+      "title": "REaR: Retrieve, Expand and Refine for Effective Multitable Retrieval",
+      "authors": ["Rishita Agarwal", "Himanshu Singhal", "Peter Baile Chen", "Manan Roy Choudhury", "Dan Roth", "Vivek Gupta"],
+      "status": "ACL 2026; first arXiv version 2025-11-02",
+      "url": "https://aclanthology.org/2026.acl-long.1826/",
+      "full_text": "https://arxiv.org/html/2511.00805",
+      "review_depth": "Official conference metadata; preprint methods, experimental setup, and description prompts inspected",
+      "evidence_sections": ["2 Methodology", "3.1 Experimental Setup", "A.2.1 Experimental Setup"],
+      "comparison_boundary": "No online LLM retrieval calls does not mean no offline LLM enrichment."
+    },
+    {
+      "id": "core_t",
+      "title": "CORE-T: COherent REtrieval of Tables for Text-to-SQL",
+      "authors": ["Hassan Soliman", "Vivek Gupta", "Dan Roth", "Iryna Gurevych"],
+      "status": "2026 arXiv preprint; inspected v3 dated 2026-08-30; conference status not inferred from repository name",
+      "url": "https://arxiv.org/abs/2601.13111",
+      "full_text": "https://arxiv.org/html/2601.13111",
+      "review_depth": "Methods, pooled evaluation, baseline implementation notes, and incremental-cache appendix inspected",
+      "evidence_sections": ["4 Methodology", "5.1 Experimental Setup", "Appendix C: Scalability and incremental maintenance"],
+      "comparison_boundary": "Uses sampled rows and value compatibility; incremental design is not a longitudinal semantic-context benchmark."
+    },
+    {
+      "id": "guided_retrieval",
+      "title": "Guided Table Retrieval for Structured Data Search",
+      "status": "2026 arXiv preprint; first version August 12; v2 August 13",
+      "url": "https://arxiv.org/abs/2608.11644",
+      "full_text": "https://arxiv.org/html/2608.11644",
+      "review_depth": "Metadata, retrieval phases, graph construction, and reachability inspected",
+      "comparison_boundary": "Directed rooted left-join trees and sampled-value evidence restrict direct transfer."
+    },
+    {
+      "id": "graph_link",
+      "title": "Graph-Link: Bridging the Semantic-Structural Gap in Text-to-SQL via Constrained Subgraph Induction",
+      "status": "ICML 2026, Proceedings of Machine Learning Research 306",
+      "url": "https://proceedings.mlr.press/v306/zhong26s.html",
+      "full_text": "https://raw.githubusercontent.com/mlresearch/v306/main/assets/zhong26s/zhong26s.pdf",
+      "review_depth": "Official metadata, PDF methods, algorithm, limitations, and future work inspected",
+      "evidence_sections": ["4.1 Offline Phase", "4.2 Online Phase", "Algorithm 1", "Limitations", "Future Work"],
+      "comparison_boundary": "Structural connectivity and inferred similarity edges do not establish approved business relationships."
+    },
+    {
+      "id": "schema_graph_sql",
+      "title": "SchemaGraphSQL: Efficient Schema Linking with Pathfinding Graph Algorithms for Text-to-SQL on Large-Scale Databases",
+      "status": "Findings EACL 2026; first preprint May 2025",
+      "doi": "10.18653/v1/2026.findings-eacl.134",
+      "url": "https://aclanthology.org/2026.findings-eacl.134/",
+      "review_depth": "Official metadata and abstract",
+      "comparison_boundary": "Detailed algorithm reproduction remains unverified; inferred joins need independent review."
+    },
+    {
+      "id": "arm",
+      "title": "Can we Retrieve Everything All at Once? ARM: An Alignment-Oriented LLM-based Retrieval Method",
+      "status": "ACL 2025",
+      "url": "https://aclanthology.org/2025.acl-long.1463.pdf",
+      "preprint": "https://arxiv.org/abs/2501.18539",
+      "review_depth": "Official paper abstract, conference listing, and author repository pipeline inspected",
+      "comparison_boundary": "Treat as a related LLM-assisted baseline; full artifact portability was not audited."
+    },
+    {
+      "id": "human_guided_graph",
+      "title": "Plugging Schema Graph into Multi-Table QA: A Human-Guided Framework for Reducing LLM Reliance",
+      "status": "Findings EMNLP 2025",
+      "doi": "10.18653/v1/2025.findings-emnlp.311",
+      "url": "https://aclanthology.org/2025.findings-emnlp.311/",
+      "full_text": "https://aclanthology.org/2025.findings-emnlp.311.pdf",
+      "review_depth": "Official metadata and selected PDF methods, CISS context, and limitations through web extraction",
+      "comparison_boundary": "Real-world domain evaluation and curated relationships are already present in prior work."
+    },
+    {
+      "id": "rasl",
+      "citation_label": "RASL, Eben, Ahmad, and Lau",
+      "status": "2025; paper states KDD SKnowLLM workshop acceptance",
+      "url": "https://arxiv.org/html/2507.23104",
+      "review_depth": "Methods inspected in the earlier review",
+      "comparison_boundary": "Typed units and question-plus-keyword retrieval are prior work."
+    },
+    {
+      "id": "solid_sql",
+      "title": "Solid-SQL: Enhanced Schema-linking based In-context Learning for Robust Text-to-SQL",
+      "status": "COLING 2025",
+      "url": "https://aclanthology.org/2025.coling-main.654/",
+      "review_depth": "Official metadata and abstract",
+      "comparison_boundary": "Perturbation robustness is established; full training reproduction was not inspected."
+    },
+    {
+      "id": "squab",
+      "title": "SQUAB: Evaluating LLM robustness to Ambiguous and Unanswerable Questions in Semantic Parsing",
+      "status": "EMNLP 2025",
+      "doi": "10.18653/v1/2025.emnlp-main.906",
+      "url": "https://aclanthology.org/2025.emnlp-main.906/",
+      "review_depth": "Official metadata and abstract",
+      "comparison_boundary": "Automatic challenge generation does not replace independent expert truth or natural-query prevalence."
+    },
+    {
+      "id": "learning_to_clarify",
+      "citation_label": "Learning to Clarify, Chen, Sun, Pfister, and Arik",
+      "status": "ICLR 2025",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/4ffd05ca3cf3985f4572af015b4cfc1e-Abstract-Conference.html",
+      "review_depth": "Official abstract and relevant PDF appendix inspected in the earlier review",
+      "comparison_boundary": "AmbigSQL is a task within this paper, not an independent publication."
+    },
+    {
+      "id": "bird_interact",
+      "citation_label": "BIRD-INTERACT, Huo et al.",
+      "status": "ICLR 2026; preprint October 2025",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/496b549556509bbb9770bf9d335c5800-Abstract-Conference.html",
+      "preprint": "https://arxiv.org/abs/2510.05318",
+      "review_depth": "Official abstract, preprint metadata, and project page in the earlier review",
+      "comparison_boundary": "Our read-only question retrieval task covers only part of the benchmark's database interaction scope."
+    },
+    {
+      "id": "semantic_layer_agent",
+      "title": "A Semantic-Layer-Mediated Agent for Natural Language to SQL over Heterogeneous Enterprise Databases",
+      "status": "June 2026 arXiv preprint",
+      "url": "https://arxiv.org/html/2606.31041",
+      "review_depth": "Full HTML architecture and limitations inspected in the earlier review",
+      "comparison_boundary": "Curated per-database contexts and semantic compilation do not establish whole-catalog retrieval."
+    },
+    {
+      "id": "ground",
+      "title": "GROUND: Reducing Hallucinations in LLM-Based Enterprise Analytics Through Governed Semantic Definitions",
+      "status": "2026 preprint; conflicting day-level metadata remains unresolved",
+      "url": "https://arxiv.org/html/2608.26157",
+      "review_depth": "Full HTML framework and evaluation inspected in the earlier review; SSRN metadata cross-check",
+      "evidence_sections": ["4.1 full semantic-layer context", "Evaluation controls"],
+      "comparison_boundary": "Full-context prompting and unequal policy/retry information limit attribution to retrieval."
+    },
+    {
+      "id": "dbcc",
+      "title": "Database Context Compression for Text-to-SQL on Real-World Large Databases",
+      "status": "June 2026 arXiv preprint",
+      "url": "https://arxiv.org/abs/2606.28601",
+      "review_depth": "Abstract and metadata in the earlier review",
+      "comparison_boundary": "Full compression algorithm and reproduction choices remain unverified."
+    },
+    {
+      "id": "benchpress",
+      "title": "BenchPress: A Human-in-the-Loop Annotation System for Rapid Text-to-SQL Benchmark Curation",
+      "status": "CIDR 2026; preprint October 2025",
+      "url": "https://www.vldb.org/cidrdb/papers/2026/p16-wenz.pdf",
+      "preprint": "https://arxiv.org/abs/2510.13853",
+      "review_depth": "Official PDF annotation workflow and SQL-log motivation; preprint metadata",
+      "comparison_boundary": "SQL-to-question drafts require expert review and do not preserve natural user noise by default."
+    },
+    {
+      "id": "beaver",
+      "title": "BEAVER: An Enterprise Benchmark for Text-to-SQL",
+      "status": "First preprint 2024; evolving project checked in October 2026; explicit older-work exception",
+      "url": "https://arxiv.org/abs/2409.02038",
+      "project": "https://beaverbench.github.io/",
+      "review_depth": "Primary metadata and current project; benchmark subsets checked in citing primary papers",
+      "comparison_boundary": "Author lists, corpus sizes, and available subsets change across versions; pin all before use."
+    },
+    {
+      "id": "fantastic_tables",
+      "title": "Fantastic Tables and Where to Find Them: Table Search in Semantic Data Lakes",
+      "status": "EDBT 2025",
+      "url": "https://www.openproceedings.org/2025/conf/edbt/paper-108.pdf",
+      "review_depth": "Official PDF abstract and task framing",
+      "comparison_boundary": "Entity-tuple queries and knowledge-graph/content evidence differ from Ossie-definition retrieval."
+    }
+  ],
+  "specification": {
+    "name": "Apache Ossie Core Metadata Specification",
+    "url": "https://github.com/apache/ossie/blob/main/core-spec/spec.md",
+    "observed_version": "0.2.0.dev0, mutable development specification",
+    "review_depth": "Official core document shape, datasets, relationships, fields, and metrics",
+    "boundary": "Core defines neither cross-model references nor a bundle format; pin a commit before implementation."
+  },
+  "limits": [
+    "This inventory is a selected reading list, not the total number of screened search hits.",
+    "Some entries deliberately retain short citation labels instead of inventing unverified full metadata.",
+    "Publication versions are deduplicated; an arXiv preprint is not treated as peer reviewed without an official proceedings record.",
+    "No paper result or author repository was reproduced.",
+    "No training dataset was imported or redistributed.",
+    "Absence from this search cannot establish research priority."
+  ]
+}

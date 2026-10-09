@@ -2,6 +2,10 @@
 
 Status: proposed. All dataset sizes, thresholds, and latency budgets below are planning values, not measured results.
 
+Updated after the [focused literature review](focused-literature-review.md) on 9 October 2026.
+The primary catalog-change protocol now covers table additions, following the user's deployment description.
+Standard training objectives remain sufficient for the initial study; a new cost-aware loss is outside scope.
+
 ## Research questions
 
 1. Does candidate-conditioned learning improve complete semantic coverage beyond strong lexical, dense, and hybrid retrieval?
@@ -10,7 +14,8 @@ Status: proposed. All dataset sizes, thresholds, and latency budgets below are p
 4. Does any gain survive equal token budgets and the full cost of retrieval, expansion, and clarification?
 
 The primary comparison isolates selection quality.
-Every comparable system receives the same approved catalog, permissions, dependency expansion, compiler, and downstream generator.
+Every comparable system receives the same approved catalog, permissions, relationship evidence, compiler, and downstream generator.
+Scorer comparisons hold dependency expansion constant; separate graph ablations vary expansion explicitly.
 The final generator remains fixed throughout a comparison.
 
 ## System and training contract
@@ -58,6 +63,8 @@ Online:  question + history + caller
 ```
 
 Start candidate retrieval with BM25, a dense retriever, and reciprocal-rank fusion.
+Tune the hybrid baseline on development data and add a generic reranker.
+Include corpus-adaptive embedding training and the closest graph methods from the focused review.
 Benchmark model summaries and individual metric or dataset descriptors.
 Retrieve both granularities so an inaccurate model summary cannot always hide a relevant metric.
 Candidate recall sets the ceiling for reranking quality.
@@ -160,10 +167,25 @@ For the unseen-family protocol, group all related releases and templates togethe
 For the temporal protocol, train on earlier releases and evaluate later changes explicitly.
 Do not describe temporal reuse of a known family as unseen-family generalization.
 
-Test catalog scale at approximately **50, 500, and 2,000 tables**, while separately reporting model and definition counts.
+Test catalog scale at approximately **100, 1,000, and 10,000 tables**, when real catalog diversity supports those sizes.
+Separately report model, definition, column, and relationship counts.
 Add realistic confusable distractors as well as irrelevant distractors.
 Duplicated or renamed fixtures can support load tests but cannot establish semantic diversity.
-Measure indexing time, storage, update cost, and deletion or revocation behavior.
+Measure indexing time, storage, update cost, and old-query regression after additions.
+Deletion and revocation tests remain integration checks outside the primary append-only research protocol.
+
+Evaluate known-database and pooled-catalog retrieval separately.
+Do not supply an oracle database ID in the main enterprise comparison.
+Freeze weights after training on snapshot C0, then index new tables from C1 and C2.
+Keep new-table synthetic training questions and future query logs outside C0 training.
+Measure questions requiring new tables and existing questions that gain confusing alternatives.
+Report retraining on the expanded catalog as a separate adaptation condition.
+If historical snapshots are unavailable, label staged arrivals as simulated rather than prospective evidence.
+
+Give all comparable methods the same metadata and row-sample access.
+CORE-T and several other methods use value evidence; label metadata-only versions as adaptations.
+Separate local summarization from retrieval so summary omissions do not become hidden selection failures.
+Preserve exact expressions and mandatory rules alongside a generated summary.
 
 ## Experiment sequence
 
@@ -171,10 +193,10 @@ Measure indexing time, storage, update cost, and deletion or revocation behavior
 | --- | --- | --- |
 | E0: truth and oracle | Gold sufficient context versus retrieved context; full permitted context only when feasible | Whether catalog quality and generator capability support the task |
 | E1: retrieval | Existing Helios lexical behavior, BM25, dense, hybrid, query expansion, and a RASL-style baseline | Whether simple indexing already resolves the problem |
-| E2: learned selection | Generic reranker, an ExSL-style scorer, Laya, GLiNER2.5-Decide, and a Bi-SR-style trained retriever | Whether learning and backbone choice improve selection |
-| E3: completeness | Same candidates with and without dependency expansion; same expansion with different scorers | Whether the gain comes from learning or deterministic assembly |
+| E2: learned selection | Generic reranker, corpus-adaptive embeddings, Bi-SR-style retrieval, ExSL-style scoring, Laya, and GLiNER2.5-Decide | Whether training and backbone choice improve selection |
+| E3: completeness | Fixed dependency expansion, REaR, JoinGR-style learned traversal, and CORE-T-style set selection; controlled graph/scorer ablations | Whether learning adds value beyond structural assembly |
 | E4: context policy | Fixed top-K, token-budgeted selection, compression, and calibrated proceed/clarify/abstain | Whether selection improves the useful-context versus cost trade-off |
-| E5: transfer | Unseen catalog families, release changes, paraphrases, policy revocation, and larger distractor pools | Whether gains survive realistic changes |
+| E5: transfer | Unseen catalog families, chronological table additions with frozen weights, natural paraphrases, and larger distractor pools | Whether gains survive realistic changes |
 
 Label simplified implementations as adaptations, not exact paper reproductions.
 Use authors' code where compatible and record differences in metadata, training data, and retrieval budgets.
@@ -231,15 +253,16 @@ Zero observed policy violations is a release gate for tested cases, not a univer
 Any observed leak blocks integration until fixed.
 Permissions remain hard constraints in every experiment.
 
-## When a new loss would be justified
+## Standard objectives and error analysis
 
 First classify the residual errors: retrieval omission, missing semantics, ranking confusion, incomplete assembly, calibration, or generation.
 A new loss cannot repair missing business definitions or an unenforced execution identity.
 
-If ranking repeatedly prefers relevant but insufficient bundles, test standard multi-positive ranking and set-level prediction before inventing an objective.
-Only then consider an objective that estimates complete semantic support while accounting for context cost.
+Use standard multi-positive ranking and masked relevance objectives for the first comparisons.
+If relevant candidates remain jointly insufficient, evaluate dependency assembly and set-level selection.
+Keep a new cost-aware loss outside the current research scope.
 Keep access rules and mandatory semantic dependencies as hard checks.
-Report gains against equal-budget standard objectives, with ablations and independent test questions.
+Report gains at equal budgets, with ablations and independent test questions.
 
 ## Deliverables and integration boundary
 

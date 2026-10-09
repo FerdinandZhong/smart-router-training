@@ -7,12 +7,15 @@ The remaining implementation status reflects the committed branch base.
 Current unfinished router experiments remain in the original `main` checkout.
 
 - [x] Review recent schema retrieval, semantic-layer, and clarification literature.
+- [x] Extend the [focused review](docs/research/semantic-model-routing/focused-literature-review.md)
+  with trained embeddings, learned graph traversal, pooled catalogs, and benchmark construction.
 - [x] Inspect Helios and UOB source boundaries and record evidence hashes.
 - [x] Prepare a benchmark-first [research proposal](docs/research/semantic-model-routing/README.md)
   and [return handoff](docs/research/semantic-model-routing/return-to-main.md).
 - [ ] Review the proposed annotation contract and independent evaluation families.
 - [ ] Build deterministic retrieval baselines before training a semantic selector.
-- [ ] Evaluate standard objectives before proposing a new loss.
+- [ ] Compare trained embeddings and graph methods at equal semantic-context budgets.
+- [ ] Evaluate newly added tables with frozen model weights; a new cost-aware loss remains outside scope.
 
 ## Original pilot gateway reannotation — 2026-10-06
 

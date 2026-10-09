@@ -24,9 +24,11 @@ Finding a payments table can be relevant while omitting settlement rules, curren
 A useful selector must support clarification or abstention when the available definitions cannot determine the intended calculation.
 
 This is a proposed contribution, not a claim of priority.
-RASL and Bi-SR already address scalable schema retrieval.
-GROUND already addresses governed semantic definitions and validation.
-The [literature review](literature-review.md) identifies the overlap and remaining questions.
+The [focused literature review](focused-literature-review.md) identifies close prior work in trained retrieval and graph traversal.
+JoinGR already learns query-conditioned traversal; REaR and CORE-T already select relationally coherent table sets.
+GROUND already addresses governed business definitions.
+The hypothesis now requires business-definition completeness, equal-budget comparisons, and chronological new-table evaluation.
+The earlier [literature and implementation review](literature-review.md) retains the local source assessment.
 
 ## What the code inspection changed
 
@@ -92,11 +94,11 @@ The [experiment plan](experiment-plan.md) describes the required adapter and con
 
 1. Define the semantic bundle contract and an independent annotation rubric.
 2. Build a small reviewed benchmark with realistic ambiguity and conflicting definitions.
-3. Measure lexical, dense, hybrid, and existing learned retrieval baselines.
-4. Train the two candidate scorers with standard objectives and identical evaluation conditions.
+3. Measure hybrid search, trained embeddings, and graph baselines including REaR, JoinGR, and CORE-T.
+4. Compare candidate scorers with standard objectives, shared evidence, and frozen-weight evaluation after table additions.
 5. Continue only if learning adds value beyond indexing, dependency expansion, and stronger metadata.
 
-Do not choose a new loss before these comparisons.
+A new cost-aware loss is outside this study's current scope.
 If the strongest baseline already meets the requirements, retain the engineering improvement and revise the research claim.
 
 Read the [experiment plan](experiment-plan.md), [search record](search-record.md), and [return handoff](return-to-main.md) for execution details.
