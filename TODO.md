@@ -1,6 +1,6 @@
 # Current work and priorities
 
-## Isolated semantic-context research — 2026-10-09
+## Isolated semantic-context research — 2026-10-10
 
 This section belongs to `research/semantic-model-routing`.
 The remaining implementation status reflects the committed branch base.
@@ -16,7 +16,9 @@ Current unfinished router experiments remain in the original `main` checkout.
   and [return handoff](docs/research/semantic-model-routing/return-to-main.md).
 - [ ] Review the proposed annotation contract and independent evaluation families.
 - [ ] Build deterministic retrieval baselines before training a semantic selector.
-- [ ] Compare trained embeddings and graph methods at equal semantic-context budgets.
+- [x] Consolidate the [no-graph, low-latency execution proposal](docs/research/semantic-model-routing/research-plan-zh.md)
+  with annotation effort, staged decision gates, and separate context/end-to-end latency measurements.
+- [ ] Compare trained embeddings and optional rerankers at equal semantic-context and latency budgets.
 - [ ] Build a shared candidate pool and compare a conventional reranker, GLiNER2.5-Decide, and Laya with encoder adaptation.
 - [ ] Evaluate newly added tables with frozen model weights; a new cost-aware loss remains outside scope.
 

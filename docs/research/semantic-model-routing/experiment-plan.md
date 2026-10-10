@@ -2,6 +2,10 @@
 
 Status: proposed. All dataset sizes, thresholds, and latency budgets below are planning values, not measured results.
 
+Scope update, 10 October 2026: the [current execution proposal](research-plan-zh.md) prioritizes no-graph Ossie retrieval and low total latency.
+Its schedule, decision gates, and latency protocol take precedence over earlier planning values here.
+Graph methods are related work or optional later comparisons, not required training components.
+
 Updated after the [focused literature review](focused-literature-review.md) on 9 October 2026.
 The primary catalog-change protocol now covers table additions, following the user's deployment description.
 Standard training objectives remain sufficient for the initial study; a new cost-aware loss is outside scope.
@@ -18,7 +22,7 @@ Its [model evidence](model-evidence.json) distinguishes pinned upstream behavior
 
 The primary comparison isolates selection quality.
 Every comparable system receives the same approved catalog, permissions, relationship evidence, compiler, and downstream generator.
-Scorer comparisons hold dependency expansion constant; separate graph ablations vary expansion explicitly.
+Scorer comparisons hold dependency assembly constant; separate ablations vary declared-dependency lookup explicitly.
 The final generator remains fixed throughout a comparison.
 
 ## System and training contract
@@ -32,7 +36,7 @@ The model never predicts whether the caller deserves access.
 
 A candidate descriptor contains its scoped ID, description, aliases, applicability, and material semantic constraints.
 Include explicit inclusions and exclusions when the approved model supplies them.
-Use stable references for expressions and dependency graphs that remain server-side.
+Use stable references for expressions and declared dependency lists that remain server-side.
 Do not silently truncate a defining exclusion or time rule to fit the encoder.
 Record descriptor omissions and route unsupported cases to clarification or abstention.
 
@@ -67,7 +71,8 @@ Online:  question + history + caller
 
 Start candidate retrieval with BM25, a dense retriever, and reciprocal-rank fusion.
 Tune the hybrid baseline on development data and add a generic reranker.
-Include corpus-adaptive embedding training and the closest graph methods from the focused review.
+Include corpus-adaptive embedding training and a documented REaR-style retrieval/refinement comparison from the focused review.
+Do not infer valid joins from lineage or similarity; the main method uses approved declared references.
 Benchmark model summaries and individual metric or dataset descriptors.
 Retrieve both granularities so an inaccurate model summary cannot always hide a relevant metric.
 Candidate recall sets the ceiling for reranking quality.
@@ -214,7 +219,7 @@ Preserve exact expressions and mandatory rules alongside a generated summary.
 | E0: truth and oracle | Gold sufficient context versus retrieved context; full permitted context only when feasible | Whether catalog quality and generator capability support the task |
 | E1: retrieval | Existing Helios lexical behavior, BM25, dense, hybrid, query expansion, and a RASL-style baseline | Whether simple indexing already resolves the problem |
 | E2: learned selection | Generic reranker, corpus-adaptive embeddings, Bi-SR-style retrieval, ExSL-style scoring, Laya, and GLiNER2.5-Decide | Whether training and backbone choice improve selection |
-| E3: completeness | Fixed dependency expansion, REaR, JoinGR-style learned traversal, and CORE-T-style set selection; controlled graph/scorer ablations | Whether learning adds value beyond structural assembly |
+| E3: completeness | No assembly versus declared-dependency assembly; flat table documents versus typed semantic units; a clearly labeled REaR-style adaptation | Whether learning adds value beyond metadata representation and deterministic assembly |
 | E4: context policy | Fixed top-K, token-budgeted selection, compression, and calibrated proceed/clarify/abstain | Whether selection improves the useful-context versus cost trade-off |
 | E5: transfer | Unseen catalog families, chronological table additions with frozen weights, natural paraphrases, and larger distractor pools | Whether gains survive realistic changes |
 

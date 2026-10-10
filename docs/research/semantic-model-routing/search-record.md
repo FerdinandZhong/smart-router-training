@@ -212,3 +212,22 @@ The GLiNER compatibility shim identified `gliner2/models/span/model.py` as the c
 The source checks establish that the current local adapters freeze their encoders.
 They do not establish full-fine-tuning quality, new-task memory requirements, or live cluster status.
 The plan therefore adds matched encoder-adaptation conditions rather than extrapolating from the old routing trials.
+
+## No-graph execution proposal
+
+Date: 10 October 2026. Applied skill: `researchwrite`.
+The [current research plan](research-plan-zh.md) consolidates the user's no-graph and low-latency constraints.
+This pass re-opened the official Ossie core specification, the corpus-adaptive retrieval arXiv record,
+the REaR ACL record, and the BenchPress CIDR paper.
+It did not repeat the literature-discovery sweep or add works to the existing source inventory.
+
+The proposal separates declared-dependency lookup from graph retrieval and separates context preparation from final-answer latency.
+Trained embeddings are the primary learned component; decision-model reranking is optional.
+Its 240-query pilot, 1,200–2,000-query expansion, 8–10-week schedule, and service targets are proposed values.
+Expert-review capacity and production traffic remain execution assumptions.
+
+The proposal received separate methods and feasibility self-review passes by the same assistant.
+These are internal checks, not independent peer review or measured system validation.
+Checks cover matched source information, anchor-versus-dependency labels, grouped and temporal splits,
+budget failures, abstention denominators, latency boundaries, and conditional research claims.
+Markdown is the canonical version; a Word copy was exported for review.

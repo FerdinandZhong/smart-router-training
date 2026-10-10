@@ -1,6 +1,10 @@
 # Research side plan: selecting semantic context for lakehouse questions
 
-Reviewed: 9 October 2026. Status: proposal and literature review; no implementation or experiment results.
+Reviewed: 10 October 2026. Status: proposal and literature review; no implementation or experiment results.
+
+The current execution proposal is the [Chinese research plan](research-plan-zh.md).
+It prioritizes Ossie document retrieval without graph retrieval, trained embeddings, optional reranking, and low total latency.
+Its staged schedule and evaluation boundaries supersede earlier requirements to train graph scorers.
 
 Branch: `research/semantic-model-routing`.
 Base: `2b7eecf37d0053951576bca654f6efd204e07950`.
@@ -13,7 +17,7 @@ The engineering need is concrete, and the existing router training infrastructur
 However, generic learned schema retrieval already has substantial prior work.
 Research novelty remains conditional on a more specific result.
 
-**Working question:** Can a small, candidate-conditioned model select sufficient business context from a changing semantic catalog within a fixed token budget?
+**Working question:** Can learned retrieval select complete, consistent business context from a growing Ossie catalog within fixed token and latency budgets?
 
 A **semantic bundle** means selected definitions plus their required dependencies.
 These include metric expressions, filters, aggregation grain, units, time rules, and approved relationships.
@@ -58,9 +62,9 @@ Question + confirmed history + verified caller
                     |
        permission-filtered candidate retrieval
                     |
-          small learned candidate scorer
+          optional learned candidate scorer
                     |
-       dependency expansion + budget checks
+       declared-dependency lookup + budget checks
                     |
           proceed / clarify / abstain
                     |
@@ -96,9 +100,13 @@ It also separates frozen-encoder trials from encoder adaptation and records the 
 
 1. Define the semantic bundle contract and an independent annotation rubric.
 2. Build a small reviewed benchmark with realistic ambiguity and conflicting definitions.
-3. Measure hybrid search, trained embeddings, and graph baselines including REaR, JoinGR, and CORE-T.
-4. Compare candidate scorers with standard objectives, shared evidence, and frozen-weight evaluation after table additions.
-5. Continue only if learning adds value beyond indexing, dependency expansion, and stronger metadata.
+3. Measure tuned hybrid search, trained embeddings, and deterministic dependency assembly with shared source evidence.
+4. Compare optional candidate scorers, using standard objectives and frozen-weight evaluation after table additions.
+5. Continue only if learning improves completeness or latency beyond strong retrieval and better metadata.
+
+Graph methods remain related work rather than mandatory implementation for this phase.
+Measure context preparation separately from SQL generation, execution, and the final answer.
+The initial 500 ms context p95 target is unmeasured and subject to a declared serving load.
 
 A new cost-aware loss is outside this study's current scope.
 If the strongest baseline already meets the requirements, retain the engineering improvement and revise the research claim.
