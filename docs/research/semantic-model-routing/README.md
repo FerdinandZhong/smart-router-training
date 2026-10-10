@@ -1,10 +1,18 @@
 # Research side plan: selecting semantic context for lakehouse questions
 
-Reviewed: 10 October 2026. Status: proposal and literature review; no implementation or experiment results.
+Reviewed: 10 October 2026. Status: proposal, literature review, and unreviewed public-source intake tooling; no semantic training results.
 
-The current execution proposal is the [Chinese research plan](research-plan-zh.md).
+The current execution proposal is the [bilingual research plan](research-plan-bilingual.md).
+Read the [plan audit](plan-audit-bilingual.md), [collection protocol](data-collection-bilingual.md),
+and [data availability plan](data-availability-bilingual.md) before collecting or approving semantic labels.
+The [earlier Chinese plan](research-plan-zh.md) remains as background for the initial design.
 It prioritizes Ossie document retrieval without graph retrieval, trained embeddings, optional reranking, and low total latency.
 Its staged schedule and evaluation boundaries supersede earlier requirements to train graph scorers.
+
+Public-source intake is now implemented in this research branch.
+It prepares 13,601 unreviewed source records, 209 structural Ossie drafts, and a 240-record review queue.
+The 1,259 dataset objects have passed pinned JSON Schema validation, not semantic or SQL execution validation.
+No reviewed semantic training release or semantic model training result exists yet.
 
 Branch: `research/semantic-model-routing`.
 Base: `2b7eecf37d0053951576bca654f6efd204e07950`.

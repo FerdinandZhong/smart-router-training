@@ -2,6 +2,8 @@
 
 Status: proposed. All dataset sizes, thresholds, and latency budgets below are planning values, not measured results.
 
+The [current bilingual master plan](research-plan-bilingual.md) supersedes this earlier plan's source selection and sample accounting.
+
 Scope update, 10 October 2026: the [current execution proposal](research-plan-zh.md) prioritizes no-graph Ossie retrieval and low total latency.
 Its schedule, decision gates, and latency protocol take precedence over earlier planning values here.
 Graph methods are related work or optional later comparisons, not required training components.

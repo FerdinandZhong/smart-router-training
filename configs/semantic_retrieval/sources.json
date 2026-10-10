@@ -1,0 +1,141 @@
+{
+  "schema_version": "semantic-source-registry-v1",
+  "verified_date": "2026-10-10",
+  "scope": "public-source intake; not a reviewed training release",
+  "target_journal": null,
+  "assets": [
+    {
+      "name": "spider_tables.json",
+      "source_id": "spider_1_train",
+      "url": "https://raw.githubusercontent.com/taoyds/spider/b7b5b8c890cd30e35427348bb9eb8c6d1350ca7c/evaluation_examples/examples/tables.json",
+      "sha256": "61bb20aa401f03164e2d7f3b16509b7b5f79cc9c943ca7bd159046df1159e2ed",
+      "bytes": 810971,
+      "max_bytes": 33554432
+    },
+    {
+      "name": "spider_train.json",
+      "source_id": "spider_1_train",
+      "url": "https://raw.githubusercontent.com/taoyds/spider/b7b5b8c890cd30e35427348bb9eb8c6d1350ca7c/evaluation_examples/examples/train_spider.json",
+      "sha256": "c43d0d72e59e1a9e1a60837da9bf70d5a6277226bdb7f634d544f380646f527a",
+      "bytes": 24928884,
+      "max_bytes": 33554432
+    },
+    {
+      "name": "bird_train.jsonl",
+      "source_id": "bird_filtered_train",
+      "url": "https://huggingface.co/datasets/birdsql/bird23-train-filtered/resolve/4068469807b255fcfc0816bdd520946fe460d256/data/train-00000-of-00001.jsonl",
+      "sha256": "2ee64aa593e1adc59be7d5b9ce2395372a8ee27fdd94a3fb4d2fe09f3cd34bc8",
+      "bytes": 2654294,
+      "max_bytes": 33554432
+    },
+    {
+      "name": "bird_column_meaning.json",
+      "source_id": "bird_filtered_train",
+      "url": "https://huggingface.co/datasets/birdsql/bird23-train-filtered/resolve/4068469807b255fcfc0816bdd520946fe460d256/train_column_meaning.json",
+      "sha256": "7928ddb444fd6e1b96b13ef6a1a87f4b9cf138e8354873c0ed7ca2878d7a88db",
+      "bytes": 786420,
+      "max_bytes": 33554432
+    },
+    {
+      "name": "ossie-schema.json",
+      "source_id": "ossie_spec",
+      "url": "https://raw.githubusercontent.com/apache/ossie/28a91f59e0d7fc51d808608b626627be79ef8128/core-spec/ossie-schema.json",
+      "sha256": "a7bf8071ceb42c5d5630f751cce155191d160a77c7654e9fe6d420437ca035c8",
+      "bytes": 11662,
+      "max_bytes": 33554432
+    }
+  ],
+  "sources": [
+    {
+      "id": "spider_1_train",
+      "title": "Spider 1.0 training annotations and schema",
+      "creators": "Spider dataset authors / Yale LILY",
+      "access_route": "reused public source",
+      "landing_page": "https://yale-lily.github.io/spider",
+      "repository": "https://github.com/taoyds/spider",
+      "revision": "b7b5b8c890cd30e35427348bb9eb8c6d1350ca7c",
+      "license": "CC-BY-SA-4.0",
+      "license_evidence": "https://yale-lily.github.io/spider",
+      "license_scope": "Dataset license from project page; repository code license is not substituted.",
+      "role": "pilot and formal development/training candidates from upstream train only",
+      "recorded_upstream_split": "train_spider",
+      "training_allowed_after_review": true,
+      "database_access": "Official project-page archive; database rows not downloaded in this intake.",
+      "limitations": [
+        "schema-only descriptions",
+        "public pretraining exposure unknown",
+        "GitHub evaluation_examples snapshot, not asserted to be the latest canonical ZIP"
+      ]
+    },
+    {
+      "id": "bird_filtered_train",
+      "title": "BIRD-SQL Train (Filtered)",
+      "creators": "BIRD Team",
+      "access_route": "reused public source",
+      "landing_page": "https://huggingface.co/datasets/birdsql/bird23-train-filtered",
+      "revision": "4068469807b255fcfc0816bdd520946fe460d256",
+      "release_year": 2025,
+      "license": "CC-BY-SA-4.0",
+      "license_evidence": "https://huggingface.co/datasets/birdsql/bird23-train-filtered/blob/4068469807b255fcfc0816bdd520946fe460d256/README.md",
+      "role": "pilot and formal development/training candidates",
+      "recorded_upstream_split": "train",
+      "training_allowed_after_review": true,
+      "database_access": "Full training databases are linked from the dataset card; not downloaded in this intake.",
+      "limitations": [
+        "column meanings summarize upstream CSVs",
+        "no DDL/PK/FK validation in metadata-only intake",
+        "question-specific evidence is supervision-only by default"
+      ]
+    },
+    {
+      "id": "spider2",
+      "title": "Spider 2.0",
+      "creators": "Spider 2.0 authors / XLANG",
+      "access_route": "reused public source",
+      "landing_page": "https://github.com/xlang-ai/Spider2",
+      "revision": null,
+      "license": null,
+      "license_status": "asset-specific verification pending",
+      "role": "optional external evaluation only",
+      "training_allowed_after_review": false,
+      "limitations": [
+        "authors discourage fine-tuning on released gold SQL",
+        "cloud account access and current availability vary",
+        "not acquired for training"
+      ]
+    },
+    {
+      "id": "livesqlbench_large_v1",
+      "title": "LiveSQLBench-Large-v1",
+      "creators": "BIRD Team and Google Cloud",
+      "access_route": "reused public source",
+      "landing_page": "https://huggingface.co/datasets/birdsql/livesqlbench-large-v1",
+      "revision": "a418e108d5cbb4cf9b783a928eff5e924ad2460d",
+      "license": null,
+      "license_status": "conflicting declarations: YAML cc-by-4.0; README License section cc-by-sa-4.0",
+      "role": "conditional external semantic-context evaluation",
+      "training_allowed_after_review": false,
+      "ground_truth_access_route": "third-party restricted",
+      "ground_truth_access": "Maintainer email request described in dataset card; no request sent.",
+      "limitations": [
+        "license conflict unresolved",
+        "gold SQL, knowledge IDs, and tests omitted from public release",
+        "rule drift is not the same as append-only table arrival",
+        "restrict any future experiment to SELECT tasks"
+      ]
+    },
+    {
+      "id": "ossie_spec",
+      "title": "Apache Ossie core metadata JSON Schema",
+      "creators": "Apache Ossie contributors",
+      "access_route": "reused public source",
+      "landing_page": "https://github.com/apache/ossie",
+      "revision": "28a91f59e0d7fc51d808608b626627be79ef8128",
+      "spec_version": "0.2.0.dev0",
+      "license": "Apache-2.0",
+      "license_evidence": "https://github.com/apache/ossie/blob/28a91f59e0d7fc51d808608b626627be79ef8128/LICENSE",
+      "role": "pinned research validation schema, not production compatibility claim",
+      "training_allowed_after_review": false
+    }
+  ]
+}

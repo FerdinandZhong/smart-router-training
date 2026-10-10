@@ -231,3 +231,25 @@ These are internal checks, not independent peer review or measured system valida
 Checks cover matched source information, anchor-versus-dependency labels, grouped and temporal splits,
 budget failures, abstention denominators, latency boundaries, and conditional research claims.
 Markdown is the canonical version; a Word copy was exported for review.
+
+## Public-data collection and bilingual audit
+
+Date: 10 October 2026. User-invoked skill: `nature-data`.
+The scope is source access, provenance, derived-data preparation, and a bilingual plan audit, not a journal submission audit.
+No target journal or persistent identifier has been invented.
+
+Primary sources checked: Spider's official site and linked repository, the BIRD project site,
+the publisher's `birdsql/bird23-train-filtered` record, Spider 2.0's repository,
+the `birdsql/livesqlbench-large-v1` card, and the pinned Apache Ossie schema.
+Source revisions, asset hashes, access routes, and declared licenses are recorded in
+[the source registry](../../../configs/semantic_retrieval/sources.json).
+
+The LiveSQLBench card's YAML license and License section disagree.
+It also excludes gold SQL, knowledge IDs, and test cases from the public release.
+The source remains a conditional external evaluation option; no email was sent and no restricted fields were acquired.
+The Spider 2.0 README discourages fine-tuning on its released gold SQL; our plan reserves it for optional external evaluation.
+
+The local intake uses 7,000 Spider training records and 6,601 publisher-filtered BIRD training records.
+Schema conversion precedes question labeling and does not infer metrics from test SQL.
+All generated labels remain unreviewed and training-ineligible.
+The [bilingual audit](plan-audit-bilingual.md) records the scientific limitations and the next review gate.

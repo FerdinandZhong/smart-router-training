@@ -21,6 +21,11 @@ runner specifically evaluates routing candidates against local-step contracts.
 
 ## Current capability
 
+On the isolated semantic research branch, a public-source intake tool prepares
+unreviewed Spider/BIRD records, structural Ossie drafts, and a pilot review queue.
+This capability does not provide reviewed semantic labels or semantic retrieval training.
+See the [bilingual research and data plan](docs/research/semantic-model-routing/research-plan-bilingual.md).
+
 The repository includes import/audit/preparation tools, resumable annotation,
 a pinned Ray cluster implementation, CAI setup and application launchers, and a
 Ray TorchTrainer diagnostic with checkpoint resume and TensorBoard logging.

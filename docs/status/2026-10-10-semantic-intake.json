@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-10",
+  "status": "unreviewed_intake",
+  "source_counts": {
+    "bird_filtered_train": 6601,
+    "spider_1_train": 7000
+  },
+  "catalog_count": 209,
+  "dataset_objects": 1259,
+  "pilot_count": 240,
+  "reviewed_count": 0,
+  "trainable_count": 0,
+  "quarantined_fields": 1,
+  "group_count": 178,
+  "proposed_split_counts": {
+    "train": 7576,
+    "calibration": 294,
+    "validation": 1610,
+    "test": 4121
+  },
+  "validation": {
+    "source_hashes": "passed",
+    "official_pinned_json_schema": "passed for 209 documents",
+    "artifact_hashes": "passed",
+    "deterministic_rebuild": "byte-identical manifest and artifact hashes",
+    "pilot_train_group_only": "passed",
+    "exact_input_group_isolation": "passed",
+    "unit_tests": 9,
+    "main_checkout_preserved": "passed",
+    "sql_execution": "not performed",
+    "semantic_review": "not performed",
+    "distinct_pilot_questions": 240
+  },
+  "python": "3.13.9",
+  "jsonschema": "4.26.0",
+  "implementation_sha256": "936ec397a3cb30feae2765a7c73acb28b057024415535c199bf0d1c0383d749b",
+  "intake_manifest_sha256": "006159262dea80496b68e829b9bf8b79bc5ca34563455fe68d8ab36f8f65898c",
+  "registry_file_sha256": "09e386cf3dda7ea271a679edb6807b6988c61e7da76332e33f6063164d5dde3f",
+  "intake_path": "data/semantic-research/intake-20261010-v3"
+}

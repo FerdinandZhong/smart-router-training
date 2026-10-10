@@ -98,5 +98,20 @@ For deployment commands, recovery and shutdown, follow [user-guide.md](user-guid
 and [the AMP runbook](docs/amp-deployment.md). For presentation changes, follow
 [DESIGN.md](DESIGN.md).
 
+## Isolated semantic research intake
+
+The research branch provides `scripts/prepare_semantic_intake.py` with `fetch` and
+`build` commands. It requires `jsonschema` from the annotation extra and reads the
+pinned `configs/semantic_retrieval/sources.json` registry. See the
+[bilingual collection protocol](docs/research/semantic-model-routing/data-collection-bilingual.md).
+Generated data remain ignored under `data/semantic-research/` and are unreviewed,
+not an approved training bundle. Verify this path with:
+
+```bash
+env PYTHONPATH=src python -m unittest discover -s tests -p test_semantic_intake.py -v
+```
+
+The command does not submit Ray jobs, execute source SQL, or invoke an LLM.
+
 Gateway campaign checks: `PYTHONPATH=src:. python -m pytest tests/test_gateway_dataset.py tests/test_gateway_campaign.py -q`.
 Source extraction uses pinned Parquet shards and requires the Parquet extra.

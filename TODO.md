@@ -3,6 +3,13 @@
 ## Isolated semantic-context research — 2026-10-10
 
 This section belongs to `research/semantic-model-routing`.
+
+- [x] Audit and consolidate the [bilingual plan](docs/research/semantic-model-routing/research-plan-bilingual.md)
+  and [data availability package](docs/research/semantic-model-routing/data-availability-bilingual.md).
+- [x] Pin public Spider/BIRD sources and build unreviewed intake, structural Ossie drafts, and a training-domain pilot review queue.
+- [ ] Review the first 80 pilot episodes, including pooled-catalog ambiguity and independent business definitions.
+- [ ] Acquire required physical databases, verify keys/SQL, complete semantic alias review, and freeze formal splits.
+- [ ] Implement a reviewed-label validator and training exporter after the annotation contract is confirmed.
 The remaining implementation status reflects the committed branch base.
 Current unfinished router experiments remain in the original `main` checkout.
 

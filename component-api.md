@@ -5,6 +5,17 @@ production-router APIs remain proposals in
 [the framework contract](docs/decision-models-and-customer-training.md).
 Internal Python helpers are not a versioned public compatibility guarantee.
 
+## Isolated semantic research intake
+
+`smart_router.semantic_intake` prepares unreviewed public-source research material.
+`checked_assets()` verifies source hashes; `build()` emits structural Ossie drafts,
+provisional database/duplicate groups, and a pilot queue restricted to proposed training groups.
+`model_input()` projects only question, confirmed history, and catalog snapshot.
+SQL, source evidence, oracle database IDs, and weak labels remain outside that projection.
+All generated records remain `training_eligible=false` with unreviewed labels.
+This is not an approved semantic-training exporter or a production retrieval API.
+See the [collection contract](docs/research/semantic-model-routing/data-collection-bilingual.md).
+
 ## Task and dataset components
 
 | Component | Interface | Result / invariant |

@@ -1,0 +1,31 @@
+{
+  "schema_version": "semantic-review-draft-v1",
+  "record_id": null,
+  "catalog_snapshot": null,
+  "track": null,
+  "review_status": "pending",
+  "reviewer_id": null,
+  "second_reviewer_id": null,
+  "reviewed_at": null,
+  "global_catalog_scope": "unreviewed",
+  "question_sql_consistency": null,
+  "answerability": null,
+  "anchor_ids": null,
+  "required_definition_ids": null,
+  "acceptable_context_sets": null,
+  "conflicting_definition_ids": null,
+  "clarification_options": null,
+  "dependency_review": null,
+  "value_evidence_needed": null,
+  "semantic_claims": [],
+  "candidate_judgments": [],
+  "execution": {
+    "status": "not_run",
+    "database_sha256": null,
+    "reference_result_sha256": null
+  },
+  "group_alias_review": "pending",
+  "assigned_split": null,
+  "reviewer_notes_supervision_only": null,
+  "training_eligible": false
+}

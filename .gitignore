@@ -30,4 +30,5 @@ receipts/*
 data/annotation/*
 !data/annotation/batch-001/
 data/inspection/
+data/semantic-research/
 collective-probe.*/
