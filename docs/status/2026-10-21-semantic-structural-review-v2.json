@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-21",
+  "protocol": "ossie-structural-review-v2",
+  "local_tests_passed": 46,
+  "actual_evidence_checks": {
+    "complete_coin_status": true,
+    "program_table_recovered": true,
+    "program_relationship_recovered": true
+  },
+  "source_artifact_hashes_unchanged": true,
+  "training_started": false,
+  "run_directory": "data/semantic-research/structural-diagnostic-20261020-v2c",
+  "live_status": {
+    "state": "running",
+    "total": 11,
+    "reviewed": 0,
+    "failed": 0,
+    "note": "Gateway request launched; first receipt pending."
+  },
+  "limits": "Gateway re-review pending; no accuracy or training readiness claim."
+}

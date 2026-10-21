@@ -66,11 +66,11 @@ This study is in data preparation. The current source pool uses Spider 1.0 train
 
 ### Code Availability — preparation-stage wording
 
-Preparation code is maintained on the `research/semantic-model-routing` branch of the project repository. It provides pinned-source retrieval, structural Ossie conversion, provisional grouping, and review-queue construction. The code does not yet provide an approved training-data exporter or a trained semantic retriever. A public code release and persistent archive identifier remain to be selected before publication.
+Preparation code is maintained on the `research/semantic-model-routing` branch of the project repository. It provides pinned-source retrieval, structural Ossie conversion, grouped pilot sampling, review validation, structural training export, retrieval diagnostics, and a single-device embedding training script. All source pilot labels remain pending. Training optimization has only been verified on an invented CPU fixture, not the public pilot. A public code release and persistent archive identifier remain to be selected before publication.
 
 ### 代码可用性 — 研究准备阶段表述
 
-准备代码保存在项目的独立研究分支，支持固定来源获取、Ossie 结构转换、初步分组和审核队列构建。当前不包含审核通过的训练数据导出器或已训练的语义检索模型。正式发表前仍需确定公开代码版本和长期归档标识符。
+准备代码保存在独立研究分支，支持来源获取、Ossie 转换、分组抽样、审核验证、结构训练导出、检索诊断和单设备 embedding 训练。全部来源标签仍待审。优化过程仅在虚构 CPU fixture 上验证，尚未训练公开 pilot。正式发表前仍需确定公开代码版本和长期归档标识符。
 
 ## 4. 数据引用 / Dataset citations
 

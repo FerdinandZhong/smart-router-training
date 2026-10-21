@@ -32,3 +32,6 @@ data/annotation/*
 data/inspection/
 data/semantic-research/
 collective-probe.*/
+
+# Local link to ignored research artifacts in the main checkout.
+/data/semantic-research

@@ -1,0 +1,14 @@
+{
+  "model": "claude-sonnet-5",
+  "api": "chat_completions",
+  "base_url": "https://ai-gateway.cloudops.cloudera.com",
+  "api_key_file": "~/tokens/litellm_key_applied_ai",
+  "timeout_seconds": 600,
+  "max_output_tokens": 12000,
+  "generation": {
+    "temperature": 0
+  },
+  "protocol": "ossie-review-draft-v2",
+  "candidate_description_chars": 900,
+  "field_description_chars": 180
+}

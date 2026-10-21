@@ -1,5 +1,9 @@
 # Return to the current router work
 
+Update, 21 October 2026: the research branch now contains implementation and review tools.
+Its worktree was restored at `/tmp/smart-router-semantic-research-20261021`.
+Read the [current branch record](branch-record-20261021.md) before using the historical paths below.
+
 Recorded: 9 October 2026.
 
 The original checkout remains at:

@@ -1,0 +1,252 @@
+{
+  "verified_on": "2026-10-10",
+  "cluster_url": "https://smart-router-ray-head.ml-c0c21b54-337.qzhong-a.a465-9q4k.cloudera.site",
+  "job": {
+    "type": "SUBMISSION",
+    "job_id": "0f000000",
+    "submission_id": "semantic-pilot-audit-20261010-02",
+    "driver_info": {
+      "id": "0f000000",
+      "node_ip_address": "100.100.199.138",
+      "pid": "732647"
+    },
+    "status": "SUCCEEDED",
+    "entrypoint": "/home/cdsw/.venv-router-train/bin/python scripts/verify_semantic_cluster.py --run-id semantic-pilot-audit-20261010-02",
+    "message": "Job finished successfully.",
+    "error_type": null,
+    "start_time": 1791642688671,
+    "end_time": 1791642884571,
+    "metadata": null,
+    "runtime_env": {
+      "working_dir": "gcs://router-010697643171a57c30d3.zip",
+      "py_executable": "/home/cdsw/.venv-router-train/bin/python",
+      "env_vars": {
+        "PYTHONPATH": "",
+        "PYTHONNOUSERSITE": "1",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    "driver_agent_http_address": "http://100.100.199.138:52365",
+    "driver_node_id": "2b4c2066409f45b1526ca7305cf1f5e52fef88ab72bccf580bdd8ddc",
+    "driver_exit_code": 0
+  },
+  "result": {
+    "run_id": "semantic-pilot-audit-20261010-02",
+    "output": "/home/cdsw/semantic-runs/semantic-pilot-audit-20261010-02",
+    "node_id": "7fe24302b40e0c065038dd9a59ea694dc970373028a4b2eb5f0a2dfe",
+    "gpu": "NVIDIA L40S",
+    "audit": {
+      "pilot_manifest_sha256": "99befb94c8b07ccb461be7e66f710d931254251217998a489a792561ebfc7226",
+      "schema_sha256": "a7bf8071ceb42c5d5630f751cce155191d160a77c7654e9fe6d420437ca035c8",
+      "checks_passed": [
+        "bundle_checksums",
+        "ossie_json_schema",
+        "metadata_rederived_exactly",
+        "dependency_references",
+        "unique_ids",
+        "input_whitelist",
+        "group_and_duplicate_split_isolation"
+      ],
+      "episodes": 240,
+      "catalogs": 112,
+      "metadata_units": 5205,
+      "tables": 702,
+      "connected_groups": 73,
+      "splits": {
+        "train": 197,
+        "validation": 43
+      },
+      "review": {
+        "format": "semantic-pilot-review-audit-v1",
+        "episode_count": 240,
+        "pending_count": 240,
+        "eligible_count": 0,
+        "deferred": [],
+        "failures": [],
+        "eligible_splits": {},
+        "ready_for_training": false
+      }
+    },
+    "baseline": {
+      "candidate_k": 32,
+      "catalog_snapshot": "d403cb75e1a1b880fcdce53154b1f368829c1bca7d91aed1b5cfc6a4fb8870b7",
+      "catalog_tables": 702,
+      "code_sha256": "2f5d5c8fe2506edef9cdef969d79a4da1ff137acad7a2cec44c537cabd260de8",
+      "config": {
+        "device": "cuda",
+        "epochs": 10,
+        "language_scope": "English structural baseline; not the final model choice",
+        "learning_rate": 0.00002,
+        "max_grad_norm": 1,
+        "max_seq_length": 256,
+        "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+        "patience": 2,
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "seed": 42,
+        "temperature": 0.1
+      },
+      "episodes": 240,
+      "format": "semantic-baseline-diagnostic-v1",
+      "limitations": [
+        "Unreviewed structural SQL table evidence only",
+        "BIRD gold table sets unavailable",
+        "No tuning, no context assembly, no business-semantic or SQL execution metric",
+        "Closed pilot catalog only; no large-catalog or arrival claim"
+      ],
+      "methods": [
+        "bm25_k1_1.2_b_0.75",
+        "unadapted_dense",
+        "rrf_constant_60_not_tuned"
+      ],
+      "packages": {
+        "sentence-transformers": "5.2.3",
+        "torch": "2.8.0",
+        "transformers": "4.57.6"
+      },
+      "pilot_manifest_sha256": "99befb94c8b07ccb461be7e66f710d931254251217998a489a792561ebfc7226",
+      "quality_claim_allowed": false,
+      "timing": {
+        "index_seconds": 0.8699597019585781,
+        "scope": "single_process_warm_serial_diagnostic_no_queue_reranker_assembly_or_serving_load",
+        "serial_all_methods_p50_ms": 9.214915509801358,
+        "serial_all_methods_p95_ms": 11.865334035246631
+      },
+      "token_audit": {
+        "index": {
+          "chunks": 998,
+          "documents": 702,
+          "max_chunks_per_document": 12,
+          "max_seq_length": 256,
+          "multi_chunk_documents": 162,
+          "overlap_tokens": 32,
+          "pooling": "normalized_mean_of_normalized_chunk_vectors",
+          "tokens_discarded": 0
+        },
+        "max_seq_length": 256,
+        "max_tokens": 2485,
+        "texts": 942,
+        "texts_needing_chunks": 162,
+        "tokens_discarded": 0
+      },
+      "weak_diagnostic_episodes": 120,
+      "weak_spider_coverage": {
+        "bm25": {
+          "weak_complete_at_k": 0.575,
+          "weak_table_recall_at_k": 0.6805555555555555
+        },
+        "dense": {
+          "weak_complete_at_k": 0.875,
+          "weak_table_recall_at_k": 0.9305555555555555
+        },
+        "hybrid_rrf": {
+          "weak_complete_at_k": 0.8333333333333334,
+          "weak_table_recall_at_k": 0.8826388888888889
+        }
+      }
+    }
+  },
+  "cluster_after": {
+    "nodes": [
+      {
+        "node_id": "da2527417cee86d7eeb916d588630ca02b01a4ee81310d29107d0fac",
+        "name": "training-l40s-02",
+        "app_id": "2ls6-1pak-v78f-pvuj",
+        "app_name": "ray-training-l40s-02-4b3ec417da56",
+        "alive": true,
+        "resources": {
+          "accelerator_type:L40S": 1,
+          "worker_launch_id:4b3ec417da564e199977fce0e21f89b3": 1,
+          "CPU": 12,
+          "memory": 62413742080,
+          "node:100.100.117.140": 1,
+          "GPU": 1,
+          "node_type:gpu-worker": 1,
+          "object_store_memory": 17179869184,
+          "worker_id:39e7c5ebac594460938cd71fe89cdaa7": 1
+        },
+        "pod_name": "ycd2u958acvv65n0",
+        "cml_status": "APPLICATION_RUNNING",
+        "worker_id": "39e7c5ebac594460938cd71fe89cdaa7"
+      },
+      {
+        "node_id": "7fe24302b40e0c065038dd9a59ea694dc970373028a4b2eb5f0a2dfe",
+        "name": "training-l40s-01",
+        "app_id": "fmya-fmiq-pv8s-28q0",
+        "app_name": "ray-training-l40s-01-aca0d62c3fd0",
+        "alive": true,
+        "resources": {
+          "node:100.100.230.12": 1,
+          "accelerator_type:L40S": 1,
+          "memory": 62413246464,
+          "CPU": 12,
+          "object_store_memory": 17179869184,
+          "worker_launch_id:aca0d62c3fd04fb7bdb51384430a9f26": 1,
+          "GPU": 1,
+          "node_type:gpu-worker": 1,
+          "worker_id:a8cdbe86b255421c9e11a3847e0db85f": 1
+        },
+        "pod_name": "qdou9no62sojlwe1",
+        "cml_status": "APPLICATION_RUNNING",
+        "worker_id": "a8cdbe86b255421c9e11a3847e0db85f"
+      },
+      {
+        "node_id": "2b4c2066409f45b1526ca7305cf1f5e52fef88ab72bccf580bdd8ddc",
+        "name": null,
+        "app_id": null,
+        "app_name": null,
+        "alive": true,
+        "resources": {
+          "node:__internal_head__": 1,
+          "object_store_memory": 9250111488,
+          "memory": 21583593472,
+          "node:100.100.199.138": 1,
+          "CPU": 16
+        },
+        "pod_name": "njy1ye1bv2cpxno3",
+        "cml_status": null,
+        "worker_id": null
+      }
+    ],
+    "capacity": {
+      "total_cpus": 40,
+      "available_cpus": 38,
+      "total_memory": 136.3554801940918,
+      "available_memory": 128.3554801940918,
+      "total_gpus": 2,
+      "available_gpus": 2,
+      "utilization_percent": 5
+    },
+    "workers": [
+      {
+        "name": null,
+        "app_id": "fmya-fmiq-pv8s-28q0",
+        "status": "APPLICATION_RUNNING",
+        "state": null,
+        "cpu": null,
+        "memory": null,
+        "gpus": null,
+        "node_id": null
+      },
+      {
+        "name": null,
+        "app_id": "2ls6-1pak-v78f-pvuj",
+        "status": "APPLICATION_RUNNING",
+        "state": null,
+        "cpu": null,
+        "memory": null,
+        "gpus": null,
+        "node_id": null
+      }
+    ]
+  },
+  "local_checks": {
+    "semantic_unit_tests_passed": 20,
+    "verifier_local_audit": "passed",
+    "diff_check": "passed"
+  },
+  "first_attempt": {
+    "submission_id": "semantic-pilot-audit-20261010-01",
+    "status": "FAILED",
+    "reason": "Verifier used hashed filename as catalog ID; corrected to manifest catalog ID. Dataset unchanged."
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "source_checkout": "/Users/zhongqishuai/Projects/cldr_projects/smart_router_training",
+  "research_branch": "research/semantic-model-routing",
+  "files": [
+    {
+      "path": "configs/semantic_retrieval/embedding-pilot.json",
+      "sha256": "c70c5c91e4dcc345d7bc09def11f856e74490db4368b371ed788e6e9c9a785c8"
+    },
+    {
+      "path": "configs/semantic_retrieval/opus-reviewer.json",
+      "sha256": "f9e0acc680a465da0afaf9a30e0402c1c0b27c503f2049d71e4bb9e78d886150"
+    },
+    {
+      "path": "configs/semantic_retrieval/review-judge.json",
+      "sha256": "d4d1db331ae2545548584580c96efaed76ae372e4ca28553cce747663fa09367"
+    },
+    {
+      "path": "configs/semantic_retrieval/review-template.json",
+      "sha256": "15856ce5002bf66698efa0f1b09902e9d7e62db20f35f83f67de7a82d7fad04c"
+    },
+    {
+      "path": "configs/semantic_retrieval/sources.json",
+      "sha256": "09e386cf3dda7ea271a679edb6807b6988c61e7da76332e33f6063164d5dde3f"
+    },
+    {
+      "path": "configs/semantic_retrieval/structural-reviewer-v2.json",
+      "sha256": "6b00abed5aa0e222812f2af9649741db02d13573d37990b2b16cf86d077a07d0"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/README.md",
+      "sha256": "6342991d9a785897377f6067f8ca2f15bf385b60ba8f3bb59671757f4d09c601"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/data-availability-bilingual.md",
+      "sha256": "bbeb316d8e64de158ecc3d90c885eb9493ff183b8dce506bef3057862d956327"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/data-collection-bilingual.md",
+      "sha256": "13bb603eec5abbc20751d6bac8515a28f99edc552ba90157ed258bfa15462fbb"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/deferral-audit-20261020.md",
+      "sha256": "d9e4ae1313f75f45c32794f916520cd0a123eb4ae198357c196d8d80b29f2e3b"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/experiment-plan.md",
+      "sha256": "3cad394340708941c2c169af0c0d853ad80f671812721ae31687fd230bd2f3d5"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/focused-literature-review.md",
+      "sha256": "dc14fc6fd632fe172032a020ad8973a0c337da98eaedf894291a3a574719e0c2"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/focused-sources.json",
+      "sha256": "0ca7938429658d9ced987d9610a47faaa4df2a2ecc8a2737c928544347aca755"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/hybrid-retrieval-sources-20261010.json",
+      "sha256": "d0065f4cfaf25beb65c41fbeed70ba4c2ee9d16a7f8426fe01cbae8341261c63"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/hybrid-retrieval-verification-20261010.md",
+      "sha256": "1ef155961a1b7c3ee9a09c00be940a6d459864cfa5adfbc97d8fd549152e5e7d"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/judge-assisted-review.md",
+      "sha256": "e1dc691a14e5155bbcfa3ee8c021f6c20a0fd4552128cd3f50fe323fefde3831"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/literature-review.md",
+      "sha256": "b732b8af1900017f57516708916b0dc49d617aa33b1e3084bf8950aeef6ab373"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/local-review-ui.md",
+      "sha256": "91df7561f59962ec4390516f9c7dfe7213b631cbeb4b1e0140dd080dbb24d637"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/model-evidence.json",
+      "sha256": "a2fc0d3c3e78c773a6a5691b816d4c17f2df2d1cc2f25440d676d9074254f97a"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/opus-delegated-review.md",
+      "sha256": "f45e6f0736aa5f7d43426bc96d9ae568b4c3f10a098cddb9b4b4b41793ff6614"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/pilot-readiness-bilingual.md",
+      "sha256": "6e643092e213178f88cfc22da57161f2e9437a66122b8670ffbda1813b7b80f2"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/plan-audit-bilingual.md",
+      "sha256": "f957f0c6f74a6ee35faa5d8a05262fbfae2ce6e6dfc9156d43a8096444a2b25a"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/research-plan-bilingual.md",
+      "sha256": "78d5c37d4c68f81c9b175c8b9b6c955b033b51b6009962a49a9c6c864d333bb2"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/research-plan-zh.md",
+      "sha256": "089602c56953edd9c167a7d96517914b4b60dd739e005509f45bbabfb59166b5"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/return-to-main.md",
+      "sha256": "d431cd228a1e8a7464dfb28a96d27559b80ec97f9019b494b545b1a57ce9621a"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/search-record.md",
+      "sha256": "d886233cfdf01440d34e9a06a03f99408a0542c83f19b98166b242274b2a2f89"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/source-audit.json",
+      "sha256": "7b8b2da2ba92a5fe665799ba9cad34c5aca3eba9e8e05308ef101a60572ffc86"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/structural-review-v2.md",
+      "sha256": "0b0e738699ea62256f8609b6dc02e3fd3f1f6eec489f3ed1b285ea6dbc78284c"
+    },
+    {
+      "path": "docs/research/semantic-model-routing/training-and-experiments-zh.md",
+      "sha256": "7184347beb8fbe359e136bb9f5b6026ce067c1941a3f6123748565169274cbd5"
+    },
+    {
+      "path": "docs/status/2026-10-10-semantic-cluster-verification.json",
+      "sha256": "39924950712f944df7445d22050af0f641b617ab78019385c12dd6580324a9e1"
+    },
+    {
+      "path": "docs/status/2026-10-10-semantic-cluster-verification.md",
+      "sha256": "98d185ef17605d015a1515b3e1537728b500a790f21e35f99e5a12bbf6e11cc9"
+    },
+    {
+      "path": "docs/status/2026-10-10-semantic-intake.json",
+      "sha256": "bdc7d1e3c569da6e967e29d5060c84877b06f6424a9a10ae246ce460dab5bdc0"
+    },
+    {
+      "path": "docs/status/2026-10-10-semantic-pilot-preparation.json",
+      "sha256": "c59b1b545d179d87ace0c5d3cfeebeaeddb950749a4b262adb2bff25e8101420"
+    },
+    {
+      "path": "docs/status/2026-10-13-semantic-judge-assisted-review.json",
+      "sha256": "b57ef42c048d71c4144e56fb05eef9437e925f6104ee52fbd40d749964059645"
+    },
+    {
+      "path": "docs/status/2026-10-19-opus-delegated-review.json",
+      "sha256": "1f2ff7d463591b729f510b27d242a9d47caca5be33633ae6c7b1e4becfd90be3"
+    },
+    {
+      "path": "docs/status/2026-10-20-semantic-deferral-audit.json",
+      "sha256": "b5163678437a7a23eb48c9526e32082bdef32fe471df29185c635c28f9cd5269"
+    },
+    {
+      "path": "docs/status/2026-10-21-semantic-structural-review-v2.json",
+      "sha256": "0f0c638f0df55b5c31c4c2b8c33a8ada13513539f62cf71875defb7e3f754a5b"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "de1140fefea48a862e8da91f49b7c7f319c34fff53539106465215fac13f6bde"
+    },
+    {
+      "path": "scripts/evaluate_semantic_baselines.py",
+      "sha256": "ed939c770c4b04c79e91ba79026150c1ed5cfd55416558221f9974eadaeeeef5"
+    },
+    {
+      "path": "scripts/finish_opus_reviews.py",
+      "sha256": "af2d5695fb146085d1e659016d99db6d379d45b224bc6a18609f275fa10d6d1f"
+    },
+    {
+      "path": "scripts/prefill_semantic_reviews.py",
+      "sha256": "272553b2a4ec25b573f81a5b53e8b975997522fb1a3d17ed7ee633a9055d88f7"
+    },
+    {
+      "path": "scripts/prepare_semantic_intake.py",
+      "sha256": "648c473cbcaadbd64ecbb4e8ea54d53d05b2c65cd9f0795d3cbb96074f24c755"
+    },
+    {
+      "path": "scripts/prepare_semantic_pilot.py",
+      "sha256": "f8fe6c9d397cb018aee67ba4380e07cff88748af86d8e445a4e899467bd8eafa"
+    },
+    {
+      "path": "scripts/review_semantic_diagnostic.py",
+      "sha256": "c700ba809aa03c2fc30da3d065fa30457094e8994c7755b5fb4cfdfe83a72312"
+    },
+    {
+      "path": "scripts/review_semantic_pilot.py",
+      "sha256": "fd571e23783d65a9e1394dcb6277a9e44cef991cac63e7fccf3c39a08b989709"
+    },
+    {
+      "path": "scripts/review_semantic_with_opus.py",
+      "sha256": "70d6cf05f627daadccaa73f1a4924c8cdbf4ca64cef763b0f9d1a4ee1a6b5e39"
+    },
+    {
+      "path": "scripts/train_semantic_retriever.py",
+      "sha256": "900aa5a7f4fc8ce2f86ef5d2e92c98d51f6e8871b32fe2fe6cce47a45a3d3e19"
+    },
+    {
+      "path": "scripts/verify_semantic_cluster.py",
+      "sha256": "2877f62f3401886450465080a2e82866f86b7e8a38f2c0fa5238bc0139e0b587"
+    },
+    {
+      "path": "src/smart_router/models/semantic_embedding.py",
+      "sha256": "5bd9f71111adfed712b59d42482fddcd3834932a5ca7323a19f8a9280a75ff5b"
+    },
+    {
+      "path": "src/smart_router/review_ui/index.html",
+      "sha256": "7df3e37f2d8a142761d017dbbed431c25aff32443a3cd0aacaf61974143e1140"
+    },
+    {
+      "path": "src/smart_router/semantic_baselines.py",
+      "sha256": "2f5d5c8fe2506edef9cdef969d79a4da1ff137acad7a2cec44c537cabd260de8"
+    },
+    {
+      "path": "src/smart_router/semantic_delegated_review.py",
+      "sha256": "b263b6933253d8ba257a700fc9f21ae0db0c56e0a15f7428f6e66c8e1a6b867a"
+    },
+    {
+      "path": "src/smart_router/semantic_intake.py",
+      "sha256": "936ec397a3cb30feae2765a7c73acb28b057024415535c199bf0d1c0383d749b"
+    },
+    {
+      "path": "src/smart_router/semantic_pilot.py",
+      "sha256": "4a8dbedcb29d799357a89f677fbe10db36bc18a14060467692d8b65bed0cee81"
+    },
+    {
+      "path": "src/smart_router/semantic_review_judge.py",
+      "sha256": "6091b02c258f8c6bb9fddbcab76bf846366c2360c94d87201db9b7979363f3c1"
+    },
+    {
+      "path": "src/smart_router/semantic_review_ui.py",
+      "sha256": "8beb76c4f3dd707edd78d700c7ad7e9a9209cb84f9291dd29c3920ba93f56ecf"
+    },
+    {
+      "path": "src/smart_router/semantic_structural_review.py",
+      "sha256": "2d6d0e4fe86cae8aad4c7449fa1ee47fe50fddbf06a96c0519fe812e20e9336a"
+    },
+    {
+      "path": "src/smart_router/training/semantic_retriever.py",
+      "sha256": "79c8cc2a990921b8f5a9c4b18683172b6fdab8da89356cb660f225e98741c185"
+    },
+    {
+      "path": "tests/run_semantic_training_smoke.py",
+      "sha256": "d7bcde71457351c5f2b6ca95a327d948274cdff74551836a9bb53fdddb63ddac"
+    },
+    {
+      "path": "tests/test_semantic_delegated_review.py",
+      "sha256": "831bfb5453860120f704140aa2f9cccbae78007d3062acee20c85ee47555fcbd"
+    },
+    {
+      "path": "tests/test_semantic_intake.py",
+      "sha256": "8480589b645b04178242b5da9ee19321cbace9b904d85dc91da3a618b20dfe91"
+    },
+    {
+      "path": "tests/test_semantic_pilot.py",
+      "sha256": "e86c9c3ae06ff90ef5bd13495b1f8111d0f1b41c367842451c16a9e8f621b780"
+    },
+    {
+      "path": "tests/test_semantic_review_judge.py",
+      "sha256": "34dcf4fbdad61d5c8605de1696e56e1c74b21305531beca27aaab3b6539c572b"
+    },
+    {
+      "path": "tests/test_semantic_review_ui.py",
+      "sha256": "4c4edfe35aa3766b973ab660df85a19807cf32459c9181ecbde818b7f338e489"
+    },
+    {
+      "path": "tests/test_semantic_structural_review.py",
+      "sha256": "0d3765c29c29b81642e042e8ef4e1c92cc287dfddf718bdd85197698638ec876"
+    }
+  ]
+}

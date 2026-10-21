@@ -172,3 +172,8 @@ production routing remain unimplemented.
 
 A launched campaign is not evidence that annotation has finished or that labels
 are sufficient for training. Current progress is recorded in its run directory.
+
+## Semantic research branch — 21 October 2026
+
+See the [branch record](docs/research/semantic-model-routing/branch-record-20261021.md) for the current implementation, tests, artifact locations, and partial diagnostic status.
+The [structural review contract](docs/research/semantic-model-routing/structural-review-v2.md) defines the automated label schema and execution commands.

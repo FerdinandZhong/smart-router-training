@@ -20,6 +20,8 @@ cluster = [
 ]
 training = ["ray[default,train]==2.58.0", "torch==2.8.0", "numpy>=1.26,<3", "tensorboard==2.20.0"]
 
+semantic = ["jsonschema==4.26.0", "torch==2.8.0", "sentence-transformers==5.2.3", "transformers==4.57.6", "numpy>=1.26,<3"]
+
 [project.scripts]
 smart-router-data = "smart_router.cli:main"
 smart-router-annotate = "smart_router.annotation.cli:main"
@@ -29,5 +31,6 @@ where = ["src", "."]
 include = ["smart_router*", "ray_serve_cai*", "cai_integration*"]
 
 [tool.setuptools.package-data]
+smart_router = ["review_ui/*.html"]
 ray_serve_cai = ["configs/*.yaml", "configs/nginx/*.j2", "configs/nginx/conf.d/*.j2", "configs/nginx/snippets/*.j2", "static/*"]
 cai_integration = ["templates/*.j2", "*.sh"]

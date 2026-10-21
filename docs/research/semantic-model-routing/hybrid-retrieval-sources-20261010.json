@@ -1,0 +1,86 @@
+{
+  "searched_on": "2026-10-10",
+  "workflow": "multi-source-search-and-citation-verification",
+  "fallback": "Browser primary sources; academic MCP unavailable",
+  "sources": [
+    {
+      "title": "Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods",
+      "authors": [
+        "Gordon V. Cormack",
+        "Charles L. A. Clarke",
+        "Stefan B\u00fcttcher"
+      ],
+      "year": 2009,
+      "venue": "SIGIR",
+      "doi": "10.1145/1571941.1572114",
+      "primary_url": "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf",
+      "verified_fields": [
+        "title",
+        "authors",
+        "venue",
+        "year",
+        "formula"
+      ],
+      "doi_verification": "Search metadata matches DOI; ACM page returned 403"
+    },
+    {
+      "title": "An Analysis of Fusion Functions for Hybrid Retrieval",
+      "authors": [
+        "Sebastian Bruch",
+        "Siyu Gai",
+        "Amir Ingber"
+      ],
+      "year": 2023,
+      "arxiv": "2210.11934v2",
+      "doi": "10.1145/3596512",
+      "primary_url": "https://arxiv.org/abs/2210.11934v2",
+      "verified_fields": [
+        "title",
+        "authors",
+        "revision_date",
+        "related_doi",
+        "abstract_claims"
+      ]
+    },
+    {
+      "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      "year": 2021,
+      "arxiv": "2104.08663v4",
+      "primary_url": "https://arxiv.org/abs/2104.08663v4",
+      "verified_fields": [
+        "title",
+        "authors",
+        "venue",
+        "year",
+        "abstract_claims"
+      ]
+    },
+    {
+      "title": "MMTEB: Massive Multilingual Text Embedding Benchmark",
+      "year": 2025,
+      "arxiv": "2502.13595v4",
+      "primary_url": "https://arxiv.org/abs/2502.13595v4",
+      "verified_fields": [
+        "title",
+        "authors",
+        "venue",
+        "year",
+        "abstract_claims"
+      ]
+    },
+    {
+      "title": "Reciprocal rank fusion: Elasticsearch Reference",
+      "type": "official_documentation",
+      "primary_url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion",
+      "verified_fields": [
+        "rank_constant",
+        "rank_window_size",
+        "retriever_contract"
+      ]
+    }
+  ],
+  "limitations": [
+    "No citation-impact audit",
+    "Published retrieval evidence does not validate this pilot business semantics"
+  ]
+}

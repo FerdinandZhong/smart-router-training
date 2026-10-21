@@ -5,6 +5,14 @@
 结论：可以开始公开数据收集和 pilot 审核。当前材料不满足正式训练或企业有效性结论的条件。
 Decision: proceed with public-source intake and pilot review. Current material is not ready for formal training or enterprise-effectiveness claims.
 
+后续审核已发现并修正抽样简单化、pilot 缺少内部开发划分和长元数据截断问题。
+现有 240 条平衡审核包、审核导出验证器及 embedding 训练脚本；真实可训练样本仍为零。
+具体证据及执行步骤见[最新审核与训练准备记录](pilot-readiness-bilingual.md)。
+
+The follow-up audit corrected simple-question sampling bias, missing internal pilot development splits, and long-metadata truncation.
+A balanced 240-episode package, review/export validator, and embedding training script now exist. Source-data training eligibility remains zero.
+See the [current readiness audit and runbook](pilot-readiness-bilingual.md) for evidence and commands.
+
 | 审核问题 / Finding | 处理 / Resolution | 剩余工作 / Remaining work |
 | --- | --- | --- |
 | 研究贡献易退化为普通 schema 检索 / Contribution could reduce to ordinary schema retrieval | 主指标改为完整且一致的业务上下文，并保留强 hybrid 对照 / Prioritize complete, consistent context against tuned hybrid | 语义子集与企业验证 / Semantic subset and enterprise validation |

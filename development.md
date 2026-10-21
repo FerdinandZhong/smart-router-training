@@ -115,3 +115,8 @@ The command does not submit Ray jobs, execute source SQL, or invoke an LLM.
 
 Gateway campaign checks: `PYTHONPATH=src:. python -m pytest tests/test_gateway_dataset.py tests/test_gateway_campaign.py -q`.
 Source extraction uses pinned Parquet shards and requires the Parquet extra.
+
+## Semantic research branch — 21 October 2026
+
+See the [branch record](docs/research/semantic-model-routing/branch-record-20261021.md) for the current implementation, tests, artifact locations, and partial diagnostic status.
+The [structural review contract](docs/research/semantic-model-routing/structural-review-v2.md) defines the automated label schema and execution commands.

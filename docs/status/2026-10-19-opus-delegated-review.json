@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-19",
+  "status_snapshot": {
+    "model": "claude-opus-5-5",
+    "total": 80,
+    "reviewed": 68,
+    "failed": 4,
+    "state": "running",
+    "output": "/Users/zhongqishuai/Projects/cldr_projects/smart_router_training/data/semantic-research/review-work-20261010-v2/opus-5-5-review-20261019-v1"
+  },
+  "model_verified": "claude-opus-5-5",
+  "gateway": "https://ai-gateway.cloudops.cloudera.com",
+  "tests_passed": 41,
+  "browser": "actual delegated decision displayed; no JavaScript errors",
+  "human_records_overwritten": false,
+  "first_review_decision": "revise",
+  "initial_sonnet_ready": 69,
+  "initial_sonnet_failed": 11,
+  "retry_policy": "One post-batch pass validates cached decisions and retries unresolved samples",
+  "actual_artifact_checks": {
+    "canonical_inputs_preserved": true,
+    "human_review_files_match_start_snapshot": true,
+    "no_human_approval_claims": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "model": "claude-opus-5-5",
+  "api": "chat_completions",
+  "base_url": "https://ai-gateway.cloudops.cloudera.com",
+  "api_key_file": "~/tokens/litellm_key_applied_ai",
+  "timeout_seconds": 600,
+  "max_output_tokens": 16000,
+  "generation": {"temperature": 0},
+  "protocol": "ossie-opus-delegated-review-v1",
+  "candidate_description_chars": 900,
+  "field_description_chars": 180
+}

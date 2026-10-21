@@ -1,6 +1,10 @@
 # Research side plan: selecting semantic context for lakehouse questions
 
-Reviewed: 10 October 2026. Status: proposal, literature review, and unreviewed public-source intake tooling; no semantic training results.
+Current implementation and review status: [21 October branch record](branch-record-20261021.md).
+The dated sections below retain earlier research milestones.
+
+Reviewed: 10 October 2026. Status: balanced pilot review package, review/export tools,
+CPU retrieval diagnostics and an embedding training script; no reviewed semantic training results.
 
 The current execution proposal is the [bilingual research plan](research-plan-bilingual.md).
 Read the [plan audit](plan-audit-bilingual.md), [collection protocol](data-collection-bilingual.md),
@@ -14,11 +18,21 @@ It prepares 13,601 unreviewed source records, 209 structural Ossie drafts, and a
 The 1,259 dataset objects have passed pinned JSON Schema validation, not semantic or SQL execution validation.
 No reviewed semantic training release or semantic model training result exists yet.
 
+The [pilot readiness audit and runbook](pilot-readiness-bilingual.md) records the
+latest changes. Use `pilot-20261010-v3`, with 240 balanced episodes and a 197/43
+grouped internal train/development reservation. It searches 702 tables from 112
+training-reserved catalogs. All labels remain pending. `baselines-20261010-v3`
+contains current BM25/dense/untuned-hybrid diagnostics with complete token-window
+encoding. Training optimization has only been tested on an invented CPU fixture.
+
 Branch: `research/semantic-model-routing`.
 Base: `2b7eecf37d0053951576bca654f6efd204e07950`.
 The original checkout remains on `main`, with its unfinished router work preserved.
 
 ## Recommendation
+
+The [2026-10-10 hybrid retrieval verification](hybrid-retrieval-verification-20261010.md)
+defines the established BM25/dense baseline, primary sources and cluster audit scope.
 
 Explore this direction through a bounded benchmark first.
 The engineering need is concrete, and the existing router training infrastructure can support the experiment.

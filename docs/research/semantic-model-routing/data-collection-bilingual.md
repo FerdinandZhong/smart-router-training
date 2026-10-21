@@ -1,6 +1,6 @@
 # 训练数据收集与审核协议 / Training Data Collection and Review Protocol
 
-日期 / Date：2026-10-10。当前阶段 / Current stage：未审核导入 / Unreviewed intake。
+日期 / Date：2026-10-10。当前阶段 / Current stage：平衡 pilot 审核准备 / Balanced pilot review preparation。
 主方案 / Master plan：[研究计划 / Research plan](research-plan-bilingual.md)。
 
 ## 1. 当前已有材料 / Material prepared
@@ -10,15 +10,17 @@
 | Spider upstream train | 7,000 问题，140 数据库 / questions, databases | 固定官方代码库快照中的训练注释 / Training annotations from a pinned official repository snapshot |
 | BIRD filtered train | 6,601 问题，69 数据库 / questions, databases | 官方筛选训练集 / Publisher-filtered training set |
 | Ossie 草稿 / Drafts | 209 文档，1,259 数据集对象 / documents, dataset objects | schema／字段说明转换；不是人工批准的语义模型 / Schema or column-description conversion, not approved semantic models |
-| Pilot 审核队列 / Review queue | 240；每来源 120 / 120 per source | 从初步训练预留组抽取 / Selected from provisional training-reserved groups |
+| Pilot 审核队列 / Review queue | 240；每来源 120 / 120 per source | 已按结构平衡重采样；见 pilot-v3 / Resampled with structural balance; see pilot-v3 |
 | 已审核／可训练 / Reviewed / trainable | 0 / 0 | 不能将导入成功称为训练数据完成 / Successful import is not training readiness |
 | 隔离字段 / Quarantined fields | 1 | BIRD 的一个字段标识缺少列名 / One BIRD column identifier has an empty column name |
 
-当前入口为 `data/semantic-research/intake-20261010-v3/`。
+来源导入入口为 `data/semantic-research/intake-20261010-v3/`。
+实际审核使用 `data/semantic-research/pilot-20261010-v3/`，详见[审核与训练准备协议](pilot-readiness-bilingual.md)。
 早期本地 v1/v2 仅为构建中间产物，不使用其审核队列。
 上述材料未下载物理数据库行，也未执行 SQL。
 
-Use `data/semantic-research/intake-20261010-v3/` as the current intake.
+Use `data/semantic-research/intake-20261010-v3/` as the current source intake.
+Use `data/semantic-research/pilot-20261010-v3/` for actual review; see the [pilot protocol](pilot-readiness-bilingual.md).
 The earlier local v1/v2 directories are intermediate builds; do not use their review queues.
 No physical database rows were downloaded and no SQL was executed.
 
@@ -120,31 +122,33 @@ Candidate descriptions cannot contain `ai_context.examples` rewritten from the e
 `proposed_split` is a reservation proposal. `assigned_split` remains null until final review and freezing.
 The intake snapshot inventories all sources; it is not training snapshot C0. Build training indexes from the permitted training-time catalog, rather than mining future-domain negatives from the entire intake.
 
-审核者按[审核模板](../../../configs/semantic_retrieval/review-template.json)记录来源问题、锚点、必要定义、合法集合和判断依据。
-模板当前不是训练导出接口。审批状态、字段引用及全局不变量仍需正式验证器检查。
+早期[审核模板](../../../configs/semantic_retrieval/review-template.json)保留为完整语义研究的设计表。
+当前结构训练导出器使用 pilot 包中生成的 `reviews.template.jsonl` 与 `catalog_reviews.template.jsonl`。
+验证器现已检查审批、哈希、字段引用、显式依赖、正负标签及划分隔离。
 
-Reviewers use the [review template](../../../configs/semantic_retrieval/review-template.json) for anchors, required definitions, valid sets, and evidence.
-The template is not yet a training export interface. Approval states, references, and global invariants require a formal validator.
+The earlier [review template](../../../configs/semantic_retrieval/review-template.json) remains a worksheet for the broader semantic study.
+The structural exporter uses generated `reviews.template.jsonl` and `catalog_reviews.template.jsonl` from the pilot package.
+The implemented validator checks approval, hashes, references, declared dependencies, observed labels, and split isolation.
 
 ## 6. Pilot 的具体审核 / Pilot review procedure
 
-当前队列覆盖 74 个 Spider 与 38 个 BIRD 数据库，属于多样性初筛。
-先选每来源 40 题进行深审，必要时重采样以形成可负担的核心语义域。
-记录每次排除、替换和重采样，不能将不利样本静默丢弃。
+原始多样性队列被结构平衡队列替代，全部替换均已记录。
+当前覆盖 45 个 Spider 与 34 个 BIRD 数据库，合并为 73 个分组。
+首批每来源 40 题，每类结构各 10 题。197/43 内部训练／开发预留全部来自正式训练域。
 
-The current diversity queue covers 74 Spider and 38 BIRD databases.
-Review 40 episodes per source first, and resample if necessary to establish a manageable core set of semantic domains.
-Record exclusions, replacements, and resampling rather than silently discarding difficult cases.
+The structurally balanced queue replaces the initial diversity queue, with every replacement recorded.
+It covers 45 Spider and 34 BIRD databases, joined into 73 groups.
+Review 40 episodes per source first, ten per structural stratum. The 197/43 internal split remains within formal-training-reserved domains.
 
 对每题检查：原始数据库范围是否隐含、问题是否歧义、SQL 是否可信、所需字段是否齐全、是否需要值检索。
 无法从纯 metadata 回答的值依赖问题单独分层；主实验不额外给某个方法提供行样本。
 至少安排多表、聚合／子查询、口径冲突、缺失定义与澄清样本。
-复杂度配额须在 SQL/人工审核后确定，当前自动队列不声称已满足这些配额。
+结构配额现已满足，但不能当作业务语义覆盖配额。
 
 Check implicit database scope, ambiguity, SQL correctness, field coverage, and dependence on database values.
 Stratify value-dependent tasks separately; do not give row samples only to the proposed method.
 Include multitable, aggregation/subquery, conflicting-definition, missing-definition, and clarification cases.
-Set complexity quotas after parsing and review; the automatic queue does not claim to meet them.
+Structural sampling quotas are now met; they do not establish coverage of business-semantic conditions.
 
 ## 7. 正式版本的进入条件 / Formal release gates
 
@@ -157,7 +161,10 @@ Set complexity quotas after parsing and review; the automatic queue does not cla
 7. 人工语义审核与执行结果核验分开记录。/ Record semantic review separately from execution checks.
 8. 测试集冻结后不再用于调参或改写元数据。/ Frozen tests cannot tune models or rewrite metadata.
 
-当前只完成来源导入、草稿转换、初步分组与队列准备。
-物理数据库获取、语义审核、困难负例、正式划分和训练导出属于后续工作。
-Current completion covers source intake, draft conversion, provisional grouping, and queue preparation only.
-Physical database acquisition, semantic review, hard negatives, final splits, and training export remain outstanding.
+当前已实现来源导入、草稿转换、平衡 pilot、审核验证、结构训练导出及训练脚本。
+全部真实标签仍待审；尚无实际训练导出。物理数据库、业务语义、困难负例及正式划分仍需完成。
+结构工程 pilot 与正式语义发布分开：前者只训练已审核的 metadata 检索标签，后者仍需上述全部门槛。
+
+Intake, conversion, balanced pilot preparation, review validation, structural export, and a training script are implemented.
+All source labels remain pending, so no actual training release exists. Physical databases, business semantics, reviewed negatives and formal splits remain outstanding.
+The structural engineering pilot uses reviewed metadata-retrieval labels only. A formal semantic release still requires all gates above.

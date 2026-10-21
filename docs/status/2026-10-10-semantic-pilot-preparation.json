@@ -1,0 +1,149 @@
+{
+  "baseline_claim_scope": "Unreviewed Spider SQL-table diagnostic only; not semantic accuracy",
+  "baseline_manifest_sha256": "6e050313fc6e33e5c5c12955cb3ade86d139a0df4448a7914a1b67c6c2e59f12",
+  "baseline_path": "data/semantic-research/baselines-20261010-v3",
+  "baseline_timing": {
+    "index_seconds": 18.3869001250132,
+    "scope": "single_process_warm_serial_diagnostic_no_queue_reranker_assembly_or_serving_load",
+    "serial_all_methods_p50_ms": 15.302041996619664,
+    "serial_all_methods_p95_ms": 18.204125647025645
+  },
+  "baseline_token_audit": {
+    "index": {
+      "chunks": 998,
+      "documents": 702,
+      "max_chunks_per_document": 12,
+      "max_seq_length": 256,
+      "multi_chunk_documents": 162,
+      "overlap_tokens": 32,
+      "pooling": "normalized_mean_of_normalized_chunk_vectors",
+      "tokens_discarded": 0
+    },
+    "max_seq_length": 256,
+    "max_tokens": 2485,
+    "texts": 942,
+    "texts_needing_chunks": 162,
+    "tokens_discarded": 0
+  },
+  "baseline_weak_spider_coverage": {
+    "bm25": {
+      "weak_complete_at_k": 0.575,
+      "weak_table_recall_at_k": 0.6805555555555555
+    },
+    "dense": {
+      "weak_complete_at_k": 0.875,
+      "weak_table_recall_at_k": 0.9305555555555555
+    },
+    "hybrid_rrf": {
+      "weak_complete_at_k": 0.8333333333333334,
+      "weak_table_recall_at_k": 0.8826388888888889
+    }
+  },
+  "blocked_unreviewed_operations": {
+    "export": "Training export blocked: approved train/development records and error-free review are required",
+    "preflight": "Expected semantic-training-v1"
+  },
+  "branch": "research/semantic-model-routing",
+  "catalog_count": 112,
+  "date": "2026-10-10",
+  "episode_count": 240,
+  "first_review_count": 80,
+  "implementation_sha256": {
+    "configs/semantic_retrieval/embedding-pilot.json": "c70c5c91e4dcc345d7bc09def11f856e74490db4368b371ed788e6e9c9a785c8",
+    "src/smart_router/models/semantic_embedding.py": "5bd9f71111adfed712b59d42482fddcd3834932a5ca7323a19f8a9280a75ff5b",
+    "src/smart_router/semantic_baselines.py": "2f5d5c8fe2506edef9cdef969d79a4da1ff137acad7a2cec44c537cabd260de8",
+    "src/smart_router/semantic_pilot.py": "4a8dbedcb29d799357a89f677fbe10db36bc18a14060467692d8b65bed0cee81",
+    "src/smart_router/training/semantic_retriever.py": "79c8cc2a990921b8f5a9c4b18683172b6fdab8da89356cb660f225e98741c185"
+  },
+  "internal_pilot_splits": {
+    "train": 197,
+    "validation": 43
+  },
+  "local_verification": {
+    "bundle_hashes_verified": true,
+    "cpu_tiny_bert_training_smoke": {
+      "checkpoint_reload": true,
+      "chunk_token_coverage": true,
+      "multi_positive_gradients": true,
+      "nonzero_weight_updates": true,
+      "passed": true,
+      "scope": "invented fixture only",
+      "unknown_mask": true
+    },
+    "deterministic_reproduction": true,
+    "packages": {
+      "jsonschema": "4.26.0",
+      "sentence-transformers": "5.2.3",
+      "torch": "2.9.1",
+      "transformers": "4.57.6"
+    },
+    "python": "3.13.9",
+    "semantic_unit_tests_passed": 20
+  },
+  "metadata_units": 5205,
+  "not_performed": [
+    "Human label approval",
+    "Business-semantic enrichment",
+    "Physical database verification",
+    "SQL execution",
+    "Task-specific source-label training",
+    "GPU/Ray jobs",
+    "Paid LLM annotation",
+    "Public artifact upload"
+  ],
+  "physical_database_archive": {
+    "availability_check": "HEAD 200 OK",
+    "bytes": 8919543554,
+    "database_rows_downloaded": false,
+    "source": "BIRD publisher train.zip"
+  },
+  "pilot_manifest_sha256": "99befb94c8b07ccb461be7e66f710d931254251217998a489a792561ebfc7226",
+  "pilot_path": "data/semantic-research/pilot-20261010-v3",
+  "remaining": [
+    "First-80 catalog/query review",
+    "Reviewed hard negatives and acceptable context sets",
+    "Physical schema checks",
+    "Independent business definitions and ambiguity tasks",
+    "Tuned hybrid and formal evaluation domains"
+  ],
+  "review_audit": {
+    "deferred": [],
+    "eligible_count": 0,
+    "eligible_splits": {},
+    "episode_count": 240,
+    "failures": [],
+    "format": "semantic-pilot-review-audit-v1",
+    "pending_count": 240,
+    "ready_for_training": false
+  },
+  "review_workspace": "data/semantic-research/review-work-20261010-v2",
+  "sampling": {
+    "added": 230,
+    "first_review_strata": {
+      "bird_filtered_train/aggregation_hint": 10,
+      "bird_filtered_train/join_hint": 10,
+      "bird_filtered_train/nested_hint": 10,
+      "bird_filtered_train/simple_hint": 10,
+      "spider_1_train/single_complex_hint": 10,
+      "spider_1_train/single_simple_hint": 10,
+      "spider_1_train/three_plus_tables": 10,
+      "spider_1_train/two_tables": 10
+    },
+    "reason": "Balance source-SQL structure before review; not semantic labels",
+    "removed": 230,
+    "retained": 10,
+    "strata": {
+      "bird_filtered_train/aggregation_hint": 30,
+      "bird_filtered_train/join_hint": 30,
+      "bird_filtered_train/nested_hint": 30,
+      "bird_filtered_train/simple_hint": 30,
+      "spider_1_train/single_complex_hint": 30,
+      "spider_1_train/single_simple_hint": 30,
+      "spider_1_train/three_plus_tables": 30,
+      "spider_1_train/two_tables": 30
+    },
+    "strategy": "balanced"
+  },
+  "status": "pilot_review_ready_training_not_started",
+  "tables": 702
+}

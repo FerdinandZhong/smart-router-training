@@ -1,6 +1,6 @@
 # Ossie 语义上下文检索研究计划 / Ossie Semantic Context Retrieval Research Plan
 
-版本 / Version：2026-10-10 public-data revision。状态 / Status：方案及未审核数据收集工具已准备；语义训练尚未开始 / Proposal and unreviewed intake tooling prepared; semantic training has not started.
+版本 / Version：2026-10-10 pilot-readiness revision。状态 / Status：平衡 pilot 审核包、基线诊断和训练脚本已准备；真实标签训练尚未开始 / Balanced review package, baseline diagnostics and training script prepared; source-label training has not started.
 
 本文件是当前主计划。它更新了早期中文计划的数据来源、样本口径和评估隔离安排。
 This is the current master plan. It updates the earlier Chinese plan's data sources, sample accounting, and evaluation isolation.
@@ -137,6 +137,15 @@ Pilot episodes may count toward formal training after re-review, without double 
 Paraphrases, translations, and semantic variants remain in their source group and do not increase the independent episode count.
 Counts are planning values; group integrity, review capacity, and statistical precision take precedence.
 
+实际审核包为 `pilot-20261010-v3`：240 条，按来源及结构平衡抽样，内部按组预留 197 条训练、43 条开发。
+首批 80 条在八个来源／结构分层中各取 10 条。全部仍属正式训练预留域，不消耗正式验证或测试域。
+当前全部标签待审；候选目录限定为 112 个训练预留目录中的 702 个表。
+
+The actual `pilot-20261010-v3` package contains 240 balanced episodes, with 197/43 grouped internal training/development reservations.
+The first 80 contain ten episodes from each of eight source/structure strata. All remain in formal-training-reserved domains.
+Every label is pending. Candidate search covers 702 tables from 112 training-reserved catalogs.
+The internal development setting shares that catalog; it does not establish unseen-catalog generalization.
+
 先按数据库及其别名、重复 schema 和重复输入组成分组，再保留训练、验证、校准与测试域。
 pilot 只从训练预留组抽取。当前工具只提供初步分组，最终还需人工识别跨来源语义别名。
 语义完整性子集应包含指标、时间、过滤、粒度、必要关系和歧义任务；实际比例由试点确定。
@@ -177,6 +186,22 @@ Old routing labels do not become retrieval labels. Training inputs require the n
 Comparable experiments use the same descriptions, metadata, candidate pools, and assembler. Do not enrich only the proposed method.
 Use development data for checkpoints and calibration data for thresholds. Never inject test positives or rewrite catalogs from test errors.
 Use validation-based stopping. Begin with at most four development configurations per backbone, then run three seeds for shortlisted methods.
+
+首个工程配置采用固定英文 MiniLM 双编码器，并以分块聚合保留全部元数据 token。
+它使用标准多正例对比目标，负例仅来自明确审核的候选；未知对象和其他正例不作为负例。
+最多十轮，并保留初始模型作为候选 checkpoint。GLiNER/Laya 新任务适配仍在后续阶段。
+
+The first engineering recipe uses a pinned English MiniLM encoder with complete token-window encoding and chunk pooling.
+Its standard contrastive objective uses explicit reviewed negatives; unknowns and other positives are excluded from negatives.
+It allows ten epochs and retains epoch zero as a checkpoint candidate. GLiNER/Laya task adapters remain later work.
+
+结构 pilot 可在来源元数据与标签审核后进行工程训练，但不能支持业务正确性或 SQL 执行结论。
+正式语义实验仍须满足物理核验、独立业务定义及原有质量门槛。
+参见[审核与训练准备协议](pilot-readiness-bilingual.md)。
+
+Reviewed structural metadata can support an engineering training pilot without claiming business correctness or SQL execution success.
+Formal semantic experiments still require physical checks, independent business definitions, and the existing release gates.
+See the [pilot review and training protocol](pilot-readiness-bilingual.md).
 
 ## 7. 实验、指标与延迟 / Experiments, metrics, and latency
 

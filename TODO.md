@@ -168,3 +168,8 @@ is completed. Do not mark a live GPU gate complete based on a local CPU test.
 - [ ] Select a standalone demo GitHub repository and isolated CAI project; rehearse Claude Code Messages/tool compatibility and the proposed CI/CD deployment before presenting.
 
 - [x] Prepare customer follow-up draft, Ray training summary, Helios implementation note and a Bash NCCL IT-review package. Default read-only planning, explicit apply acknowledgments, scoped labels/filter, evidence and rollback; four local contract tests passed. Live staging apply/rollback and customer IT approval remain pending.
+
+## Semantic research branch — 21 October 2026
+
+See the [branch record](docs/research/semantic-model-routing/branch-record-20261021.md) for the current implementation, tests, artifact locations, and partial diagnostic status.
+The [structural review contract](docs/research/semantic-model-routing/structural-review-v2.md) defines the automated label schema and execution commands.

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-13",
+  "judge_model": "claude-sonnet-5",
+  "protocol": "ossie-review-draft-v2",
+  "ui": "http://127.0.0.1:8765",
+  "batch_snapshot": {
+    "model": "claude-sonnet-5",
+    "protocol": "ossie-review-draft-v2",
+    "total": 80,
+    "completed": 6,
+    "failed": 6,
+    "state": "running",
+    "last_record_id": "bird_filtered_train:5371:a053799b8f841b17"
+  },
+  "verification": {
+    "semantic_test_cases": 38,
+    "browser_prefill_agree_disagree_export": "passed",
+    "actual_first_question_draft": "ready",
+    "existing_human_reviews_overwritten": false
+  },
+  "limitations": [
+    "Drafts are LLM proposals, not human approvals",
+    "Gateway model ID is not an immutable checkpoint",
+    "Full first-80 generation is still running",
+    "Source metadata excerpts can be clipped with explicit flags"
+  ],
+  "automatic_failed_draft_retry": "Queued after current batch; same Sonnet model and v2 protocol"
+}

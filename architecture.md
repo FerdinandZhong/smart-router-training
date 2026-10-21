@@ -119,3 +119,8 @@ training epochs, validation checkpoint selection, audited 2,048-token views and
 selected-head export. It remains a frozen-encoder, independent-binary adapter.
 See the [dated GPU results](docs/status/2026-10-01-laya-pilot.md); calibration and
 production routing remain unimplemented.
+
+## Semantic research branch — 21 October 2026
+
+See the [branch record](docs/research/semantic-model-routing/branch-record-20261021.md) for the current implementation, tests, artifact locations, and partial diagnostic status.
+The [structural review contract](docs/research/semantic-model-routing/structural-review-v2.md) defines the automated label schema and execution commands.
