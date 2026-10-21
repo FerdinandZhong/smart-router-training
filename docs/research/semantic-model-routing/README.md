@@ -1,5 +1,9 @@
 # Research side plan: selecting semantic context for lakehouse questions
 
+Current research scope: one customer business domain per deployed catalog, with generalization across customer domains.
+Read the [21 October literature and implementation review](domain-scoped-review-20261021.md).
+Its scope supersedes earlier pooled-catalog recommendations; existing pilot artifacts remain historical evidence.
+
 Current implementation and review status: [21 October branch record](branch-record-20261021.md).
 The dated sections below retain earlier research milestones.
 

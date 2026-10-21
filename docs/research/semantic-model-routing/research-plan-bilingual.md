@@ -1,5 +1,12 @@
 # Ossie 语义上下文检索研究计划 / Ossie Semantic Context Retrieval Research Plan
 
+> Scope update / 范围更新 — 2026-10-21: Train and evaluate generalization across domains; deploy within one customer's business domain. A customer catalog may span databases.
+> 跨领域训练和评估泛化能力；部署时限定为一个客户的业务领域，客户目录可跨多个数据库。
+> Primary inputs contain metadata and declared Ossie semantics only. Existing pooled-catalog results remain historical diagnostics.
+> 主实验仅使用元数据与明确声明的 Ossie 语义。已有混合目录结果仅作为历史诊断。
+> See [updated review and experiment recommendations / 更新综述与实验建议](domain-scoped-review-20261021.md). The detailed protocol below still requires scope alignment.
+
+
 版本 / Version：2026-10-10 pilot-readiness revision。状态 / Status：平衡 pilot 审核包、基线诊断和训练脚本已准备；真实标签训练尚未开始 / Balanced review package, baseline diagnostics and training script prepared; source-label training has not started.
 
 本文件是当前主计划。它更新了早期中文计划的数据来源、样本口径和评估隔离安排。

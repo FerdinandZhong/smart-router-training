@@ -173,3 +173,6 @@ is completed. Do not mark a live GPU gate complete based on a local CPU test.
 
 See the [branch record](docs/research/semantic-model-routing/branch-record-20261021.md) for the current implementation, tests, artifact locations, and partial diagnostic status.
 The [structural review contract](docs/research/semantic-model-routing/structural-review-v2.md) defines the automated label schema and execution commands.
+
+- [x] Complete the 21 October domain-scoped literature, implementation and dataset-access review. See [review](docs/research/semantic-model-routing/domain-scoped-review-20261021.md). Evidence is documentary; no new benchmark was executed.
+- [ ] Align the semantic collection protocol and build a new customer-scoped pilot. Preserve pooled artifacts and separate cross-domain transfer, customer adaptation and catalog growth.

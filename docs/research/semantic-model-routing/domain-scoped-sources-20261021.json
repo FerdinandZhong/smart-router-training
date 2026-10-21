@@ -1,0 +1,159 @@
+{
+  "review_date": "2026-10-21",
+  "review_type": "targeted multi-source review, not systematic or exhaustive",
+  "scope": "Cross-domain method; one customer business domain per deployed catalog; metadata and declared Ossie semantics only in primary condition.",
+  "verification_depth": "Primary papers, proceedings, documentation, repository trees and dataset cards inspected; implementations not executed and datasets not downloaded in this review.",
+  "works": [
+    {
+      "title": "Corpus-adaptive schema retrieval",
+      "status": "2026 preprint",
+      "url": "https://arxiv.org/abs/2607.13311",
+      "limits": "Per-database retrieval; distinguish target-corpus adaptation and transfer. Some representations include sampled rows."
+    },
+    {
+      "title": "REaR",
+      "status": "ACL 2026",
+      "url": "https://aclanthology.org/2026.acl-long.1826/",
+      "limits": "Online LLM-free multitable retrieval; standalone repository not confirmed."
+    },
+    {
+      "title": "CORE-T",
+      "status": "2026 preprint",
+      "url": "https://arxiv.org/abs/2601.13111",
+      "limits": "Public code; value signals and pooled setting differ from primary condition."
+    },
+    {
+      "title": "AutoLink",
+      "status": "AAAI 2026",
+      "url": "https://arxiv.org/abs/2511.17190",
+      "limits": "Public code; iterative LLM exploration requires latency measurement."
+    },
+    {
+      "title": "JoinGR",
+      "status": "2026 preprint",
+      "url": "https://arxiv.org/abs/2610.01064",
+      "limits": "Lightweight learned join traversal; optional structural comparator."
+    },
+    {
+      "title": "GROUND",
+      "status": "2026 preprint",
+      "url": "https://arxiv.org/abs/2608.26157",
+      "limits": "Full semantic context and asymmetric policy information; reuse license unresolved."
+    },
+    {
+      "title": "Qwen3 Embedding",
+      "status": "2025 technical report",
+      "url": "https://arxiv.org/abs/2506.05176",
+      "limits": "Modern embedding/reranking baseline; no Ossie-specific performance verified."
+    },
+    {
+      "title": "CLEAR",
+      "status": "ICDE 2025",
+      "url": "https://ieeexplore.ieee.org/document/11113237/",
+      "limits": "Ambiguity and clarification comparator."
+    },
+    {
+      "title": "AmbiSQL",
+      "status": "2025 preprint",
+      "url": "https://arxiv.org/abs/2508.15276",
+      "limits": "Interactive clarification; public author repository."
+    },
+    {
+      "title": "CLARITY",
+      "status": "2026 preprint",
+      "url": "https://arxiv.org/abs/2604.22313",
+      "limits": "Ambiguity and unanswerability; artifact access not confirmed."
+    },
+    {
+      "title": "EntSQL",
+      "status": "2026 preprint",
+      "url": "https://arxiv.org/abs/2606.03363",
+      "limits": "Public metadata and questions; ground-truth answers withheld."
+    },
+    {
+      "title": "Pervasive Annotation Errors Break Text-to-SQL Benchmarks and Leaderboards",
+      "status": "2026 paper",
+      "url": "https://arxiv.org/abs/2601.08778",
+      "limits": "Corrected subsets support diagnostic checks; do not generalize source-specific error rates."
+    }
+  ],
+  "cited_urls": [
+    "https://aclanthology.org/2026.acl-long.1826/",
+    "https://arxiv.org/abs/2506.05176",
+    "https://arxiv.org/abs/2508.15276",
+    "https://arxiv.org/abs/2604.22313",
+    "https://arxiv.org/html/2511.00805",
+    "https://arxiv.org/html/2601.13111",
+    "https://arxiv.org/html/2606.03363",
+    "https://arxiv.org/html/2607.13311",
+    "https://arxiv.org/html/2608.26157",
+    "https://arxiv.org/html/2610.01064",
+    "https://beaverbench.github.io/",
+    "https://bird-bench.github.io/",
+    "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst",
+    "https://github.com/Canner/WrenAI/blob/aa9432ec42e93519b23b86bb47e48d6e360d3a30/docs/core/reference/architecture.md",
+    "https://github.com/JustinzjDing/AmbiSQL",
+    "https://github.com/QwenLM/Qwen3-Embedding",
+    "https://github.com/UKPLab/emnlp2026-core-t",
+    "https://github.com/apache/ossie/blob/main/core-spec/spec.md",
+    "https://github.com/aravindsp/ground-benchmark",
+    "https://github.com/beaverbench/beaver",
+    "https://github.com/beaverbench/beaver/blob/main/retrieve/retrieve.py",
+    "https://github.com/bird-bench/livesqlbench/blob/main/README.md",
+    "https://github.com/dbt-labs/dbt-llm-sl-bench",
+    "https://github.com/mengzhang18/CLEAR",
+    "https://github.com/uiuc-kang-lab/text_to_sql_benchmarks",
+    "https://github.com/wzy416/AutoLink",
+    "https://huggingface.co/datasets/XuWave/Rethinking_Enterprise_Text_to_SQL",
+    "https://huggingface.co/datasets/birdsql/livesqlbench-base-lite",
+    "https://ieeexplore.ieee.org/document/11113237/",
+    "https://ojs.aaai.org/index.php/AAAI/article/download/40672/44633",
+    "https://spider2-sql.github.io/",
+    "https://yale-lily.github.io/spider"
+  ],
+  "repository_anchors": [
+    {
+      "repository": "Canner/WrenAI",
+      "commit": "aa9432ec42e93519b23b86bb47e48d6e360d3a30",
+      "url": "https://github.com/Canner/WrenAI/commit/aa9432ec42e93519b23b86bb47e48d6e360d3a30"
+    },
+    {
+      "repository": "UKPLab/emnlp2026-core-t",
+      "commit": "ccdb4be001642102e41c33188ceb032aa108f83d",
+      "url": "https://github.com/UKPLab/emnlp2026-core-t/commit/ccdb4be001642102e41c33188ceb032aa108f83d"
+    },
+    {
+      "repository": "wzy416/AutoLink",
+      "commit": "26c723158445d5c831290315c9a93ba76eb5bd0e",
+      "url": "https://github.com/wzy416/AutoLink/commit/26c723158445d5c831290315c9a93ba76eb5bd0e"
+    },
+    {
+      "repository": "aravindsp/ground-benchmark",
+      "commit": "3039118296e74a7808ab3cbecbb617460fafa889",
+      "url": "https://github.com/aravindsp/ground-benchmark/commit/3039118296e74a7808ab3cbecbb617460fafa889"
+    },
+    {
+      "repository": "dbt-labs/dbt-llm-sl-bench",
+      "commit": "a29f2429b1bb38cee9d591892299e96f1e197ff9",
+      "url": "https://github.com/dbt-labs/dbt-llm-sl-bench/commit/a29f2429b1bb38cee9d591892299e96f1e197ff9"
+    },
+    {
+      "repository": "apache/ossie",
+      "commit": "2b0209cfe3910f4b7138d364b1f56afc758208ef",
+      "url": "https://github.com/apache/ossie/commit/2b0209cfe3910f4b7138d364b1f56afc758208ef"
+    }
+  ],
+  "access_constraints": {
+    "BEAVER": "Hugging Face gated authentication; confirm exact release and terms.",
+    "LiveSQLBench": "Public sample omits gold SQL/test cases; card metadata says CC-BY-4.0 while body says CC-BY-SA-4.0. Resolve before redistribution.",
+    "EntSQL": "Public questions, databases and domain documents; gold answers withheld.",
+    "Spider2": "Official guidance excludes gold SQL from supervised fine-tuning. Use as evaluation target.",
+    "GROUND": "Root reuse license not established."
+  },
+  "tool_limits": [
+    "Academic-search MCP unavailable",
+    "Endpoint preflight passed after sandbox network retry",
+    "OpenAlex fallback returned HTTP 429",
+    "OpenReview DRAG page challenged browser; no stable artifact or publication claim included"
+  ]
+}
