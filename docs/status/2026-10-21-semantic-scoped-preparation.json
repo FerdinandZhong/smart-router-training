@@ -1,0 +1,46 @@
+{
+  "candidate_k": 32,
+  "candidate_method": "within_catalog_bm25",
+  "candidate_pairs": 110951,
+  "catalog_count": 209,
+  "episode_count": 13601,
+  "excluded_count": 0,
+  "format": "semantic-scoped-preparation-v1",
+  "intake_manifest_sha256": "006159262dea80496b68e829b9bf8b79bc5ca34563455fe68d8ab36f8f65898c",
+  "limitations": [
+    "Source databases approximate customers; no verified business-domain labels",
+    "No dense/hybrid retrieval yet in this package",
+    "No gold candidate injection or negative labels inferred from SQL absence",
+    "No reviewed semantic labels, metrics, SQL execution or physical schema verification",
+    "Original group splits preserved; semantic aliases still require review",
+    "Pilot development uses only formal-train reserved groups",
+    "Existing source-use restrictions remain applicable; no new redistribution license"
+  ],
+  "pilot_count": 240,
+  "pilot_splits": {
+    "train": 197,
+    "validation": 43
+  },
+  "source_registry_sha256": "48de1958fa3e82f6a433db3ad1a7a7cb5e3db906025905e51e5566ac9527bc73",
+  "splits": {
+    "calibration": 294,
+    "test": 4121,
+    "train": 7576,
+    "validation": 1610
+  },
+  "status": "pending_annotation_not_training_ready",
+  "training_eligible_count": 0,
+  "weak_diagnostic": {
+    "complete_count": 7000,
+    "count": 7000,
+    "quality_claim_allowed": false
+  },
+  "difficulty_audit": {
+    "catalogs_at_most_32_tables": 207,
+    "max_tables_per_catalog": 65,
+    "episodes_with_entire_catalog_as_candidates": 13007,
+    "pilot_customer_catalogs": 79,
+    "pilot_single_table_catalog_episodes": 0
+  },
+  "artifact_path": "/Users/zhongqishuai/Projects/cldr_projects/smart_router_training/data/semantic-research/scoped-selector-20261021-v1"
+}

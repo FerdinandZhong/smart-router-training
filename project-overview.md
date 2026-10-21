@@ -73,3 +73,9 @@ production routing remain unimplemented.
 
 See the [branch record](docs/research/semantic-model-routing/branch-record-20261021.md) for the current implementation, tests, artifact locations, and partial diagnostic status.
 The [structural review contract](docs/research/semantic-model-routing/structural-review-v2.md) defines the automated label schema and execution commands.
+
+## Customer-scoped selector preparation — 21 October 2026
+
+`smart_router.semantic_scoped_data.prepare()` builds metadata-only, customer-scoped annotation episodes for Laya/GLiNER selector training.
+The CLI is `scripts/prepare_semantic_scoped_data.py`. Existing output is never overwritten.
+The generated labels remain unknown and cannot enter training. See [contract, results and commands](docs/research/semantic-model-routing/scoped-selector-data-20261021.md).

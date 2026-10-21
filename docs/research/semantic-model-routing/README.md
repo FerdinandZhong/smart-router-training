@@ -1,5 +1,8 @@
 # Research side plan: selecting semantic context for lakehouse questions
 
+Latest data preparation: [customer-scoped selector package](scoped-selector-data-20261021.md).
+The trained Laya/GLiNER selector is the central model; retrieval supplies candidates and baselines.
+
 Current research scope: one customer business domain per deployed catalog, with generalization across customer domains.
 Read the [21 October literature and implementation review](domain-scoped-review-20261021.md).
 Its scope supersedes earlier pooled-catalog recommendations; existing pilot artifacts remain historical evidence.

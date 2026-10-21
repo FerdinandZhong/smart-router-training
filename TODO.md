@@ -176,3 +176,6 @@ The [structural review contract](docs/research/semantic-model-routing/structural
 
 - [x] Complete the 21 October domain-scoped literature, implementation and dataset-access review. See [review](docs/research/semantic-model-routing/domain-scoped-review-20261021.md). Evidence is documentary; no new benchmark was executed.
 - [ ] Align the semantic collection protocol and build a new customer-scoped pilot. Preserve pooled artifacts and separate cross-domain transfer, customer adaptation and catalog growth.
+
+- [x] Prepare customer-scoped annotation inventory: 13,601 questions, 209 catalogs, 240-question pilot; 22 CPU tests passed. [Evidence](docs/research/semantic-model-routing/scoped-selector-data-20261021.md).
+- [ ] Complete scoped hybrid candidates, automated annotation and audited training export for Laya/GLiNER. No scoped examples are training-approved yet.
