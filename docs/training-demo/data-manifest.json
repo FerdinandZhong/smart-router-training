@@ -1,0 +1,29 @@
+{
+  "source": "openai/grade-school-math",
+  "revision": "3101c7d5072418e28b9008a6636bde82a006892c",
+  "license": "MIT",
+  "counts": {
+    "sft": 1024,
+    "grpo": 512,
+    "validation": 128,
+    "test": 256
+  },
+  "selection": "normalized-question SHA256 order; disjoint slices",
+  "source_sha256": {
+    "grade_school_math/data/train.jsonl": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+    "grade_school_math/data/test.jsonl": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "LICENSE": "86bbb73e855821d7c401912fd4bf82e34313e6e3b6fd6f909f2b6cc9e209a53b"
+  },
+  "files": {
+    "test.jsonl": "2be727c3643a9d474840f7510db6b50f5c945d3df5aec5b3cbfbb5ed40b91b51",
+    "LICENSE": "86bbb73e855821d7c401912fd4bf82e34313e6e3b6fd6f909f2b6cc9e209a53b",
+    "sft.jsonl": "43d2a87e03ed2c2623d0eec43ae29d198e159cc909f5724a7e8682fe9707c087",
+    "validation.jsonl": "4984fb7dfa785d668383a1bd96d6f695b3aea9e52c11714c97233551b35bc87c",
+    "grpo.jsonl": "6ab82e05628b60dc53d8aa8ebf92d7bec6a116c8b48197ab7ad820270c8ae981"
+  },
+  "limitations": [
+    "Demo subsets, not a benchmark claim",
+    "Pretraining contamination unknown",
+    "Test must not select checkpoints"
+  ]
+}

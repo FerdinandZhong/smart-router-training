@@ -1,0 +1,12 @@
+{
+  "status": "planned_requires_model_and_environment_smoke",
+  "model_id": "mistralai/Ministral-3-3B-Instruct-2512-BF16",
+  "model_revision": null,
+  "framework": "Ray Train + Hugging Face TRL + PEFT",
+  "ray_version_in_repository": "2.58.0",
+  "lora": {"r": 16, "alpha": 32, "dropout": 0.05, "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"]},
+  "sft": {"max_steps": 100, "learning_rate": 0.0001, "max_length": 1024, "micro_batch_size": 1, "gradient_accumulation_steps": 8},
+  "grpo": {"max_steps": 50, "learning_rate": 0.000005, "num_generations": 4, "max_completion_length": 256, "temperature": 0.8, "beta": 0.04, "use_vllm": false},
+  "compute": {"initial_gpu_workers": 1, "scale_target_gpu_workers": 2, "gpus_per_worker": 1, "cpus_per_worker": 4},
+  "evaluation": {"compare": ["original", "sft", "sft_grpo"], "metric": "held_out_numeric_exact_match", "decoding": "greedy", "test_for_checkpoint_selection": false}
+}

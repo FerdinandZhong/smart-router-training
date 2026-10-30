@@ -35,3 +35,6 @@ collective-probe.*/
 
 # Local link to ignored research artifacts in the main checkout.
 /data/semantic-research
+
+/data/training-demo/
+/training-demo-runs/

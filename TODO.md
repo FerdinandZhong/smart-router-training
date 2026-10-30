@@ -179,3 +179,9 @@ The [structural review contract](docs/research/semantic-model-routing/structural
 
 - [x] Prepare customer-scoped annotation inventory: 13,601 questions, 209 catalogs, 240-question pilot; 22 CPU tests passed. [Evidence](docs/research/semantic-model-routing/scoped-selector-data-20261021.md).
 - [ ] Complete scoped hybrid candidates, automated annotation and audited training export for Laya/GLiNER. No scoped examples are training-approved yet.
+
+## Training demo — 30 October 2026
+
+Branch `training-demo` preserves semantic research at `9e9a2a0`.
+GSM8K subsets, reward parser, recipe proposal and read-only UI preview are prepared.
+GPU training and live Ray deployment remain pending. See [plan and handoff](docs/training-demo/PLAN.md).

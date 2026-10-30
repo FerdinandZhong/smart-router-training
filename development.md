@@ -126,3 +126,9 @@ The [structural review contract](docs/research/semantic-model-routing/structural
 `smart_router.semantic_scoped_data.prepare()` builds metadata-only, customer-scoped annotation episodes for Laya/GLiNER selector training.
 The CLI is `scripts/prepare_semantic_scoped_data.py`. Existing output is never overwritten.
 The generated labels remain unknown and cannot enter training. See [contract, results and commands](docs/research/semantic-model-routing/scoped-selector-data-20261021.md).
+
+## Training demo — 30 October 2026
+
+Branch `training-demo` preserves semantic research at `9e9a2a0`.
+GSM8K subsets, reward parser, recipe proposal and read-only UI preview are prepared.
+GPU training and live Ray deployment remain pending. See [plan and handoff](docs/training-demo/PLAN.md).
