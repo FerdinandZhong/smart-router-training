@@ -1,5 +1,20 @@
 # Component and API reference
 
+## Training workspace contracts — 1 November 2026
+
+`amp/training_demo/monitor.py` serves the preview HTML and a legacy read-only `/api/status` endpoint.
+The new page does not use that legacy endpoint for job history.
+There is no implemented job submission, cancellation or server-side history API.
+
+Browser draft storage key: `training-workspace-drafts-v2`.
+Draft envelopes contain `id`, `name`, `created_at` and `config`.
+Configuration schema version 1 contains weights, method, parameter_updates, lora, dataset, compute, training and reward.
+Method is `sft` or `grpo`; parameter_updates is `lora` or `full`.
+These are preview contracts, not a versioned executable trainer API.
+Dataset target columns must remain outside GRPO policy inputs.
+See [the current plan](docs/training-demo/PLAN.md) before adding executable endpoints.
+
+
 This documents implemented interfaces. The broader interchangeable-adapter and
 production-router APIs remain proposals in
 [the framework contract](docs/decision-models-and-customer-training.md).

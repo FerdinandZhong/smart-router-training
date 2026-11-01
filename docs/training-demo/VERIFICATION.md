@@ -10,3 +10,10 @@
 - No GPU training, cluster networking, model loading, adapter reload or model-quality measurement was performed.
 
 Re-run browser checks while the preview runs: `python tests/browser_training_demo.py`.
+
+## Independent-job UI — 1 November 2026
+
+Chromium passed the redesigned form and history checks at 1440, 980 and 390 pixels.
+Checks cover SFT/GRPO fields, LoRA/full visibility, draft save/reload, method filtering, duplication and configuration download.
+Launch remains disabled. No JavaScript errors or horizontal page overflow occurred.
+These checks cover browser-local drafts, not backend job history or training.

@@ -1,5 +1,25 @@
 # Architecture and data flow
 
+## Training workspace architecture — 1 November 2026
+
+The current branch adds independent-job UI preparation alongside the existing router components.
+The browser stores local drafts and downloads configuration JSON. No submission endpoint is implemented.
+
+```text
+Browser form -> Local draft -> Job detail / configuration download
+
+Planned production path:
+Browser -> Authenticated job API -> Persistent job store
+                       |                    ^
+                       v                    |
+                    Ray Job -> Trainer -> Events / metrics / checkpoints
+```
+
+Starting weights are an explicit input for each job. Checkpoint lineage does not imply a pipeline.
+The loopback preview is not the planned Ray Serve deployment.
+See [the job lifecycle and implementation plan](docs/training-demo/PLAN.md).
+
+
 ## Components
 
 ```text

@@ -1,5 +1,14 @@
 # Project overview
 
+## Current training-demo scope — 1 November 2026
+
+This branch builds a general-purpose training workspace for independent jobs on CAI Ray.
+Users choose model weights, datasets, training method, parameter updates and compute.
+The working UI supports local drafts, filtering, details, duplication and JSON download.
+Submission, persistent server history and GPU trainers remain pending.
+See [the authoritative plan](docs/training-demo/PLAN.md). Older model-specific sequential demo text is historical.
+
+
 Smart Router Training builds the data and infrastructure needed to train small
 decision models for customer-defined classes and step-level agent routing.
 The intended router estimates whether each candidate model can handle the next

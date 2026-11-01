@@ -1,5 +1,26 @@
 # Working in this repository
 
+## Active branch: training-demo — 1 November 2026
+
+Read [the current training workspace plan](docs/training-demo/PLAN.md) before changing this branch.
+Build a model-independent UI for standalone training jobs, not a fixed training pipeline.
+Keep training method (SFT or GRPO) separate from parameter updates (LoRA/PEFT or full fine-tuning).
+Selecting an earlier checkpoint records lineage; it must not trigger automatic training stages.
+Numeric-reward GRPO is RLVR. Do not label it human-preference RLHF.
+
+The current UI supports browser-local drafts, filtering, details, duplication and configuration download.
+Ray submission, server-side history, training adapters and live job telemetry remain unimplemented.
+Keep Launch disabled until validated authenticated submission exists. Never show fabricated training metrics.
+Browser drafts are not submitted jobs. Model and dataset text fields are not compatibility verification.
+Keep existing router environments and vendor code unchanged unless the task explicitly requires changes.
+Use the UOB workspace design reference recorded in the plan.
+Run `python tests/browser_training_demo.py` with the preview active for UI changes.
+Keep the plan, verification evidence and root guides aligned with implemented behavior.
+
+Semantic research remains on `research/semantic-model-routing` at `9e9a2a0`.
+Preserve its data and original main-checkout work. Do not present pooled annotations as scoped training labels.
+
+
 Smart Router Training is a Cloudera AI (CAI) AMP for configurable decision-model
 training. Read [project-overview.md](project-overview.md), [TODO.md](TODO.md), and
 [architecture.md](architecture.md) before changing behavior. Use

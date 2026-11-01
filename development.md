@@ -1,5 +1,21 @@
 # Development and verification
 
+## Training workspace verification — 1 November 2026
+
+```bash
+python amp/training_demo/monitor.py --port 8096
+# In another terminal:
+python tests/browser_training_demo.py
+PYTHONPATH=src python -m unittest discover -s tests -p test_training_demo.py -q
+git diff --check
+```
+
+Browser checks use an isolated Chromium profile and create only local drafts.
+They verify SFT/GRPO fields, LoRA/full settings, reload persistence, filters, duplication, JSON download and disabled launch.
+Widths: 1440, 980 and 390 pixels. They do not submit Ray jobs or verify GPU training.
+See [verification evidence](docs/training-demo/VERIFICATION.md) and [the current plan](docs/training-demo/PLAN.md).
+
+
 ## Setup
 
 Core dataset tooling supports Python 3.10+. CAI deployment requires Python 3.11

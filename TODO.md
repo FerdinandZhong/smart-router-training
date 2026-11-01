@@ -1,5 +1,24 @@
 # Current work and priorities
 
+## Active training-demo priorities — 1 November 2026
+
+The [independent-job plan](docs/training-demo/PLAN.md) is authoritative for this branch.
+
+- [x] Preserve the semantic research checkpoint and record the return handoff.
+- [x] Prepare pinned GSM8K subsets and a tested numeric-answer reward.
+- [x] Replace the model-specific pipeline page with job history, a new-job form and individual draft details.
+- [x] Add browser-local draft persistence, filtering, duplication and configuration download.
+- [x] Verify form behavior and responsive widths in Chromium.
+- [ ] Implement persistent server-side job records and authenticated model/data validation.
+- [ ] Connect UI launch to independent Ray Jobs with idempotency and explicit error handling.
+- [ ] Implement separate SFT and GRPO trainers with LoRA/full update options and compatible package pins.
+- [ ] Connect per-job metrics, logs, checkpoint references and stale-state detection.
+- [ ] Verify one-GPU updates/reload, then distributed execution and interrupted resume.
+- [ ] Deploy through the existing authenticated CAI/Ray Serve setup.
+
+No training-demo GPU job or live deployment has been completed.
+
+
 ## Isolated semantic-context research — 2026-10-10
 
 This section belongs to `research/semantic-model-routing`.

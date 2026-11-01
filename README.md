@@ -1,5 +1,13 @@
 # Smart router training
 
+## Training workspace branch
+
+On `training-demo`, start with [the current plan](docs/training-demo/PLAN.md).
+The UI manages independent job configurations with model, dataset, method and compute choices.
+Local draft workflows are implemented; Ray submission and live training remain pending.
+Run `python amp/training_demo/monitor.py --port 8096` for the preview.
+
+
 Train configurable decision models for customer-defined classification tasks and step-level model selection in agent workflows.
 
 Current direction: compare Laya, CLM-8B, and GLiNER2.5-Decide through interchangeable model adapters. Accept customer datasets and target classes through configuration. LLM annotation is optional for customer-labeled data; agent routing additionally uses executable outcomes. Ray supports distributed preparation and training.
