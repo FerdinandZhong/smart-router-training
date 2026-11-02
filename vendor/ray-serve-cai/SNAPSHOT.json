@@ -111,6 +111,14 @@
     "ray_serve_cai/management/app.py": {
       "sha256": "04e3b026791d29c267ac90c212d3e1e277e511a7074dbb89f5b234a3836c3c2c",
       "reason": "Expose authenticated Ray Jobs submission, status, logs and stop routes in management Swagger; retain upstream source hash."
+    },
+    "cai_integration/project_environment.py": {
+      "sha256": "3c229a1693376fc1ac290cd2e78e904e08b7c1db849596bf61a8e37772e8a8cd",
+      "reason": "Training AMP: detect browser-event inputs, refresh validated project subdomains, and target the training repository in safe imports."
+    },
+    "cai_integration/create_amp.py": {
+      "sha256": "850e52d3a030fbd9cd1713466e0767bcf9d2cbb47670779f3406d33e5e4556f3",
+      "reason": "Training AMP: detect browser-event inputs, refresh validated project subdomains, and target the training repository in safe imports."
     }
   },
   "license_note": "Source pyproject declares Apache-2.0; upstream checkout contains no standalone LICENSE file. Preserve source headers and provenance."

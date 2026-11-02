@@ -115,3 +115,11 @@ Run checks appropriate to the change; see the verification matrix in
 GPU/NCCL evidence. Update the relevant guide and `TODO.md` when capabilities or
 verified milestones change. Historical reports remain dated evidence, not the
 current status source. Include these root documentation files in the AMP bundle.
+
+## AMP edited-input recovery
+
+Setup detects stored browser-event objects and gives an existing-project repair instruction.
+After API validation, it refreshes only the three subdomain process variables from stored project strings.
+It does not substitute defaults, modify project settings or fix the CAI browser frontend.
+See [recovery and safe import](docs/training-demo/amp-input-recovery.md).
+Regression command: `PYTHONPATH=src:. python -m unittest discover -s tests -p test_amp_project_inputs.py -v`.

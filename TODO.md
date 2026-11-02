@@ -207,3 +207,11 @@ The [structural review contract](docs/research/semantic-model-routing/structural
 Branch `training-demo` preserves semantic research at `9e9a2a0`.
 GSM8K subsets, reward parser, recipe proposal and read-only UI preview are prepared.
 GPU training and live Ray deployment remain pending. See [plan and handoff](docs/training-demo/PLAN.md).
+
+## AMP edited-input recovery
+
+Setup detects stored browser-event objects and gives an existing-project repair instruction.
+After API validation, it refreshes only the three subdomain process variables from stored project strings.
+It does not substitute defaults, modify project settings or fix the CAI browser frontend.
+See [recovery and safe import](docs/training-demo/amp-input-recovery.md).
+Regression command: `PYTHONPATH=src:. python -m unittest discover -s tests -p test_amp_project_inputs.py -v`.

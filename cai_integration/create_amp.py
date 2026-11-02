@@ -74,7 +74,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--name", required=True)
     parser.add_argument("--runtime", required=True)
-    parser.add_argument("--git-url", default="https://github.com/FerdinandZhong/ray-serve-cai.git")
+    parser.add_argument("--git-url", default="https://github.com/FerdinandZhong/smart-router-training.git")
     parser.add_argument("--git-ref", required=True, help="Ref containing the AMP code to deploy")
     parser.add_argument("--env-file", type=Path, help="JSON object with string values; values are not logged")
     parser.add_argument("--host", default=os.environ.get("CML_HOST"))
