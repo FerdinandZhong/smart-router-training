@@ -1,6 +1,6 @@
 # Working in this repository
 
-## Active branch: training-demo — 1 November 2026
+## Active branch: training-demo — 2 November 2026
 
 Read [the current training workspace plan](docs/training-demo/PLAN.md) before changing this branch.
 Build a model-independent UI for standalone training jobs, not a fixed training pipeline.
@@ -9,8 +9,15 @@ Selecting an earlier checkpoint records lineage; it must not trigger automatic t
 Numeric-reward GRPO is RLVR. Do not label it human-preference RLHF.
 
 The current UI supports browser-local drafts, filtering, details, duplication and configuration download.
-Ray submission, server-side history, training adapters and live job telemetry remain unimplemented.
-Keep Launch disabled until validated authenticated submission exists. Never show fabricated training metrics.
+The dashboard backend submits infrastructure smoke jobs through Ray and stores records under `training-jobs/<id>/`.
+The UI displays server jobs, Ray-observed status, logs and a Stop action alongside browser-local drafts.
+It explicitly uses UNKNOWN or NOT_SUBMITTED when Ray supplies no status.
+SFT and GRPO trainers remain unimplemented. Before a smoke passes, their requests are blocked.
+After the current smoke gate passes, requests are recorded and rejected with "trainer not implemented".
+Keep their Launch controls disabled until the trainers and validation are implemented.
+Training curves and checkpoint reporting remain pending. Never show fabricated training metrics.
+The dashboard is a loopback CAI application, not a deployed Ray Serve application.
+POST requests require JSON and the page's custom header; this is a cross-origin guard, not user authentication.
 Browser drafts are not submitted jobs. Model and dataset text fields are not compatibility verification.
 Keep existing router environments and vendor code unchanged unless the task explicitly requires changes.
 Use the UOB workspace design reference recorded in the plan.
@@ -56,19 +63,44 @@ must come from task configuration, not hardcoded tier names.
 
 ## CAI and Ray conventions
 
-- AMP launches the CPU head and TensorBoard. GPU workers are created separately
-  through the management API; networking probes precede GPU training.
+- On this branch, AMP import configures a CPU head and one group of two GPU workers.
+  Each worker defaults to one L40S, 12 CPUs and 80 GiB RAM.
+  `RAY_WORKER_CPU`, `RAY_WORKER_MEMORY`, `RAY_WORKER_GPUS` and
+  `RAY_WORKER_ACCELERATOR_TYPE` override the marked worker group's shape.
+- Import runs cluster launch, dashboard launch, TensorBoard launch, then readiness checking.
+  The cluster-smoke CAI job is created but not automatically run.
+- `amp/cluster_ready.py` polls the head's authenticated node endpoint for up to 20 minutes by default.
+  It counts alive Ray nodes with GPUs, not CAI applications marked running.
+  Node readiness does not establish free capacity or working cross-node NCCL.
+- Import-time provisioning and the new dashboard integration remain unverified live.
+  Check GPU quota, memory limits, credentials, endpoint authentication and launch timeouts during the first import.
 - Use the existing `.venv` for the cluster and `.venv-router-train` for training
   and TensorBoard. Preserve `isolated_environment()` at process boundaries so
   CAI add-ons do not leak in through `PYTHONPATH` or `PYTHONHOME`.
 - CAI/PBJ scripts may run without `__file__` and with ipykernel arguments. Use
   argument-free wrappers and explicit child arguments; do not parse kernel argv.
-- TensorBoard binds to `127.0.0.1:$CDSW_APP_PORT`, uses the built training venv,
+- TensorBoard and the training dashboard bind to `127.0.0.1:$CDSW_APP_PORT`.
+  TensorBoard uses the built training venv,
   and retains CAI ingress authentication. Do not switch it to `0.0.0.0`.
 - Project applications share `/home/cdsw`. The current job submission uses shared
   files rather than a Ray `working_dir` upload. Use new submission IDs for reruns.
 - Do not print credentials or put them in configs, receipts, documentation, or
   Ray runtime-env payloads. Use injected variables or configured credential paths.
+
+## Dashboard review findings — resolved 2 November 2026
+
+The five review findings are fixed with local CPU evidence (172 unit tests and the browser test passed):
+
+- The smoke's resolved `output_dir/<id>` must stay inside the project root.
+- Dashboard smoke entrypoints run under `timeout --kill-after=60 <job_timeout_seconds>`; coreutils `timeout` on the head runtime is unverified live.
+- The smoke gate parses `SUCCESS.json` and requires initial worker identities on distinct Ray nodes currently alive with GPUs.
+- Submission failures return and record only the exception type.
+- A failed job list is shown as stale or unavailable, never as zero jobs.
+
+The dashboard currently reads credentials only from `CDSW_APIV2_KEY` or `CML_API_KEY`.
+Credential-file fallback is not implemented. CAI application credential injection and head ingress authentication require live verification.
+`GET /api/v1/resources/nodes` has no application-level admin dependency; access relies on CAI ingress authentication.
+No live cluster calls or GPU runs have been performed.
 
 ## Changes and verification
 

@@ -37,12 +37,16 @@ def load_config(path):
     return config
 
 
-def build_submission(root, config_path, run_id, collective_env=None):
+def build_submission(root, config_path, run_id, collective_env=None, module="smart_router.training.cluster_smoke",
+                     timeout_seconds=None):
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,79}", run_id):
         raise ValueError("Submission ID must contain only letters, digits, underscores and hyphens")
     python = root / ".venv-router-train/bin/python"
-    entrypoint = shlex.join([str(python), "-m", "smart_router.training.cluster_smoke",
-                            "--config", str(config_path), "--project-root", str(root), "--run-id", run_id])
+    command = [str(python), "-m", module, "--config", str(config_path), "--project-root", str(root), "--run-id", run_id]
+    if timeout_seconds is not None:
+        # The driver enforces its own deadline, so a hung job frees GPUs without a watching client.
+        command = ["timeout", "--kill-after=60", str(int(timeout_seconds)), *command]
+    entrypoint = shlex.join(command)
     # No working_dir upload: all applications belong to this project and share NFS.
     # Runtime setup never forwards the submitter's credentials in this payload.
     return {

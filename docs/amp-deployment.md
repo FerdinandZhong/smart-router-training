@@ -18,34 +18,36 @@ Sequential AMP jobs
     -> setup_cluster_environment (.venv; Ray 2.58.0 + management dependencies)
     -> setup_training_environment (.venv-router-train; Ray 2.58.0 + Torch 2.8.0 + TensorBoard)
     -> launch_training_cluster
-         +-- CPU head only: 8 CPUs / 32 GiB (zero GPU workers)
+         +-- CPU head: 8 CPUs / 32 GiB, plus management app (resources only)
+         +-- worker group from configs/ray_cluster_config.yaml:
+             2 x GPU worker (1 L40S, 12 CPUs, 80 GiB each)
+    -> launch_training_dashboard
+         +-- authenticated CPU app: 2 CPUs / 4 GiB; submits and monitors Ray Jobs
     -> launch_tensorboard
          +-- authenticated CPU dashboard: 2 CPUs / 4 GiB
          +-- reads shared training-runs/ event files
+    -> check_cluster_ready
+         +-- passes only when Ray reports >= 2 ALIVE nodes with GPU resources
+         +-- .amp-state/cluster-ready.json; on timeout prints each node's state
   |
   v
-Manual setup through head Swagger UI
-  POST /api/v1/resources/nodes twice
-    +-- GPU worker A: for example 16 CPUs / 64 GiB / 1 L40S
-    +-- GPU worker B: for example 16 CPUs / 64 GiB / 1 L40S
-  |
-  v
-Run scripts/setup_cross_node_gpu.fish on an administrator workstation
+Manual: run scripts/setup_cross_node_gpu.fish on an administrator workstation
   -> select the new GPU pods -> configure scoped traffic exception
   -> verify TCPStore, Gloo and NCCL using the training environment
   |
   v
-Manually run cluster-smoke (CPU-only CAI submission job)
+Training dashboard: launch "Cluster smoke (NCCL check)"
+  (the cluster-smoke CAI Job is created but not run, and remains a manual alternative)
   -> discover this project's head URL from ray_cluster_info.json
   -> authenticate to /dashboard/ with CAI-injected credentials
-  -> submit Ray Job cluster-smoke
+  -> submit a Ray Job (dashboard ID cluster-smoke-<timestamp>)
        -> CPU driver -> TorchTrainer -> two GPU workers / NCCL
        -> each worker verifies the included dataset and shared storage
        -> controlled model forward/backward and gradient synchronization
        -> checkpoint -> fresh trainer restores optimizer/RNG/step -> two updates
   |
   v
-training-runs/cluster-smoke/
+training-runs/<submission id>/   (SUCCESS.json here is the training gate)
   run-manifest.json, worker identities, metrics, checkpoints, SUCCESS.json
   tensorboard/<stage>/events.* -> TensorBoard Scalars UI
 ```
@@ -68,16 +70,20 @@ successful decision-model training.
    Set a unique `RAY_HEAD_SUBDOMAIN` for additional installations. The default is
    `smart-router-ray-head`, distinct from the old serving cluster's head.
 3. Import runs validation, provisions environments, and starts the **CPU
-   head and TensorBoard dashboard**. Worker pools and worker groups are empty. GPU resource choices are
-   made later through the API. When redeploying an older installation, remove any
+   head, two L40S GPU workers, the training dashboard and TensorBoard**. The workers
+   come from the single `worker_groups` entry in `configs/ray_cluster_config.yaml`
+   (count 2, 12 CPUs, 80 GiB, 1 GPU, `L40S`); `RAY_WORKER_CPU`, `RAY_WORKER_MEMORY`,
+   `RAY_WORKER_GPUS` and `RAY_WORKER_ACCELERATOR_TYPE` override the shape at import.
+   Worker pools stay empty. When redeploying an older installation, remove any
    previously set `RAY_INITIAL_WORKER_POOLS` or set it to `[]` first; existing
    Applications/pool state are not deleted by changing the YAML.
-4. Open `https://<RAY_HEAD_SUBDOMAIN>.<CDSW_DOMAIN>/docs` and call
-   `POST /api/v1/resources/nodes` twice, selecting one GPU per worker. An example
-   request is shown below. Then wait for both workers to join in the head's
-   `/dashboard/#/cluster` page.
    GPU capacity must be available in the workspace. The existing Qwen cluster
    does not relinquish its CAI allocations automatically.
+4. The final import step, `check_cluster_ready`, polls the head's
+   `GET /api/v1/resources/nodes` (Ray-observed `alive` plus node resources) for up to
+   20 minutes and fails unless two alive nodes expose GPU resources. A created CAI
+   application alone never passes. The Swagger `POST /api/v1/resources/nodes` route
+   remains available for adding extra workers; it is not needed for the demo pair.
 5. From an administrator workstation, run the included setup script against the
    **new** GPU pods, then require its TCPStore/Gloo/NCCL probes to pass. The
    [included upstream runbook](../vendor/ray-serve-cai/docs/CROSS_NODE_GPU_DEPLOYMENT.md)
@@ -85,12 +91,24 @@ successful decision-model training.
    Qwen worker pods do not automatically apply to these pods. The script uses
    `/home/cdsw/.venv-router-train/bin/python`. AMP import itself does not modify
    Kubernetes networking; that is the explicit manual setup step.
-6. Run the created `cluster-smoke` CAI Job. It submits a Ray Job, waits up to
-   15 minutes, prints logs and fails the CAI Job if the Ray Job fails or times out.
-   A timeout requests Ray Job termination. The smoke is created but not run
-   automatically during import, so collective-network readiness can be checked.
+6. Open the **Smart Router Training Dashboard** application
+   (`TRAINING_DASHBOARD_SUBDOMAIN`, default `smart-router-training-dashboard`; CAI
+   authentication required) and launch **Cluster smoke (NCCL check)**. It submits
+   the same Ray Job as `amp/jobs.py`, wrapped in `timeout` with the config's
+   `job_timeout_seconds`, so a hung run frees the GPUs without a watching client.
+   It shows Ray's observed status and logs. The gate for SFT and GRPO jobs is a
+   smoke run whose `SUCCESS.json` parses with initial and resume results and whose
+   initial worker identities name distinct Ray nodes that are alive with GPUs now;
+   a run from replaced workers does not count.
+   SFT/GRPO submission is recorded but returns `409 trainer not implemented` until
+   the trainers exist. The created `cluster-smoke` CAI Job still works as a manual
+   alternative (15-minute wait; a timeout requests Ray Job termination). The smoke
+   is not run automatically during import, so collective-network readiness can be checked.
+   The dashboard reads `CDSW_APIV2_KEY` or `CML_API_KEY` from its application
+   environment; without one it reports an explicit 503 and shows Not connected.
+   The management app (the head's Swagger UI) manages resources only.
 
-Example Swagger request (submit twice; select an available CUDA runtime):
+Optional extra worker via Swagger (not needed for the demo pair; select an available CUDA runtime):
 
 ```json
 {
@@ -182,10 +200,13 @@ following scripts, clear their Arguments fields, and resume the failed AMP step:
 | setup_cluster_environment | `amp/setup_cluster_environment.py` |
 | setup_training_environment | `amp/setup_training_environment.py` |
 | launch_training_cluster | `amp/launch_training_cluster.py` |
+| launch_training_dashboard | `amp/launch_training_dashboard.py` |
+| launch_tensorboard | `amp/launch_tensorboard.py` |
+| check_cluster_ready | `amp/check_cluster_ready.py` |
 | cluster-smoke | `amp/run_cluster_smoke.py` |
 
-Both recovery paths preserve the head-only startup design. The smoke job remains
-a manual operation after worker creation and network setup.
+Both recovery paths preserve the startup design. The smoke remains a manual
+operation after networking is prepared.
 
 ## Data and storage
 

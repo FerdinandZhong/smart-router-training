@@ -32,7 +32,7 @@ def ensure_application(client, project_id, spec):
     if existing:
         app = existing[0]
         if app.metadata.get('script') != spec['script'] or app.metadata.get('bypass_authentication') is not False:
-            raise RuntimeError('Existing subdomain has different script/auth settings; choose another TENSORBOARD_SUBDOMAIN')
+            raise RuntimeError('Existing subdomain has different script/auth settings; choose another subdomain')
         return app
     return client.create_application(project_id=project_id, **spec)
 

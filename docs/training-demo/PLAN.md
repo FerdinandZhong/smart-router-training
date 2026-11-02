@@ -71,11 +71,12 @@ Users can select weight and dataset locations, column mappings, compute counts a
 The summary updates while editing. Drafts persist in browser localStorage.
 Job details display the saved configuration and empty metrics/artifact states.
 Users can duplicate a draft and download its JSON configuration.
-Launch remains disabled because the submission backend is not implemented.
+Launch is enabled only when `/api/cluster` accepts that kind: the cluster smoke needs two Ray-alive GPU nodes; SFT/GRPO also need the smoke gate and an implemented trainer, so they stay disabled with a stated reason.
 
 The preview server binds to loopback on port 8096, or the configured CAI application port.
 It is not a deployed Ray Serve application.
-The legacy `/api/status` endpoint is not a job-history API and is not used by the redesigned page.
+The legacy `/api/status` snapshot endpoint was removed; nothing used it. The backend API is `GET /api/cluster`, `GET /api/jobs`, `GET /api/jobs/<id>`, `GET /api/jobs/<id>/logs`, `POST /api/jobs` and `POST /api/jobs/<id>/stop`.
+Records live in `training-jobs/<id>/job.json` (immutable) and `events.jsonl`. Status is always Ray-observed. See the [design](../superpowers/specs/2026-11-01-amp-training-dashboard-design.md).
 Browser drafts are local convenience storage, not an authoritative run database.
 The preview validates basic fields only; model, data and GPU compatibility checks remain pending.
 
@@ -86,14 +87,14 @@ See [the dataset manifest](data-manifest.json) for revision, hashes and licensin
 
 ## Backend implementation plan
 
-1. Define a server-side job schema and immutable submitted-configuration record.
-2. Persist jobs, events, Ray submission IDs, ownership and artifact references.
+1. [Done locally] Define a server-side job schema and immutable submitted-configuration record.
+2. [Partly done] Persist jobs, events and Ray submission IDs; ownership and artifact references remain.
 3. Add validation that resolves model/data revisions and checks dataset columns before GPU allocation.
-4. Add authenticated submission with idempotency and explicit failure reporting.
+4. [Done for the cluster smoke only] Add authenticated submission with idempotency and explicit failure reporting.
 5. Add SFT and GRPO adapters behind a shared job contract.
 6. Add metrics, checkpoint and evaluation collection per job.
 7. Connect the UI to live history and enable submission only after validation succeeds.
-8. Deploy the monitor through the existing Ray Serve and CAI ingress setup.
+8. [Implemented, not yet deployed live] Deploy the dashboard as a CAI application (`amp/training_dashboard_app.py`), not through Ray Serve.
 
 Proposed states: draft, validating, queued, running, succeeded, failed, cancel_requested and cancelled.
 Keep validation failures visible with corrective messages.
@@ -145,3 +146,9 @@ No scoped examples are training-approved. The scoped annotation runner remains p
 Resume the metadata-only annotation contract on 20 pilot cases before expanding to the remaining cases.
 Do not reuse pooled judgments as customer-scoped labels.
 See [semantic preparation](../research/semantic-model-routing/scoped-selector-data-20261021.md).
+
+## Mistral Small demo jobs (2 × L40S)
+
+Two independent jobs: **A** SFT with LoRA on the frozen SFT subset, **B** GRPO with the numeric reward and LoRA on the GRPO subset. Job B is RL with verifiable rewards, not preference RLHF.
+If the model is about 24B parameters, bf16 weights alone are about 48 GB, a full L40S. Feasibility needs 4-bit QLoRA, sharding across both GPUs, or a smaller model, and is not yet evidenced.
+The UI presets prefill these jobs and show an unverified memory estimate. Confirm the exact model repository and revision before any run.

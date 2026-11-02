@@ -4,9 +4,10 @@
 
 ```bash
 python amp/training_demo/monitor.py --port 8096
-# In another terminal:
-python tests/browser_training_demo.py
-PYTHONPATH=src python -m unittest discover -s tests -p test_training_demo.py -q
+# In another terminal (TRAINING_DEMO_PORT defaults to 8096):
+TRAINING_DEMO_PORT=8096 python tests/browser_training_demo.py
+PYTHONPATH=src:. python -m unittest discover -s tests -p 'test_*.py'
+python amp/training_dashboard_app.py plan
 git diff --check
 ```
 
@@ -70,6 +71,7 @@ annotation tools are broader than the curated AMP archive.
 | AMP setup or launchers | AMP environment and PBJ execution-context tests; relevant subprocess smoke |
 | Training loop or checkpoints | Unit suite and two-process CPU smoke; live GPU run after network probes |
 | Laya typed-binary adapter | Mask/global-normalization and view-leakage tests; pinned checkpoint two-GPU head fit, validation, fresh reload/resume |
+| Training dashboard API, readiness gate, worker group config | `tests/test_training_dashboard.py` (fake Ray client), browser test; live AMP import/readiness is separate evidence |
 | TensorBoard launcher/events | Application tests, HTTP smoke, and distributed event validation if the writer changes |
 | Included Ray source | Review snapshot changes, update effective hashes, AMP validation and relevant cluster checks |
 

@@ -12,6 +12,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 STEPS = {
     "launch_tensorboard": ("amp/tensorboard_app.py", ["deploy"]),
+    "launch_training_dashboard": ("amp/training_dashboard_app.py", ["deploy"]),
+    "check_cluster_ready": ("amp/cluster_ready.py", []),
     "validate_pilot": ("amp/bootstrap.py", ["validate"]),
     "configure_project_resources": ("amp/bootstrap.py", ["resources"]),
     "setup_cluster_environment": ("amp/bootstrap.py", ["cluster-env"]),

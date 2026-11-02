@@ -2,9 +2,24 @@
 
 ## Training workspace contracts — 1 November 2026
 
-`amp/training_demo/monitor.py` serves the preview HTML and a legacy read-only `/api/status` endpoint.
-The new page does not use that legacy endpoint for job history.
-There is no implemented job submission, cancellation or server-side history API.
+`amp/training_demo/monitor.py` serves the page and the dashboard API on `127.0.0.1` (`--port` or `CDSW_APP_PORT`).
+The legacy `/api/status` endpoint was removed.
+
+- `GET /api/cluster`: Ray-observed alive GPU nodes, smoke gate and per-kind `launch` reason (`null` = launchable).
+- `GET /api/jobs`, `GET /api/jobs/<id>`, `GET /api/jobs/<id>/logs`: records merged with observed Ray status
+  (`NOT_SUBMITTED` for a recorded rejection, `UNKNOWN` when Ray does not report the job).
+- `POST /api/jobs` with `{kind, submission_id, config}`; kinds `cluster_smoke`, `sft`, `grpo`. `201` with the job.
+  `409` for duplicate ID, unmet gate or `trainer not implemented`; `400` for bad ID or paths outside the project root,
+  including the smoke's resolved `output_dir/<id>`. `502` on submission failure reports only the exception type.
+  Smoke entrypoints run under `timeout --kill-after=60 <job_timeout_seconds>`.
+- Smoke gate: parsed `SUCCESS.json` with `initial` and `resume` objects, a GPU `infrastructure_smoke` manifest, and
+  `initial-worker-<rank>.json` identities on distinct Ray node IDs that are currently alive with GPUs.
+- `POST /api/jobs/<id>/stop`.
+- State-changing requests need `Content-Type: application/json` and the `X-Training-Dashboard: 1` header (`415`/`403` otherwise).
+- `503` with an explicit message when the CAI API key (`CDSW_APIV2_KEY` or `CML_API_KEY`) or `ray_cluster_info.json` is missing. The dashboard does not return, log or store the key, and client exception text is not echoed.
+- Records: `training-jobs/<id>/job.json` (schema 1, written once) and append-only `events.jsonl`.
+
+`amp/cluster_ready.py` (`--timeout-minutes`, default 20; `--min-gpu-nodes`, default 2) writes `.amp-state/cluster-ready.json`.
 
 Browser draft storage key: `training-workspace-drafts-v2`.
 Draft envelopes contain `id`, `name`, `created_at` and `config`.

@@ -9,8 +9,11 @@ The [independent-job plan](docs/training-demo/PLAN.md) is authoritative for this
 - [x] Replace the model-specific pipeline page with job history, a new-job form and individual draft details.
 - [x] Add browser-local draft persistence, filtering, duplication and configuration download.
 - [x] Verify form behavior and responsive widths in Chromium.
-- [ ] Implement persistent server-side job records and authenticated model/data validation.
-- [ ] Connect UI launch to independent Ray Jobs with idempotency and explicit error handling.
+- [x] Add Mistral Small demo presets, 4-bit option, memory estimate and basic checks to the UI (local browser evidence only).
+- [x] Implement persistent server-side job records (`training-jobs/<id>`); local CPU tests only. Authenticated model/data validation remains.
+- [x] Connect UI launch to Ray Jobs with idempotency and explicit errors for the cluster smoke (fake-client tests; no live run). SFT/GRPO return 409 until trainers exist.
+- [x] AMP flow adds two-GPU worker group, `launch_training_dashboard` and `check_cluster_ready` (local tests only).
+- [ ] Live: import the AMP, confirm `check_cluster_ready`, run the networking probe and a dashboard-launched smoke; record a dated status note.
 - [ ] Implement separate SFT and GRPO trainers with LoRA/full update options and compatible package pins.
 - [ ] Connect per-job metrics, logs, checkpoint references and stale-state detection.
 - [ ] Verify one-GPU updates/reload, then distributed execution and interrupted resume.

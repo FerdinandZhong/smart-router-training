@@ -2,8 +2,9 @@ name: Smart Router Training
 description: >-
   Self-contained decision-model training pilot with repository-included data,
   an isolated PyTorch environment and a dedicated Ray head.
-  Import creates the CPU head and TensorBoard dashboard; add GPU workers through Swagger, configure
-  cross-pod collective networking, then run cluster-smoke manually.
+  Import creates the CPU head, two L40S GPU workers, the training dashboard and TensorBoard, then
+  waits for Ray to report both GPU nodes alive. Configure cross-pod collective networking manually,
+  then launch the cluster smoke from the dashboard (cluster-smoke remains available as a manual job).
 author: Smart Router Training
 date: '2026-09-29'
 specification_version: '1.0'
@@ -20,6 +21,26 @@ environment_variables:
   RAY_HEAD_SUBDOMAIN:
     default: smart-router-ray-head
     description: Unique head Application subdomain for this training AMP.
+    required: false
+  TRAINING_DASHBOARD_SUBDOMAIN:
+    default: smart-router-training-dashboard
+    description: Unique authenticated training dashboard Application subdomain.
+    required: false
+  RAY_WORKER_CPU:
+    default: '12'
+    description: CPU cores per GPU worker.
+    required: false
+  RAY_WORKER_MEMORY:
+    default: '80'
+    description: Memory in GiB per GPU worker.
+    required: false
+  RAY_WORKER_GPUS:
+    default: '1'
+    description: GPUs per worker.
+    required: false
+  RAY_WORKER_ACCELERATOR_TYPE:
+    default: L40S
+    description: GPU accelerator type per worker.
     required: false
   RAY_HEAD_CPU:
     default: '8'
@@ -86,6 +107,17 @@ tasks:
     entity_label: launch-training-cluster
     wait_for: true
   - type: create_job
+    name: launch_training_dashboard
+    entity_label: launch-training-dashboard
+    script: amp/launch_training_dashboard.py
+    kernel: python3
+    cpu: 1
+    memory: 2
+    timeout: 5
+  - type: run_job
+    entity_label: launch-training-dashboard
+    wait_for: true
+  - type: create_job
     name: launch_tensorboard
     entity_label: launch-tensorboard
     script: amp/launch_tensorboard.py
@@ -95,6 +127,17 @@ tasks:
     timeout: 5
   - type: run_job
     entity_label: launch-tensorboard
+    wait_for: true
+  - type: create_job
+    name: check_cluster_ready
+    entity_label: check-cluster-ready
+    script: amp/check_cluster_ready.py
+    kernel: python3
+    cpu: 1
+    memory: 2
+    timeout: 30
+  - type: run_job
+    entity_label: check-cluster-ready
     wait_for: true
   - type: create_job
     name: cluster-smoke

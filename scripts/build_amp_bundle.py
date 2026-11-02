@@ -17,7 +17,7 @@ def members(root):
                 "architecture.md", "user-guide.md", "development.md", "component-api.md",
                 "configs/ray_cluster_config.yaml", "scripts/build_amp_bundle.py",
                 "scripts/export_smoke_training_data.py", "docs/amp-deployment.md",
-                "scripts/setup_cross_node_gpu.fish", "scripts/run_collective_probe.fish",
+                "scripts/setup_cross_node_gpu.fish", "scripts/run_collective_probe.fish", "docs/training-demo/dashboard.html",
                 "scripts/collective_probe.py",
                 "docs/ray-first-trial-implementation-plan.md", "tests/test_amp.py",
                 "tests/test_amp_execution_contexts.py", "tests/test_amp_environment.py", "tests/test_tensorboard_app.py",

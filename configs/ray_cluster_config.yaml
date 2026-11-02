@@ -1,4 +1,5 @@
-# Head-only startup. Add GPU workers manually through the Management Swagger UI.
+# CPU head plus two GPU workers (1 x L40S each) for the 2-GPU training demo.
+# RAY_WORKER_CPU/MEMORY/GPUS/ACCELERATOR_TYPE override the input_template group at AMP import.
 # Runtime images must exist in the target Workbench.
 ray_cluster:
   head_cpu: 8
@@ -12,8 +13,16 @@ ray_cluster:
     limits: null
     max_launch_batch: 2
   worker_pools: []
-  launch_initial_workers: false
-  worker_groups: []
+  launch_initial_workers: true
+  worker_groups:
+    - name: gpu-workers
+      node_type: gpu-worker
+      count: 2
+      cpu: 12
+      memory: 80
+      gpus: 1
+      accelerator_type: L40S
+      input_template: true
 cai:
   project_name: smart-router-training
   head_app_name: smart-router-ray-head

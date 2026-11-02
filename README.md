@@ -4,8 +4,9 @@
 
 On `training-demo`, start with [the current plan](docs/training-demo/PLAN.md).
 The UI manages independent job configurations with model, dataset, method and compute choices.
-Local draft workflows are implemented; Ray submission and live training remain pending.
-Run `python amp/training_demo/monitor.py --port 8096` for the preview.
+Local drafts and the Ray-backed dashboard API (cluster smoke submission, status, logs, stop) are implemented and verified on CPU only.
+SFT/GRPO trainers and live CAI/GPU evidence remain pending.
+Run `python amp/training_demo/monitor.py --port 8096` for the preview (shows Not connected without CAI credentials).
 
 
 Train configurable decision models for customer-defined classification tasks and step-level model selection in agent workflows.
@@ -15,8 +16,8 @@ Current direction: compare Laya, CLM-8B, and GLiNER2.5-Decide through interchang
 This project is now a self-contained **Cloudera AMP**: it includes a pinned Ray
 cluster implementation, setup/launch jobs, an isolated PyTorch environment, the
 300-state pilot dataset, and a two-worker infrastructure smoke job. AMP import
-starts the CPU head and TensorBoard dashboard. Add GPU workers through Swagger, configure their
-collective networking, then launch the smoke job. Follow the
+starts the CPU head, two L40S GPU workers, the training dashboard and TensorBoard, and waits until Ray
+reports both GPU nodes alive. Configure collective networking, then launch the smoke from the dashboard. Follow the
 [AMP deployment guide](docs/amp-deployment.md) for import, resource requirements,
 job commands, data flow and cluster shutdown. The AMP metadata is
 [.project-metadata.yaml](.project-metadata.yaml).

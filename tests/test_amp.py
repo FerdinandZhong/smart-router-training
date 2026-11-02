@@ -31,13 +31,13 @@ class AMPTests(unittest.TestCase):
         self.assertTrue((ROOT / tasks[-1]["script"]).is_file())
         self.assertTrue(all(isinstance(v["default"], str) for v in manifest["environment_variables"].values()))
 
-    def test_amp_starts_head_only_with_no_worker_allocations(self):
+    def test_amp_starts_gpu_workers_from_one_group_without_pools(self):
         from cai_integration.autoscaling.bootstrap import bootstrap_policy
         config = yaml.safe_load((ROOT / "configs/ray_cluster_config.yaml").read_text())
         policy = bootstrap_policy({**config["ray_cluster"], "worker_runtime_identifier": config["cai"]["worker_runtime_identifier"]})
         self.assertEqual(policy.pools, [])
-        self.assertEqual(config["ray_cluster"]["worker_groups"], [])
-        self.assertFalse(config["ray_cluster"]["launch_initial_workers"])
+        self.assertEqual([g["count"] for g in config["ray_cluster"]["worker_groups"]], [2])
+        self.assertTrue(config["ray_cluster"]["launch_initial_workers"])
         manifest = yaml.safe_load((ROOT / ".project-metadata.yaml").read_text())
         self.assertNotIn("RAY_INITIAL_WORKER_POOLS", manifest["environment_variables"])
         self.assertNotEqual(config["cai"]["head_app_name"], "ray-cluster-head")
