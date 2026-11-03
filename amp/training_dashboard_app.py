@@ -15,7 +15,7 @@ from amp.tensorboard_app import ensure_application
 
 def application_spec(root, environment=None):
     env = os.environ if environment is None else environment
-    subdomain = env.get('TRAINING_DASHBOARD_SUBDOMAIN', 'smart-router-training-dashboard')
+    subdomain = env.get('TRAINING_DASHBOARD_SUBDOMAIN', 'model-training-dashboard')
     if not re.fullmatch(r'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?', subdomain):
         raise ValueError('TRAINING_DASHBOARD_SUBDOMAIN must be a DNS label')
     import yaml

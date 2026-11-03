@@ -14,7 +14,7 @@ from amp.environment import isolated_environment
 
 def application_spec(root, environment=None):
     env = os.environ if environment is None else environment
-    subdomain = env.get('TENSORBOARD_SUBDOMAIN', 'smart-router-tensorboard')
+    subdomain = env.get('TENSORBOARD_SUBDOMAIN', 'model-training-tensorboard')
     if not re.fullmatch(r'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?', subdomain):
         raise ValueError('TENSORBOARD_SUBDOMAIN must be a DNS label')
     # Match the CPU runtime already selected for this project's head.

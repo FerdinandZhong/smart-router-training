@@ -25,7 +25,7 @@ ray_cluster:
       input_template: true
 cai:
   project_name: smart-router-training
-  head_app_name: smart-router-ray-head
+  head_app_name: model-training-ray-head
   head_runtime_identifier: docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-pbj-jupyterlab-python3.11-standard:2026.04.1-b7
   worker_runtime_identifier: docker.repository.cloudera.com/cloudera/cdsw/ml-runtime-pbj-jupyterlab-python3.11-cuda:2026.04.1-b7
 monitoring:

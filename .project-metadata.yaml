@@ -15,15 +15,15 @@ runtimes:
     edition: Standard
 environment_variables:
   TENSORBOARD_SUBDOMAIN:
-    default: smart-router-tensorboard
+    default: model-training-tensorboard
     description: Unique authenticated TensorBoard Application subdomain.
     required: false
   RAY_HEAD_SUBDOMAIN:
-    default: smart-router-ray-head
+    default: model-training-ray-head
     description: Unique head Application subdomain for this training AMP.
     required: false
   TRAINING_DASHBOARD_SUBDOMAIN:
-    default: smart-router-training-dashboard
+    default: model-training-dashboard
     description: Unique authenticated training dashboard Application subdomain.
     required: false
   RAY_WORKER_CPU:
